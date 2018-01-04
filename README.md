@@ -20,8 +20,8 @@ Example:
 ...
                          
 % df
-Filesystem  Total Used  Avail.   Use%  Mounted On
-/flashfs 3322738  26606 3296132  0% /
+Filesystem    Total    Used   Avail.   Use%  Mounted On
+/flashfs      3322738  26606  3296132  0%    /
 
 % uptime
 0d 00h 46m 51s
