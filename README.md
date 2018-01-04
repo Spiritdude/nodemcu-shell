@@ -10,7 +10,6 @@ Example:
 ```
 % ls
 /
-/
    161  args/main.lua
     59  args2/main.lua
    540  blink/main.lua
