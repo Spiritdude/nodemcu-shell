@@ -31,10 +31,11 @@ Filesystem    Total    Used   Avail.   Use%  Mounted On
 dofile("wifi/main.lua")
 
 % help
+available commands:
    args
    blink
    cat
-   compile_all
+   compile
    cp
    date
    df
