@@ -18,9 +18,11 @@ return function(...)
   local t = tmr.time();
   kv("Uptime",string.format("%dd %dh %dm %ds",t/24/3600,(t/3600)%24,(t/60)%60,t%60))
       
-  --adc.force_init_mode(adc.INIT_VDD33)
-  --kv('Vdd',adc.readvdd33(),'mV')
-
+  if adc then     -- make it conditional in case it doesn't exist
+    adc.force_init_mode(adc.INIT_VDD33)
+    kv('Vdd',adc.readvdd33(),'mV')
+  end
+  
   local address, size = file.fscfg()
   kv('File System Address',address)
   kv('File System Size',size,'bytes')
@@ -28,7 +30,7 @@ return function(...)
   local tm = rtctime.epoch2cal(rtctime.get())
   kv('RTC Time',string.format("%04d/%02d/%02d %02d:%02d:%02d", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"]))
 
-  local remaining, used, total = file.fsinfo()
+  local remain, used, total = file.fsinfo()
   kv('File System Usage',used..' / '..total,'bytes')
 
   kv('Wifi STA MAC Address',wifi.sta.getmac())
