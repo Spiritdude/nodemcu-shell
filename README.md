@@ -2,7 +2,7 @@
 
 ** Highly Experimental: API and Skeleton might change at any time **
 
-This provides a UNIX-like Shell for the NodeMCU platform (ESP8266: 32KB RAM, 512K-16MB flash, 80MHz ARM Processor with WIFI, cost ~ USD/EUR 2.00-5.00).
+This provides a UNIX-like Shell for the NodeMCU platform (ESP8266: 32KB RAM, 512K-16MB flash, 80MHz RISC Processor with WIFI, cost ~ USD/EUR 2.00-5.00).
 
 NodeMCU is a LUA runtime environment, so the "shell" is written in LUA.
 
