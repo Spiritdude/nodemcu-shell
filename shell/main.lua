@@ -1,3 +1,8 @@
+-- == NodeMCU Sehll ==
+-- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Description: adapted from telnet.lua and further extended to provide NodeMCU shell functionality
+--    See http://github.com/Spiritdude/nodemcu-shell for details
+--
 -- History:
 -- 2018/01/04: 0.0.2: simple arguments passed on, proper prompt and empty input handled
 -- 2018/01/03: 0.0.1: first version
