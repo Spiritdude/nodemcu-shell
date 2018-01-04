@@ -137,10 +137,12 @@ Type in 'help' and hit RETURN and it will list the available commands.
 ## RM
 ## CP
 ## BLINK
+## HEAP
 ## UPTIME
 ## HOSTNAME
 ## TIME
 ## TOUCH
 ## SYSINFO
-
+## COMPILE
+## REBOOT
 
