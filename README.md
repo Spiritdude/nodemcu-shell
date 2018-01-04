@@ -56,7 +56,8 @@ available commands:
 
 Following filesystem layout has been adopted:
 - every command or app has its own directory or namespace, with main entry point of `<appname>/main.lua`
-- each `main.lua` must conform to following skeleton:
+- every shell built-in command resides in `shell/<command>.lua`
+- each `main.lua` or `shell/<command>.lua` must conform to following skeleton:
 
 ```
 return function(...) 
