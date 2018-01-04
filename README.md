@@ -69,6 +69,8 @@ end
 
 `shell/main.lua` is the NodeMCU shell main entry, it opens a telnet server at port 2323 (default).
 
+## Network Configuration
+
 At first you need to configure `wifi/wifi.conf`, first copy `wifi/wifi.conf.dist` to `wifi/wifi.conf` and edit it:
 ```
 return {
