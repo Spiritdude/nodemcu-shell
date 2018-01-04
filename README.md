@@ -6,6 +6,54 @@ This provides a UNIX-like Shell for the NodeMCU platform (ESP8266: 32KB RAM, 512
 
 NodeMCU is a LUA runtime environment, so the "shell" is written in LUA.
 
+Example:
+```
+% ls
+/
+/
+   161  args/main.lua
+    59  args2/main.lua
+   540  blink/main.lua
+   642  compile_all/main.lua
+    81  init.lua
+    30  net.down.lua
+    53  net.up.lua
+...
+                         
+% df
+Filesystem  Total Used  Avail.   Use%  Mounted On
+/flashfs 3322738  26606 3296132  0% /
+
+% uptime
+0d 00h 46m 51s
+
+% cat startup.lua
+-- add action done at boot/startup
+dofile("wifi/main.lua")
+
+% help
+   args
+   blink
+   cat
+   compile_all
+   cp
+   date
+   df
+   echo
+   help
+   hostname
+   ls
+   mv
+   rm
+   sysinfo
+   time
+   touch
+   uptime
+
+```
+
+## Layout of Commands
+
 Following filesystem layout has been adopted:
 - every command or app has its own directory or namespace, with main entry point of `<appname>/main.lua`
 - each `main.lua` must conform to following skeleton:
