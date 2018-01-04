@@ -28,7 +28,7 @@ Filesystem    Total    Used   Avail.   Use%  Mounted On
 
 % cat startup.lua
 -- add action done at boot/startup
-dofile("wifi/main.lua")
+dofile("wifi/wifi.lua")
 
 % help
 available commands:
