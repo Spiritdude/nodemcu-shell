@@ -1,6 +1,6 @@
 # NodeMCU UNIX-like Shell
 
-## Highly Experimental: API and Skeleton might change at any time
+** Highly Experimental: API and Skeleton might change at any time **
 
 This provides a UNIX-like Shell for the NodeMCU platform (ESP8266: 32KB RAM, 512K-16MB flash, 80MHz ARM Processor with WIFI, cost ~ USD/EUR 2.00-5.00).
 
