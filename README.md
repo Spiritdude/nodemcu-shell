@@ -28,6 +28,7 @@ Install `nodemcu-tool` via
 sudo npm install nodemcu-tool -g
 ```
 
+## Installation
 Then you do 
 ```
 % make upload_all
@@ -35,7 +36,7 @@ Then you do
 
 which uploads the entire setup to your NodeMCU/ESP8266 device.
 
-If your device resides somewhere else, set it with `PORT=<device>`, for example:
+If your device resides somewhere else than the default (`/dev/ttyUSB0`), set it with `PORT=<device>`, for example:
 ```
 % make PORT=/dev/ttyUSB4 upload_all
 ```
