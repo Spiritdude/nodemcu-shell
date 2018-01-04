@@ -20,7 +20,29 @@ end
 
 `shell/main.lua` is the NodeMCU shell main entry, it opens a telnet server at port 2323 (default).
 
-At first you need to configure `wifi/wifi.conf`, first copy `wifi/wifi.conf.dist` to `wifi/wifi.conf` and edit it, either have the device join your existing WIFI, edit then part of "client" part, or let the device operate as access point (AP) then change "mode" to "ap", and keep the defaults otherwise.
+At first you need to configure `wifi/wifi.conf`, first copy `wifi/wifi.conf.dist` to `wifi/wifi.conf` and edit it:
+```
+return {
+   mode = "client",     -- "client" or "ap"
+   client = {
+      ssid = "yourWIFI"
+      password = "youWIFIpassword"
+   },
+   ap = { 
+      config = {
+         ssid = "ESP-"..node.chipid(),
+         pwd = "Pass"..node.chipid()
+      },
+      net = {
+         ip = "192.168.111.1",
+         netmask = "255.255.255.255",
+         gateway = "192.168.111.1"
+      }
+   }
+}
+```
+
+Either have the device join your existing WIFI, edit then part of "client" part, or let the device operate as access point (AP) then change "mode" to "ap", and keep the defaults otherwise.
 
 ## Requirements
 Install `nodemcu-tool` via
