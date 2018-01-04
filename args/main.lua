@@ -1,4 +1,4 @@
-return function(arg)
+return function(...)
    for k,v in ipairs(arg) do
       print(k,"=",v)
    end

@@ -5,7 +5,7 @@
 -- History:
 -- 2018/01/03: 0.0.1: first version
 
-return function(arg)
+return function(...)
   local kv = function(k,v,u) 
     local s = k..': '.. (u and v..' '..u or v);
     print(s)

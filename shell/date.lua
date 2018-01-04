@@ -5,7 +5,7 @@
 -- History:
 -- 2018/01/04: 0.0.1: first version
 
-return function(arg) 
+return function(...) 
    local t = rtctime.get()
    if(t==0) then
       -- retrieve UTC remotely

@@ -5,7 +5,7 @@
 -- History:
 -- 2018/01/03: 0.0.1: first version
 
-return function(arg) 
+return function(...) 
    if file.open(arg[2],"r") then
       print(file.read())
       file.close()

@@ -5,7 +5,7 @@
 -- History:
 -- 2018/01/03: 0.0.1: first version
 
-return function(arg) 
+return function(...) 
    if arg[2] then
       wifi.sta.sethostname(arg[2])
    else

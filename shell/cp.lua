@@ -4,7 +4,8 @@
 --
 -- History:
 -- 2018/01/03: 0.0.1: first version
-return function(arg)
+
+return function(...)
    if(arg[2] and arg[3]) then
       if file.exists(arg[2]) then
          local src = file.open(arg[2], "r")

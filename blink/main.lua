@@ -1,4 +1,4 @@
-return function(arg)
+return function(...)
    id = 6
    d = 500
    pin = 4

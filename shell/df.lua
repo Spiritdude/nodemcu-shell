@@ -5,7 +5,7 @@
 -- History:
 -- 2018/01/03: 0.0.1: first version
 
-return function(arg) 
+return function(...) 
    local remain, used, total = file.fsinfo()
    print("Filesystem","Total","Used","Avail.","Use%","Mounted On")
    if(arg[2] and arg[2]=='-h') then

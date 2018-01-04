@@ -5,7 +5,7 @@
 -- History:
 -- 2018/01/04: 0.0.1: first version
 
-return function(arg) 
+return function(...) 
    table.remove(arg,1)
    if arg[1] then
       if file.exists(arg[1]) then 

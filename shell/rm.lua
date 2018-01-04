@@ -5,7 +5,7 @@
 -- History:
 -- 2018/01/03: 0.0.1: first version
 
-return function(arg)
+return function(...)
    if arg[2] then
       if file.exists(arg[2]) then
          file.remove(arg[2])

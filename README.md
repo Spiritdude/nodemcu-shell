@@ -59,7 +59,7 @@ Following filesystem layout has been adopted:
 - each `main.lua` must conform to following skeleton:
 
 ```
-return function(arg) 
+return function(...) 
    -- arg[1] contains the command name itself (e.g. 'ls')
    -- arg[2] optionally contains the first argument (e.g. `ls a.lua` then it arg[2] = "a.lua")
    -- etc.
@@ -124,7 +124,7 @@ Once your device becomes available via WIFI (as client or access point), you see
 Trying 192.168.2.119...
 Connected to 192.168.2.119.
 Escape character is '^]'.
-== Welcome to NodeMCU Shell 0.0.2
+== Welcome to NodeMCU Shell 0.0.3
 % help
 ```
 

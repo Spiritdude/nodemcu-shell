@@ -1,15 +1,16 @@
--- == NodeMCU Sehll ==
+-- == NodeMCU Shell ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description: adapted from telnet.lua and further extended to provide NodeMCU shell functionality
 --    See http://github.com/Spiritdude/nodemcu-shell for details
 --
 -- History:
+-- 2018/01/04: 0.0.3: unpacking args at dofile()
 -- 2018/01/04: 0.0.2: simple arguments passed on, proper prompt and empty input handled
 -- 2018/01/03: 0.0.1: first version
 
 -- a simple shell (based on telnet server)
 
-local VERSION = '0.0.2'
+local VERSION = '0.0.3'
 
 local port = 2323
 telnet_srv = net.createServer(net.TCP, 180)
@@ -57,19 +58,21 @@ telnet_srv:listen(port, function(socket)
         if(#a>0) then
            local cmd = a[1]
            --print("process "..cmd)
-           if(file.exists("shell/"..cmd..".lc")) then
-              dofile("shell/"..cmd..".lc")(a)
-           elseif(file.exists("shell/"..cmd..".lua")) then
-              dofile("shell/"..cmd..".lua")(a)
-           elseif(file.exists(cmd.."/main.lc")) then
+           if file.exists("shell/"..cmd..".lc") then
               --print("execute "..cmd.."/main.lc")
-              dofile(cmd.."/main.lc")(a)
-           elseif(file.exists(cmd.."/main.lua")) then
+              dofile("shell/"..cmd..".lc")(unpack(a))
+           elseif file.exists("shell/"..cmd..".lua") then
               --print("execute "..cmd.."/main.lua")
-              dofile(cmd.."/main.lua")(a)
-           elseif(file.exists(cmd..".lua")) then
+              dofile("shell/"..cmd..".lua")(unpack(a))
+           elseif file.exists(cmd.."/main.lc") then
+              --print("execute "..cmd.."/main.lc")
+              dofile(cmd.."/main.lc")(unpack(a))
+           elseif file.exists(cmd.."/main.lua") then
+              --print("execute "..cmd.."/main.lua")
+              dofile(cmd.."/main.lua")(unpack(a))
+           elseif file.exists(cmd..".lua") then
               --print("execute "..cmd..".lua")
-              dofile(cmd..".lua")(a)
+              dofile(cmd..".lua")(unpack(a))
            else 
               print("ERROR: command <"..cmd.."> not found")
            end

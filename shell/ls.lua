@@ -6,13 +6,13 @@
 -- 2018/01/04: 0.0.2: ls with individual files
 -- 2018/01/03: 0.0.1: alphabetical sorting
 
-return function(arg)
+return function(...)
    local opts = { }
    local mo = { 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' }
    local fl = { }
    
    -- parsing arguments
-   for k,v in pairs(arg) do
+   for k,v in ipairs(arg) do
       if string.find(v,"^-%w+") then
          string.gsub(v,"-(%w+)$",function(fl) opts[fl] = 1 end)
       else 
