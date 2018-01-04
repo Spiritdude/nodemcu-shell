@@ -50,7 +50,7 @@ Preferably start a terminal to see the NodeMCU console:
 
 Once your device becomes available via WIFI (as client or access point), you see the IP in the console, then you can telnet to it, for example:
 ```
-% telnet 192.168.0.6 2323
+% telnet 192.168.2.119 2323
 Trying 192.168.2.119...
 Connected to 192.168.2.119.
 Escape character is '^]'.
