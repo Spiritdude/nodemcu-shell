@@ -1,0 +1,19 @@
+return {
+   mode = "client",     -- "client" or "ap"
+   client = {
+      ssid = "yourWIFI"
+      password = "youWIFIpassword"
+   },
+   ap = { 
+      config = {
+         ssid = "ESP-"..node.chipid(),
+         pwd = "Pass"..node.chipid()
+      },
+      net = {
+         ip = "192.168.111.1",
+         netmask = "255.255.255.255",
+         gateway = "192.168.111.1"
+      }
+   }
+}
+
