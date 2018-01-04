@@ -61,7 +61,7 @@ Following filesystem layout has been adopted:
 ```
 return function(...) 
    -- arg[1] contains the command name itself (e.g. 'ls')
-   -- arg[2] optionally contains the first argument (e.g. `ls a.lua` then it arg[2] = "a.lua")
+   -- arg[2] optionally contains the first argument (e.g. `ls a.lua` then arg[2] = "a.lua")
    -- etc.
 end
 ```
