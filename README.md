@@ -139,13 +139,16 @@ Type in 'help' and hit RETURN and it will list the available commands.
 ## MV
 ## RM
 ## CP
+## TOUCH
+## DF
 ## BLINK
 ## HEAP
 ## UPTIME
+## DATE
 ## HOSTNAME
 ## TIME
-## TOUCH
 ## SYSINFO
+## PING
 ## COMPILE
 ## REBOOT
 
