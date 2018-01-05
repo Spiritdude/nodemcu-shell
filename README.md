@@ -292,6 +292,8 @@ Display remaining heap (free RAM):
 % date
 2018/01/05 10:04:09 UTC
 ```
+Hint: include *sntp* module in the firmware, and when wifi is configured, it will retrieve current time via a ntp server, see `net.up.lua` and `rtc/init.lua`.
+
 ## HOSTNAME
 Display or set hostname:
 ```
