@@ -349,6 +349,7 @@ BSSID set: 0
 BSSID: xx:xx:xx:xx:xx:xx
 STA Broadcast IP: 192.168.2.255
 RSSI: -80 dB
+```
 
 ## PING
 ```
