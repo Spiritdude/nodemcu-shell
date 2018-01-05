@@ -200,24 +200,168 @@ dofile("shell/main.lua")
 Type in 'help' and hit RETURN and it will list the available commands.
 
 ## LS
+```
+% ls
+args/main.lua
+blink/main.lua
+compile/main.lua
+...
+
+% ls -l
+-rwx     258  Jan  1 1970  args/main.lua
+-rwx      59  Jan  1 1970  args2/main.lua
+-rwx     540  Jan  1 1970  blink/main.lua
+-rwx    1108  Jan  1 1970  compile/main.lua
+...
+
+% ls -l init.lua
+-rwx      81  Jan  1 1970  init.lua
+```
+
 ## CAT
+Display content of a file:
+```
+% cat net.up.lua
+-- do things when net is up
+dofile("rtc/init.lua")
+dofile("shell/main.lua")
+
+```
 ## ECHO
+Echo the arguments:
+```
+% echo "hello world"
+hello world
+```
 ## MV
+Move or rename a file:
+```
+% mv tst.lua test.lua
+```
+ 
 ## RM
+Remove a file
+```
+% rm tst.lua
+```
 ## CP
+Copy a file
+```
+% cp tst.lua test.lua
+```
 ## TOUCH
+Touch, update mtime of a file or create an empty file:
+```
+% touch x.lua
+% ls -l x.lua
+-rwx       0  Jan  1 1970  x.lua
+```
 ## DF
+Disk usage:
+```
+% df 
+Filesystem  Total Used  Avail.   Use%  Mounted On
+/flashfs 3260490  63252 3197238  1% /
+
+% df -h
+Filesystem  Total Used  Avail.   Use%  Mounted On
+/flashfs 3184K 61K   3122K 1% /
+```
 ## BLINK
+Blink the on-board LED, with a particular frequency (default 500 = 500ms), 0 or "off" turns blinking off:
+```
+% blink
+% blink 100
+% blink 0
+% blink off
+```
+
 ## HEAP
+Display remaining heap (free RAM):
+```
+% heap
+31064
+```
 ## UPTIME
+```
+% uptime
+0d 0h 44m 26s
+```
 ## DATE
+```
+% date
+2018/01/05 10:04:09 UTC
+```
 ## HOSTNAME
+Display or set hostname:
+```
+% hostname
+ESP-10448928
+% hostname esp1
+% hostname
+esp1
+```
+
 ## TIME
+Measure execuation time of commands:
+```
+% time
+0ms
+% time ls
+....
+520ms
+% time cat init.lua
+-- DO NOT CHANGE
+if file.exists("startup.lua") then
+   dofile("startup.lua")
+   end
+   
+298 ms
+```   
 ## SYSINFO
+Display system info:
+```
+% sysinfo
+Chip ID: 12345678
+Flash ID: 7654321
+Heap: 23888
+Info: 2 1
+Uptime: 0d 0h 47m 1s
+Vdd: 2956 mV
+File System Address: 720896
+File System Size: 3448832 bytes
+RTC Time: 2018/01/05 10:06:30
+File System Usage: 63252 / 3260490 bytes
+Wifi STA MAC Address: xx:xx:xx:xx:xx:xx
+Wifi AP MAC Address: xx:xx:xx:xx:xx:xx
+WiFi Channel: 6
+WiFi Mode: STATION
+WiFi Physical Mode: N
+wifi.sta.status: STA_GOTIP
+Hostname: esp1
+STA IP: 192.168.2.119
+STA netmask: 255.255.255.0
+STA gateway: 192.168.2.1
+SSID: WLAN-XYZ
+BSSID set: 0
+BSSID: xx:xx:xx:xx:xx:xx
+STA Broadcast IP: 192.168.2.255
+RSSI: -80 dB
+
 ## PING
+```
+% ping slashdot.org
+PING slashdot.org (216.34.181.45) time 517ms
+```
 ## COMPILE
+Compile does compile .lua into .lc, the shell prefers .lc over .lua when executing commands - in other words, once you start to execute .lc and you update the system with .lua files, keep your .lc in sync.
+```
+% compile args/main.lua
+> compile args/main.lua: args/main.lc
+```
+
 ## ARGS
-Display arguments:
+Display arguments for debug purposes:
 ```
 % args "abc def" 5 14
 1 = 'args'
@@ -233,10 +377,10 @@ Execute a .lua file via `dofile()`:
 ## LUA
 Execute actual LUA code:
 ```
-% lua print("abc")
+% lua 'print("abc")'
 abc
 
-% lua print(node.bootreason())
+% lua 'print(node.bootreason())'
 2     6
 ```
 ## REBOOT
