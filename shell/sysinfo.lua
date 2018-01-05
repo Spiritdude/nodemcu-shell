@@ -3,6 +3,7 @@
 -- Description: displays sysinfo (adapted from system-info.lua)
 --
 -- History:
+-- 2018/01/05: 0.0.2: better node.info() output
 -- 2018/01/03: 0.0.1: first version
 
 return function(...)
@@ -14,7 +15,9 @@ return function(...)
   kv('Chip ID',node.chipid())
   kv('Flash ID',node.flashid())
   kv('Heap',node.heap())
-  kv('Info',node.info())
+  local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
+  kv('Info',"V"..maver.."."..miver..", DevV "..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
+  
   local t = tmr.time();
   kv("Uptime",string.format("%dd %dh %dm %ds",t/24/3600,(t/3600)%24,(t/60)%60,t%60))
       
