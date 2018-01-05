@@ -2,9 +2,11 @@
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description:
 --    Very basic web-server serving just static files for now
+-- Todo:
+--    It's very simple code, yet, it leaks memory after each request apprx. 500-1000 bytes
 --
 -- History:
--- 2018/01/05: 0.0.1: first version
+-- 2018/01/05: 0.0.1: first version, very simple
 
 local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg" }
 
@@ -68,16 +70,29 @@ srv:listen(conf.port,function(conn)
       --print("request="..request)
       local method, path = string.match(request,"^([A-Z]+) (.+) HTTP");
       --print("method="..method,"path="..path)
-      local gv = {}
-      local vars = string.match(path,"\?(.*)$")
-      if vars then
-         for k,v in string.gmatch(vars, "(%w+)=(%w+)&*") do
-           -- todo: decode k,v
-           gv[k] = v
-           print("="..k.."="..v)
+      if false then
+         local gv = {}
+         local vars = string.match(path,"\?(.*)$")
+         if vars then
+            for k,v in string.gmatch(vars,"(%w+)=(%w+)&*") do
+              -- todo: decode k,v
+              gv[k] = v
+              print("="..k.."="..v)
+            end
          end
+         -- we later process gv { }
       end
-      -- we later process gv { }
-      sendFile(client,path)        -- sending file isn't that trivial
+      if(conf.debug > 0) then
+         print("before send",node.heap())
+      end
+      if(conf.debug < 2) then
+         sendFile(client,path)        -- sending file isn't that trivial
+      else 
+         client:on("sent",function() client:send("Content-Type: text/plain\r\n\r\ntest") client:close() end)
+         client:send("HTTP/1.1 200 OK\r\n")
+      end
+      if(conf.debug > 0) then
+         print("after send",node.heap())
+      end
    end)
 end)
