@@ -1,10 +1,12 @@
+-- == Args ==
+-- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Description: just displays the arguments
+--
+-- History:
+-- 2018/01/03: 0.0.1: first version
+
 return function(...)
    for k,v in ipairs(arg) do
-      print(k,"=",v)
+      print(k.." = '"v.."'")
    end
 end
-
---local a,b,c = { ... }
---print(a,b,c)
---local param = { ... }
---print(param)

@@ -202,9 +202,9 @@ Type in 'help' and hit RETURN and it will list the available commands.
 ## ARGS
 Display arguments:
 ```
-% args "abc" 5 14
+% args "abc def" 5 14
 1  =  args
-2  =  "abc"
+2  =  abc def
 3  =  4
 4  =  15
 ```
