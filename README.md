@@ -39,10 +39,12 @@ available commands:
    cp
    date
    df
+   dofile
    echo
    help
    hostname
    ls
+   lua
    mv
    rm
    sysinfo
@@ -175,7 +177,7 @@ dofile("wifi/wifi.lua")
 dofile("rtc/init.lua")
 dofile("shell/main.lua")
 
-%
+% 
 ```
 
 Type in 'help' and hit RETURN and it will list the available commands.
@@ -197,5 +199,31 @@ Type in 'help' and hit RETURN and it will list the available commands.
 ## SYSINFO
 ## PING
 ## COMPILE
+## ARGS
+Display arguments:
+```
+% args "abc" 5 14
+1  =  args
+2  =  "abc"
+3  =  4
+4  =  15
+```
+## DOFILE
+Execute a .lua file via `dofile()`:
+```
+% dofile example.lua
+``
+## LUA
+Execute actual LUA code:
+```
+% lua print("abc")
+abc
+
+% lua print(node.bootreason())
+2     6
+```
 ## REBOOT
+```
+% reboot
+```
 
