@@ -1,4 +1,4 @@
--- == Simple HTTP Server
+-- == Simple HTTP Server ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description:
 --    Very basic web-server serving just static files for now
@@ -10,7 +10,7 @@
 
 local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg" }
 
-srv = net.createServer(net.TCP)
+srv = net.createServer(net.TCP,10)
 
 function sendFile(c,fn) 
    local h = "HTTP/1.1 200 OK\r\n"
