@@ -205,8 +205,8 @@ Display arguments:
 % args "abc def" 5 14
 1 = 'args'
 2 = 'abc def'
-3 = '4'
-4 = '15'
+3 = '5'
+4 = '14'
 ```
 ## DOFILE
 Execute a .lua file via `dofile()`:
