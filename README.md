@@ -100,10 +100,11 @@ end
 
 ## Everything is a File (No Directories)
 
-Hint: currently NodeMCU uses SPIFFS filesystem, which is very simple with little RAM consumption:
+Hint: currently NodeMCU uses SPIFFS (SPI Flash File System) which is very simple with little RAM consumption:
 - everything is a file
 - the '/' is part of the filename, and only helps you (human) to think in terms of quasi directories
 - there are no directories, hence no `mkdir`
+- and the maximum length of a filename is 32 characters, so keep this in mind as well
 
 ## Network Configuration
 
