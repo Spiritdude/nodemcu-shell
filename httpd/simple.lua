@@ -38,7 +38,9 @@ function sendFile(c,fn)
       local st = file.stat(fn)
       h = h .. "Content-Length: " .. st['size'] .. "\r\n"
       
-      print("httpd: send",fno,fn,m,st['size'])
+      if(conf.debug > 0) then
+         print("httpd: send",fno,fn,m,st['size'])
+      end
 
       h = h .. "\r\n"   -- end of header
       
@@ -82,16 +84,16 @@ srv:listen(conf.port,function(conn)
          end
          -- we later process gv { }
       end
-      if(conf.debug > 0) then
+      if(conf.debug > 1) then
          print("before send",node.heap())
       end
-      if(conf.debug < 2) then
+      if(conf.debug < 3) then
          sendFile(client,path)        -- sending file isn't that trivial
       else 
          client:on("sent",function() client:send("Content-Type: text/plain\r\n\r\ntest") client:close() end)
          client:send("HTTP/1.1 200 OK\r\n")
       end
-      if(conf.debug > 0) then
+      if(conf.debug > 1) then
          print("after send",node.heap())
       end
    end)
