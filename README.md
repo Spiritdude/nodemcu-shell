@@ -260,12 +260,12 @@ Touch, update mtime (seems currently not working) of a file or create an empty f
 Disk usage:
 ```
 % df 
-Filesystem  Total Used  Avail.   Use%  Mounted On
-/flashfs 3260490  63252 3197238  1% /
+Filesystem  Total    Used  Avail.   Use%  Mounted On
+/flashfs    3260490  63252 3197238  1%    /
 
 % df -h
-Filesystem  Total Used  Avail.   Use%  Mounted On
-/flashfs 3184K 61K   3122K 1% /
+Filesystem  Total   Used  Avail.   Use%  Mounted On
+/flashfs    3184K   61K   3122K    1%    /
 ```
 ## BLINK
 Blink the on-board LED, with a particular frequency (default 500 = 500ms), 0 or "off" turns blinking off:
