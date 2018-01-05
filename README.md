@@ -8,6 +8,11 @@ NodeMCU is a LUA runtime environment, so the "shell" is written in LUA.
 
 Example:
 ```
+> telnet 192.168.2.119 2323
+Trying 192.168.2.119...
+Connected to 192.168.2.119.
+Escape character is '^]'.
+== Welcome to NodeMCU Shell 0.0.4
 % ls
 /
    161  args/main.lua
