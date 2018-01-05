@@ -203,10 +203,10 @@ Type in 'help' and hit RETURN and it will list the available commands.
 Display arguments:
 ```
 % args "abc def" 5 14
-1  =  args
-2  =  abc def
-3  =  4
-4  =  15
+1 = 'args'
+2 = 'abc def'
+3 = '4'
+4 = '15'
 ```
 ## DOFILE
 Execute a .lua file via `dofile()`:
