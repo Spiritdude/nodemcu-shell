@@ -1,6 +1,6 @@
 # NodeMCU Shell (UNIX-like)
 
-** Highly Experimental: API and Skeleton might change at any time **
+**Highly Experimental: API and Filesystem Skeleton might change at any time**
 
 This provides a UNIX-like Shell for the NodeMCU platform (ESP8266: 32KB RAM, 512K-16MB flash, 80MHz RISC Processor with WIFI, cost ~ USD/EUR 2.00-5.00).
 - simple commands with space separated arguments (including "string with spaces" or 'string with spaces' arguments)
