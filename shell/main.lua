@@ -2,20 +2,19 @@
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description: adapted from telnet.lua and further extended to provide NodeMCU shell functionality
 --    See http://github.com/Spiritdude/nodemcu-shell for details
+--    Note: this is very experimental, telnet is a prototype interface for the shell
 --
 -- History:
 -- 2018/01/04: 0.0.3: unpacking args at dofile()
 -- 2018/01/04: 0.0.2: simple arguments passed on, proper prompt and empty input handled
 -- 2018/01/03: 0.0.1: first version
 
--- a simple shell (based on telnet server)
-
 local VERSION = '0.0.4'
 
 local port = 2323
 telnet_srv = net.createServer(net.TCP, 180)
 
-print("NodeMCU shell started on port "..port)
+print("INFO: NodeMCU shell started on port "..port)
     
 telnet_srv:listen(port, function(socket)
     local fifo = {}
