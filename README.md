@@ -56,6 +56,8 @@ available commands:
    touch
    uptime
 
+% exit
+Connection closed by foreign host.
 ```
 
 ## Layout of Commands
