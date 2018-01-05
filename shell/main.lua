@@ -10,7 +10,7 @@
 
 -- a simple shell (based on telnet server)
 
-local VERSION = '0.0.3'
+local VERSION = '0.0.4'
 
 local port = 2323
 telnet_srv = net.createServer(net.TCP, 180)
