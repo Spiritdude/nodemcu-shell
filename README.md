@@ -35,7 +35,7 @@ Filesystem    Total    Used   Avail.   Use%  Mounted On
 /flashfs      3322738  26606  3296132  0%    /
 
 % uptime
-0d 00h 46m 51s
+0d 0h 46m 51s
 
 % cat startup.lua
 -- add action done at boot/startup
