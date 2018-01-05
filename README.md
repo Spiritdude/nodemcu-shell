@@ -376,7 +376,7 @@ Display arguments for debug purposes:
 Execute a .lua file via `dofile()`:
 ```
 % dofile example.lua
-``
+```
 ## LUA
 Execute actual LUA code:
 ```
