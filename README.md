@@ -103,28 +103,28 @@ sudo npm install nodemcu-tool -g
 
 ## Firmware
 The recommended modules for your firmware from [nodemcu-build.com](https://nodemcu-build.com):
-- adc (recommended)
-- bit,
-- crypto
-- encoder
-- file
-- gpio
-- http
-- i2c (recommended)
-- mdns
-- mqtt (recommended)
-- net
-- node
-- rtctime
-- sjson
-- sntp (recommended)
-- struct
-- tmr
-- u8g (monochrome) or ucg (color): if you have a display attached
-- uart
-- websocket (recommended)
-- wifi
-- tls (enable it after the list of the modules)
+- **adc** (recommended)
+- **bit**
+- **crypto**
+- **encoder**
+- **file**
+- **gpio**
+- **http**
+- **i2c** (recommended)
+- **mdns**
+- **mqtt** (recommended)
+- **net**
+- **node**
+- **rtctime**
+- **sjson**
+- **sntp** (recommended)
+- **struct**
+- **tmr**
+- **u8g** (monochrome) or **ucg** (color): if you have a display attached, then add module **spi** as well
+- **uart**
+- **websocket** (recommended)
+- **wifi**
+- **tls** (enable it after the list of the modules)
 
 ## Installation
 Then you do 
