@@ -1,4 +1,4 @@
-# NodeMCU UNIX-like Shell
+# NodeMCU Shell (UNIX-like)
 
 ** Highly Experimental: API and Skeleton might change at any time **
 
