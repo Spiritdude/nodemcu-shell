@@ -1,7 +1,7 @@
 return {
    mode = "client",     -- "client" or "ap"
    client = {
-      ssid = "yourWIFI"
+      ssid = "yourWIFI",
       password = "youWIFIpassword"
    },
    ap = { 

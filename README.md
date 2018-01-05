@@ -111,7 +111,7 @@ At first you need to configure `wifi/wifi.conf`, first copy `wifi/wifi.conf.dist
 return {
    mode = "client",     -- "client" or "ap"
    client = {
-      ssid = "yourWIFI"
+      ssid = "yourWIFI",
       password = "youWIFIpassword"
    },
    ap = { 
