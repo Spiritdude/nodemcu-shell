@@ -110,19 +110,22 @@ telnet_srv:listen(port, function(socket)
            elseif file.exists("shell/"..cmd..".lc") then
               --print("execute "..cmd.."/main.lc")
               dofile("shell/"..cmd..".lc")(unpack(a))
+              --pcall(loadfile("shell/"..cmd..".lc"))(unpack(a))
            elseif file.exists("shell/"..cmd..".lua") then
               --print("execute "..cmd.."/main.lua")
-              --dofile("shell/"..cmd..".lua")(unpack(a))
-              pcall(loadfile("shell/"..cmd..".lua"))(unpack(a))
+              dofile("shell/"..cmd..".lua")(unpack(a))
+              --pcall(loadfile("shell/"..cmd..".lua"))(unpack(a))
            elseif file.exists(cmd.."/main.lc") then
               --print("execute "..cmd.."/main.lc")
               dofile(cmd.."/main.lc")(unpack(a))
+              --pcall(loadfile(cmd.."/main.lc"))(unpack(a))
            elseif file.exists(cmd.."/main.lua") then
               --print("execute "..cmd.."/main.lua")
               dofile(cmd.."/main.lua")(unpack(a))
+              --pcall(loadfile(cmd.."/main.lua"))(unpack(a))
            elseif file.exists(cmd..".lua") then
               --print("execute "..cmd..".lua")
-              dofile(cmd..".lua")(unpack(a))
+              pcall(loadfile(cmd..".lua"))(unpack(a))
            else 
               print("ERROR: command <"..cmd.."> not found")
            end
