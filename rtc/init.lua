@@ -1,7 +1,7 @@
 -- rtctime.set(t,0)
 if sntp then
    local h = "pool.ntp.org"
-   sntp.sync("pool.ntp.org",
+   sntp.sync(h,
       function(sec, usec, server, info)
          print("INFO: sntp:sync via "..h, sec, usec, server)
       end,
