@@ -62,6 +62,7 @@ available commands:
    dofile
    echo
    exit
+   grep
    heap
    help
    hostname
@@ -252,6 +253,7 @@ Copy a file
 ```
 % cp tst.lua test.lua
 ```
+
 ## TOUCH
 Touch, update mtime (seems currently not working) of a file or create an empty file:
 ```
@@ -259,6 +261,22 @@ Touch, update mtime (seems currently not working) of a file or create an empty f
 % ls -l x.lua
 -rwx       0  Jan  1 1970  x.lua
 ```
+
+## GREP
+Simple `grep`:
+```
+% grep lua startup.lua
+dofile("wifi/wifi.lua")
+
+% grep dofile shell/main.lua
+-- 2018/01/04: 0.0.3: unpacking args at dofile()
+              dofile("shell/"..cmd..".lc")(unpack(a))
+              dofile("shell/"..cmd..".lua")(unpack(a))
+              dofile(cmd.."/main.lc")(unpack(a))
+              dofile(cmd.."/main.lua")(unpack(a))
+              dofile(cmd..".lua")(unpack(a))
+```
+
 ## DF
 Disk usage:
 ```
@@ -270,6 +288,7 @@ Filesystem  Total    Used  Avail.   Use%  Mounted On
 Filesystem  Total   Used  Avail.   Use%  Mounted On
 /flashfs    3184K   61K   3122K    1%    /
 ```
+
 ## BLINK
 Blink the on-board LED, with a particular frequency (default 500 = 500ms), 0 or "off" turns blinking off:
 ```
