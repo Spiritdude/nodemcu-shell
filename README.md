@@ -250,7 +250,7 @@ Copy a file
 % cp tst.lua test.lua
 ```
 ## TOUCH
-Touch, update mtime of a file or create an empty file:
+Touch, update mtime (seems currently not working) of a file or create an empty file:
 ```
 % touch x.lua
 % ls -l x.lua
