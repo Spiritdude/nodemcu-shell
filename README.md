@@ -357,7 +357,7 @@ RSSI: -80 dB
 PING slashdot.org (216.34.181.45) time 517ms
 ```
 ## COMPILE
-Compile does compile .lua into .lc, the shell prefers .lc over .lua when executing commands - in other words, once you start to execute .lc and you update the system with .lua files, keep your .lc in sync.
+Compile does compile `.lua` into `.lc`, the shell prefers `.lc` over `.lua` when executing commands - in other words, once you start to execute `.lc` and you update the system with `.lua` files, keep your `.lc` in sync.
 ```
 % compile args/main.lua
 > compile args/main.lua: args/main.lc
