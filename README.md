@@ -363,10 +363,10 @@ Compile does compile `.lua` into `.lc`, the shell prefers `.lc` over `.lua` when
 Display arguments for debug purposes:
 ```
 % args "abc def" 5 14
-1 = 'args'
-2 = 'abc def'
-3 = '5'
-4 = '14'
+arg[1] = 'args'
+arg[2] = 'abc def'
+arg[3] = '5'
+arg[4] = '14'
 ```
 ## DOFILE
 Execute a .lua file via `dofile()`:

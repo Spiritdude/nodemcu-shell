@@ -7,6 +7,6 @@
 
 return function(...)
    for k,v in ipairs(arg) do
-      print(k .. " = '" .. v .. "'")
+      print("arg[" .. k .. "] = '" .. v .. "'")
    end
 end
