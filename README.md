@@ -298,7 +298,7 @@ Hint: include *sntp* module in the firmware, and when wifi is configured, it wil
 Display or set hostname:
 ```
 % hostname
-ESP-10448928
+ESP-12345678
 % hostname esp1
 % hostname
 esp1
