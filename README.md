@@ -156,6 +156,26 @@ Connected to 192.168.2.119.
 Escape character is '^]'.
 == Welcome to NodeMCU Shell 0.0.3
 % help
+available commands:
+   ...
+   ...
+   
+% cat init.lua
+-- DO NOT CHANGE
+if file.exists("startup.lua") then
+   dofile("startup.lua")
+end
+
+% cat startup.lua
+-- add action done at boot/startup
+dofile("wifi/wifi.lua")
+
+% cat net.up.lua
+-- do things when net is up
+dofile("rtc/init.lua")
+dofile("shell/main.lua")
+
+%
 ```
 
 Type in 'help' and hit RETURN and it will list the available commands.
