@@ -97,6 +97,13 @@ end
 
 `shell/main.lua` is the NodeMCU shell main entry, it opens a telnet server at port 2323 (default).
 
+## Everything is a File (No Directories)
+
+Hint: currently NodeMCU uses SPIFFS filesystem, which is very simple with little RAM consumption:
+- everything is a file
+- the '/' is part of the filename, and only helps you (human) to think in terms of quasi directories
+- there are no directories, hence no `mkdir`
+
 ## Network Configuration
 
 At first you need to configure `wifi/wifi.conf`, first copy `wifi/wifi.conf.dist` to `wifi/wifi.conf` and edit it:
