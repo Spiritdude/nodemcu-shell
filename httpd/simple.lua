@@ -14,7 +14,7 @@ function sendFile(c,fn)
    
    fn = conf.root .. fn
 
-   local mm = { ["html"]="text/html", ["txt"="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg" }
+   local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg" }
    local m = "text/html"
    local ext = string.match(fn,"\.(%w+)$")
    if mm[ext] then
