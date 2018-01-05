@@ -105,7 +105,9 @@ telnet_srv:listen(port, function(socket)
         if(#a>0) then
            local cmd = a[1]
            --print("process "..cmd)
-           if file.exists("shell/"..cmd..".lc") then
+           if cmd=='exit' then
+              c:close()
+           elseif file.exists("shell/"..cmd..".lc") then
               --print("execute "..cmd.."/main.lc")
               dofile("shell/"..cmd..".lc")(unpack(a))
            elseif file.exists("shell/"..cmd..".lua") then

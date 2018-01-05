@@ -9,6 +9,7 @@ return function(...)
    local l = file.list()
    print("available commands:")
    local cmd = { }
+   table.insert(cmd,"exit")         -- built-in command
    for f,k in pairs(l) do
       --print("="..f)
       if string.find(f,"shell/") then

@@ -41,11 +41,15 @@ available commands:
    df
    dofile
    echo
+   exit
+   heap
    help
    hostname
    ls
    lua
    mv
+   ping
+   reboot
    rm
    sysinfo
    time
@@ -226,4 +230,9 @@ abc
 ```
 % reboot
 ```
-
+### EXIT
+This is a built-in command (there is no corresponding .lua) and disconnects telnet session:
+```
+% exit
+Connection closed by foreign host.
+```
