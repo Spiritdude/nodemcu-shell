@@ -13,15 +13,21 @@ Trying 192.168.2.119...
 Connected to 192.168.2.119.
 Escape character is '^]'.
 == Welcome to NodeMCU Shell 0.0.4
-% ls
+% ls -l
 /
-   161  args/main.lua
-    59  args2/main.lua
-   540  blink/main.lua
-   642  compile_all/main.lua
-    81  init.lua
-    30  net.down.lua
-    53  net.up.lua
+-rwx     258  Jan  1 1970  args/main.lua
+-rwx      59  Jan  1 1970  args2/main.lua
+-rwx     540  Jan  1 1970  blink/main.lua
+-rwx    1108  Jan  1 1970  compile/main.lua
+-rwx      81  Jan  1 1970  init.lua
+-rwx      30  Jan  1 1970  net.down.lua
+-rwx      76  Jan  1 1970  net.up.lua
+-rwx    1359  Jan  1 1970  rtc/init.lua
+-rwx     327  Jan  1 1970  shell/cat.lua
+-rwx     771  Jan  1 1970  shell/cp.lua
+-rwx     476  Jan  1 1970  shell/date.lua
+-rwx     537  Jan  1 1970  shell/df.lua
+-rwx     246  Jan  1 1970  shell/dofile.lua
 ...
                          
 % df
