@@ -77,10 +77,11 @@ srv:listen(port,function(socket)
    node.output(s_output,0)   -- re-direct output to function s_output
     
    socket:on("receive", function(c, l)
+      collectgarbage()
       --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
       l = string.gsub(l,"[\n\r]*$","")
       a = { }
-      if true then
+      if true then                 -- argument parser
          local s = 0               -- state: 0 (default), 1 = non-space, 2 = in " string, 3 = in ' string
          local t = ""              -- current token
          local ln = string.len(l)
@@ -138,7 +139,9 @@ srv:listen(port,function(socket)
          local cmd = a[1]
          --print("process "..cmd)
          if cmd=='exit' then
+            prompt = true     -- don't try to print it 
             c:close()
+            return
          elseif file.exists("shell/"..cmd..".lc") then
             --print("execute "..cmd.."/main.lc")
             dofile("shell/"..cmd..".lc")(unpack(a))
@@ -171,6 +174,8 @@ srv:listen(port,function(socket)
    end)
    socket:on("disconnection",function(c)
       node.output(nil)        -- un-register the redirect output function, output goes to serial
+      socket = nil
+      collectgarbage()
    end)
    socket:on("sent",sender)
    print("== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..")")

@@ -1,8 +1,10 @@
 return {
-   mode = "client",     -- "client" or "ap"
-   client = {
-      ssid = "yourWIFI",
-      password = "youWIFIpassword"
+   mode = "station",     -- "station" (client) or "ap"
+   station = {
+      config = {
+         ssid = "yourWIFI",
+         pwd = "youWIFIpassword"
+      }
    },
    ap = { 
       config = {
