@@ -1,0 +1,5 @@
+return {
+   root = "httpd/www",
+   port = 10080,
+   debug = 0            -- 0: none, 1: a bit, 2: more, 3: responding just 'test' always
+}
