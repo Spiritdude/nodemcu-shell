@@ -19,8 +19,10 @@ return function(...)
          table.insert(fl,v);
       end
    end
-
-   function lf(f,opts) 
+   local cols = 2
+   local col = { }
+   
+   function lf(f,opts,last) 
       if(opts['l']) then
          local st = file.stat(f)
          local bits = ""
@@ -37,7 +39,18 @@ return function(...)
             f)
          )
       else
-         print(f)
+         if cols > 1 then
+            table.insert(col,f)
+            if #col == cols then
+               print(string.format("%-32s  %-32s",col[1],col[2]))
+               col = {}
+            elseif last then
+               print(col[1])
+               col = {}
+            end
+         else 
+            print(f)
+         end
       end
    end
    
@@ -55,16 +68,13 @@ return function(...)
    else
       local l = file.list();
    
-      local d = "/"
-      print(d)
-      
       local nl = { }
       for n in pairs(l) do       -- walk through list extract keys
          table.insert(nl,n)
       end
       table.sort(nl)             -- sort keys
       for n in pairs(nl) do      -- walk through list
-         lf(nl[n],opts) --print(string.format("%6d  %s",l[nl[n]],nl[n]))
+         lf(nl[n],opts,#nl==n)
       end
    end
 end
