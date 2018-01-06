@@ -11,8 +11,10 @@ This provides a **UNIX-like Shell for the NodeMCU platform** with **[ESP8266](ht
 NodeMCU is a LUA runtime environment, so the shell is written in LUA.
 
 **TODO**
+- improve stability (commands can take down the shell)
 - piping and redirecting stdout with multiple commands
 - scripting (writing scripts)
+- readline() features (cursor left/right, up/down = history)
 - always more commands
   - editor
   - ftpd or another upload/download functionality
@@ -25,7 +27,6 @@ Connected to 192.168.2.119.
 Escape character is '^]'.
 == Welcome to NodeMCU Shell 0.0.4
 % ls -l
-/
 -rwx     258  Jan  1 1970  args/main.lua
 -rwx      59  Jan  1 1970  args2/main.lua
 -rwx     540  Jan  1 1970  blink/main.lua
