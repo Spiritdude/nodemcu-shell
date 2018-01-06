@@ -15,8 +15,23 @@ local VERSION = '0.0.4'
 local port = 2323
 local srv = net.createServer(net.TCP,180)
 
-print("INFO: NodeMCU shell started on port "..port)
-    
+local ip = wifi.ap.getip() or wifi.sta.getip()
+print("INFO: nodemcu shell started on "..ip.." port "..port)
+
+function man(n)
+   local fn
+   if file.exists("shell/"..n..".txt") then
+      fn = "shell/"..n..".txt"
+   elseif file.exists(n.."/man.txt") then
+      fn = n .. "/man.txt"
+   end
+   if fn then   
+      file.open(fn)
+      print(file.read())
+      file.close()
+   end
+end
+
 srv:listen(port,function(socket)
    local fifo = {}
    local fifo_drained = true

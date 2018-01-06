@@ -1,4 +1,3 @@
-conf = dofile("httpd/httpd.conf")
-
-print("INFO: httpd starting at port "..conf.port);
+-- just a place holder
 dofile("httpd/simple.lua")
+-- dofile("httpd/complex.lua")      -- other httpd servers

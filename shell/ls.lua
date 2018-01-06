@@ -20,9 +20,9 @@ return function(...)
          table.insert(fl,v);
       end
    end
-   local cols = 2
+   local cols = opts['1'] and 1 or 2
    local col = { }
-   
+
    function lf(f,opts,last) 
       if(opts['l']) then
          local st = file.stat(f)
@@ -40,18 +40,7 @@ return function(...)
             f)
          )
       else
-         if cols > 1 then
-            table.insert(col,f)
-            if #col == cols then
-               print(string.format("%-32s  %-32s",col[1],col[2]))
-               col = {}
-            elseif last then
-               print(col[1])
-               col = {}
-            end
-         else 
-            print(f)
-         end
+         print(f)
       end
    end
    
@@ -74,8 +63,23 @@ return function(...)
          table.insert(nl,n)
       end
       table.sort(nl)             -- sort keys
-      for n in pairs(nl) do      -- walk through list
-         lf(nl[n],opts,#nl==n)
+      if cols > 1 then
+         local off = #nl / cols + (#nl % cols)
+         local i = 1
+         while(i <= off) do
+            local l = ""
+            for j=0,cols-1,1 do
+               if i+off*j <= #nl then
+                  l = l .. string.format("%-32s",nl[i+off*j])
+               end
+            end
+            print(l)
+            i = i + 1
+         end
+      else 
+         for n in pairs(nl) do      -- walk through list
+            lf(nl[n],opts,#nl==n)
+         end
       end
    end
 end

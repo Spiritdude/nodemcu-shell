@@ -12,6 +12,10 @@
 
 local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg", ["ico"]="image/x-icon" }
 
+local conf = dofile("httpd/httpd.conf")
+local ip = wifi.ap.getip() or wifi.sta.getip()
+print("INFO: httpd:simple started on "..ip.." port "..conf.port)
+
 local srv = net.createServer(net.TCP,10)
 
 function sendFile(c,fn) 
