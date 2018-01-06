@@ -14,7 +14,9 @@ NodeMCU is a LUA runtime environment, so the shell is written in LUA.
 - piping and redirecting stdout with multiple commands
 - scripting (writing scripts)
 - always more commands
- 
+  - editor
+  - ftpd or another upload/download functionality
+  
 ## Examples
 ```
 > telnet 192.168.2.119 2323
