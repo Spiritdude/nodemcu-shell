@@ -1,0 +1,10 @@
+ls [opts] [files]
+   options
+   -1    single column
+   -l    long output
+   
+examples:
+   ls
+   ls -1
+   ls -l
+   ls -l test.lua
