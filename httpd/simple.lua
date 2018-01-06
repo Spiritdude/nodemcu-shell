@@ -69,6 +69,8 @@ end
 
 srv:listen(conf.port,function(conn)
    conn:on("receive", function(client,request)
+      collectgarbage()
+      
       --print("request="..request)
       local method, path = string.match(request,"^([A-Z]+) (.+) HTTP");
       --print("method="..method,"path="..path)
