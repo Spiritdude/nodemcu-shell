@@ -3,6 +3,7 @@
 -- Description: list files
 --
 -- History:
+-- 2018/01/06: 0.0.3: default 2 columns output (filename max 32 chars anyway)
 -- 2018/01/04: 0.0.2: ls with individual files
 -- 2018/01/03: 0.0.1: alphabetical sorting
 
