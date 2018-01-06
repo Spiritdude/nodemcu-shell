@@ -63,7 +63,11 @@ return function(...)
          table.insert(nl,n)
       end
       table.sort(nl)             -- sort keys
-      if cols > 1 then
+      if(cols==1 or opts['l']) then
+         for n in pairs(nl) do      -- walk through list
+            lf(nl[n],opts,#nl==n)
+         end
+      else
          local off = #nl / cols + (#nl % cols)
          local i = 1
          while(i <= off) do
@@ -75,10 +79,6 @@ return function(...)
             end
             print(l)
             i = i + 1
-         end
-      else 
-         for n in pairs(nl) do      -- walk through list
-            lf(nl[n],opts,#nl==n)
          end
       end
    end
