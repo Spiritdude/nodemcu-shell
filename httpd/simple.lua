@@ -3,17 +3,19 @@
 -- Description:
 --    Very basic web-server serving just static files for now
 -- Todo:
---    It's very simple code, yet, it leaks memory after each request apprx. 500-1000 bytes
+--    - Reduce memory leak
+--    - support .lua files (to execute)
 --
 -- History:
+-- 2018/01/06: 0.0.2: adding collectgarbage() and nil local variables, reduces leaks but still not entirely gone
 -- 2018/01/05: 0.0.1: first version, very simple
 
-local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg", ["ico"=>"image/x-icon" }
+local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg", ["ico"]="image/x-icon" }
 
 srv = net.createServer(net.TCP,10)
 
 function sendFile(c,fn) 
-   local h = "HTTP/1.1 200 OK\r\n"
+   local h = "HTTP/1.0 200 OK\r\n"
    local fno = fn
    
    fn = conf.root .. fn
@@ -30,6 +32,8 @@ function sendFile(c,fn)
    if file.exists(fn..".gz") then
       fn = fn .. ".gz"
       h = h .. "Content-Encoding: gzip\r\n"
+      h = h .. "Cache-Control: public, max-age=3600\r\n"
+      -- h = h .. "X-Info: something\r\n"
    end 
    
    if file.exists(fn) then
@@ -68,6 +72,8 @@ function sendFile(c,fn)
 end
 
 srv:listen(conf.port,function(conn)
+   collectgarbage()
+   
    conn:on("receive", function(client,request)
       collectgarbage()
       
@@ -89,11 +95,16 @@ srv:listen(conf.port,function(conn)
       if(conf.debug > 1) then
          print("before send",node.heap())
       end
-      if(conf.debug < 3) then
-         sendFile(client,path)        -- sending file isn't that trivial
-      else 
-         client:on("sent",function() client:close() end)
+      if(conf.debug > 2) then
+         client:on("sent",function() client:close() conn = nil client = nil collectgarbage() end)
          client:send("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\ntest")
+      else
+         sendFile(client,path)        -- sending file isn't that trivial
+         conn = nil
+         client = nil
+         method = nil
+         path = nil
+         collectgarbage()
       end
       if(conf.debug > 1) then
          print("after send",node.heap())
