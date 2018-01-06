@@ -8,7 +8,7 @@
 -- History:
 -- 2018/01/05: 0.0.1: first version, very simple
 
-local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg" }
+local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg", ["ico"=>"image/x-icon" }
 
 srv = net.createServer(net.TCP,10)
 
@@ -90,8 +90,8 @@ srv:listen(conf.port,function(conn)
       if(conf.debug < 3) then
          sendFile(client,path)        -- sending file isn't that trivial
       else 
-         client:on("sent",function() client:send("Content-Type: text/plain\r\n\r\ntest") client:close() end)
-         client:send("HTTP/1.1 200 OK\r\n")
+         client:on("sent",function() client:close() end)
+         client:send("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\ntest")
       end
       if(conf.debug > 1) then
          print("after send",node.heap())
