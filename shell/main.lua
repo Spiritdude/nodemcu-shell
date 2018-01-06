@@ -149,19 +149,14 @@ srv:listen(port,function(socket)
          end
          prompt = false
          sender(socket)
-         --if not prompt then
-         --   c:send("% ")
-         --   prompt = true
-         --end
       else
          c:send("% ")
          prompt = true
       end
-      --c:send("> ")
    end)
    socket:on("disconnection",function(c)
       node.output(nil)        -- un-register the redirect output function, output goes to serial
    end)
    socket:on("sent",sender)
-   print("== Welcome to NodeMCU Shell "..VERSION)
+   print("== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..")")
 end)
