@@ -12,7 +12,7 @@
 
 local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg", ["ico"]="image/x-icon" }
 
-srv = net.createServer(net.TCP,10)
+local srv = net.createServer(net.TCP,10)
 
 function sendFile(c,fn) 
    local h = "HTTP/1.0 200 OK\r\n"

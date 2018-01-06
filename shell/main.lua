@@ -5,6 +5,7 @@
 --    Note: this is very experimental, telnet is a prototype interface for the shell
 --
 -- History:
+-- 2018/01/06: 0.0.4: replacing node.output() and define dedicated print(...) 
 -- 2018/01/04: 0.0.3: unpacking args at dofile()
 -- 2018/01/04: 0.0.2: simple arguments passed on, proper prompt and empty input handled
 -- 2018/01/03: 0.0.1: first version
@@ -23,25 +24,42 @@ srv:listen(port,function(socket)
     
    local function sender(c)
       if #fifo > 0 then
-         c:send(table.remove(fifo, 1))
+         c:send(table.remove(fifo,1))
       else
          fifo_drained = true
-         if(not prompt) then
+         if not prompt then
             c:send("% ")
             prompt = true
-        end
+         end
       end
    end
 
    local function s_output(str)
-      table.insert(fifo, str)
+      table.insert(fifo,str)
       if socket ~= nil and fifo_drained then
          fifo_drained = false
          sender(socket)
       end
    end
+   if false then
+      function print(...)
+         local str = ""
+         for i,v in ipairs(arg) do
+            if i > 1 then
+               str = str .. "\t"
+            end
+            str = str .. v
+         end
+         str = str .. "\n"
+         table.insert(fifo,str)
+         if socket ~= nil and fifo_drained then
+            fifo_drained = false
+            sender(socket)
+         end
+      end
+   end
 
-   node.output(s_output, 0)   -- re-direct output to function s_ouput.
+   node.output(s_output,0)   -- re-direct output to function s_output
     
    socket:on("receive", function(c, l)
       --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
@@ -98,9 +116,9 @@ srv:listen(port,function(socket)
             --print("="..c)    
           end)
       end
-        --for k,v in ipairs(a) do
-        --  print(k.."="..v)
-        --end
+      --for k,v in ipairs(a) do
+      --  print(k.."="..v)
+      --end
       if(#a>0) then
          local cmd = a[1]
          --print("process "..cmd)
@@ -130,16 +148,19 @@ srv:listen(port,function(socket)
             print("ERROR: command <"..cmd.."> not found")
          end
          prompt = false
-         --c:send("% ")
-         --prompt = true
-       else
+         sender(socket)
+         --if not prompt then
+         --   c:send("% ")
+         --   prompt = true
+         --end
+      else
          c:send("% ")
          prompt = true
-       end
-       --c:send("> ")
+      end
+      --c:send("> ")
    end)
    socket:on("disconnection",function(c)
-      node.output(nil)        -- un-regist the redirect output function, output goes to serial
+      node.output(nil)        -- un-register the redirect output function, output goes to serial
    end)
    socket:on("sent",sender)
    print("== Welcome to NodeMCU Shell "..VERSION)
