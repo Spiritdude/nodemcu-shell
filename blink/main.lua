@@ -1,3 +1,10 @@
+-- == BLINK ==
+-- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Description: just blinking
+--
+-- History:
+-- 2018/01/04: 0.0.1: first version with blink frequency in ms as optional argument
+
 return function(...)
    id = 6
    d = 500

@@ -17,25 +17,26 @@ if((not rtctime) or (rtctime and rtctime.get() == 0)) then
          end
       )
    else 
-      syslog.print(syslog.WARN,"sntp module does not exist")
-      if false then            -- future
+      syslog.print(syslog.WARN,"rtc: sntp module does not exist, trying fallback ...")
+      if true then            -- future
          local now = tmr.time()
-         local h = '...'         -- edit host which just returns unix epoch
-         http.get(h, nil, 
-            function(code, data)
-               if (code < 0) then
-                  syslog.print(syslog.WARN,"rtc fallback failed as well, no proper rtc available")
+         local h = 'http://now.httpbin.org/'       -- http (instead of https) in case tls is not included
+         http.get(h,nil,
+            function(code,data)
+               if code < 0 then
+                  syslog.print(syslog.WARN,"rtc: fallback failed as well ("..code.."), no time available")
                else
-                  -- print(code, data)
+                  --print(code,data)
+                  local d = sjson.decode(data)
+                  local t = d and d.now and d.now.epoch or 0
                   if rtctime then
-                     local t = tonumber(data);
                      t = t + (tmr.time() - now)    -- try to adjust connection & retrieval time (only 1 sec exact)
                      rtctime.set(t,0)
                      local tm = rtctime.epoch2cal(t)
                      local tz = 'UTC'
-                     syslog.print(syslog.INFO,"rtc set to "..string.format("%04d/%02d/%02d %02d:%02d:%02d %s", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"], tz).." ("..t..")")
+                     syslog.print(syslog.INFO,"rtc: "..string.format("%04d/%02d/%02d %02d:%02d:%02d %s", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"], tz).." ("..t..")")
                   else
-                     syslog.print(syslog.WARN,"no rtctime module available, cannot set rtctime")
+                     syslog.print(syslog.WARN,"no rtctime module available, cannot set rtc time")
                   end
                end
             end
