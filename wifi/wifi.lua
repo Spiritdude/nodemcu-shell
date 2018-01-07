@@ -11,7 +11,7 @@ if(conf.mode=='station') then
       wifi.sta.setip(conf.station.net)
    end
    wifi.eventmon.register(wifi.eventmon.STA_GOT_IP,function(args)
-      syslog.print(syslog.INFO,"wifi "..conf.station.config.ssid.." "..wifi.sta.getip())
+      syslog.print(syslog.INFO,"wifi "..conf.station.config.ssid.." "..wifi.sta.getip().." connected")
       dofile("net.up.lua")
       wifi.eventmon.register(wifi.eventmon.STA_DISCONNECTED,function(args)
          print("WARN: wifi: lost connectivity, reconnecting ...")
