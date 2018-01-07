@@ -68,7 +68,7 @@ return function(...)
             lf(nl[n],opts,#nl==n)
          end
       else
-         local off = #nl / cols + (#nl % cols and 1 or 0)
+         local off = #nl / cols + (#nl % cols)
          local i = 1
          while(i <= off) do
             local l = ""
