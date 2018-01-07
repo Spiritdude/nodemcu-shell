@@ -42,6 +42,7 @@ shell_srv:listen(port,function(socket)
       end
    end
    
+   -- attempt to have other apps take control of the connection (like an editor)
    terminal = {} 
    terminal.output = function(s)
       s_output(s)
