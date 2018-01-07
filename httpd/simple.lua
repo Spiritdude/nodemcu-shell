@@ -14,11 +14,11 @@ local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", 
 
 local conf = dofile("httpd/httpd.conf")
 local ip = wifi.ap.getip() or wifi.sta.getip()
-print("INFO: httpd:simple started on "..ip.." port "..conf.port)
+syslog.print(syslog.INFO,"httpd:simple started on "..ip.." port "..conf.port)
 
 local srv = net.createServer(net.TCP,10)
 
-function sendFile(c,fn) 
+function sendFile(c,fn,req,gv) 
    local h = "HTTP/1.0 200 OK\r\n"
    local fno = fn
    
@@ -41,33 +41,42 @@ function sendFile(c,fn)
    end 
    
    if file.exists(fn) then
-      h = h .. "Content-Type: " .. m .. "\r\n"
-      
-      local st = file.stat(fn)
-      h = h .. "Content-Length: " .. st['size'] .. "\r\n"
-      
-      if(conf.debug > 0) then
-         print("httpd: send",fno,fn,m,st['size'])
-      end
-
-      h = h .. "\r\n"   -- end of header
-      
-      local pos = 0                         
-      local function doSend()   -- send it chunk wise, it's slower, but safer
-         file.open(fn,'r')
-         if file.seek('set',pos) == nil then
-            c:close()
-         else
-            local buf = file.read(512)
-            pos = pos + 512
-            c:send(buf)
+      if string.match(fn,"\.lua$") then         -- a script?
+         if conf.debug > 0 then
+            print("httpd: execute",fn)
          end
-         file.close()
+         --c:on("sent",function(c) c:close() collectgarbage() end)
+         dofile(fn)(c,req,gv)                   -- let's execute it
+      else 
+         
+         h = h .. "Content-Type: " .. m .. "\r\n"
+         
+         local st = file.stat(fn)
+         h = h .. "Content-Length: " .. st['size'] .. "\r\n"
+         
+         if(conf.debug > 0) then
+            print("httpd: send",fno,fn,m,st['size'])
+         end
+   
+         h = h .. "\r\n"   -- end of header
+         
+         local pos = 0                         
+         local function doSend()   -- send it chunk wise, it's slower, but safer
+            file.open(fn,'r')
+            if file.seek('set',pos) == nil then
+               c:close()
+            else
+               local buf = file.read(512)
+               pos = pos + 512
+               c:send(buf)
+            end
+            file.close()
+         end
+   
+         c:on('sent',doSend)     -- the cumbersome part
+         c:send(h)               -- send the header
+         doSend()                -- then the rest chunk-wise
       end
-
-      c:on('sent',doSend)     -- the cumbersome part
-      c:send(h)               -- send the header
-      doSend()                -- then the rest chunk-wise
    else 
       c:send("HTTP/1.1 404 Not Found\r\nContent-Type: text/plain\r\n\r\n404 NOT FOUND")
       c:on('sent',function() c:close() end)
@@ -84,15 +93,16 @@ srv:listen(conf.port,function(conn)
       --print("request="..request)
       local method, path = string.match(request,"^([A-Z]+) (.+) HTTP");
       --print("method="..method,"path="..path)
-      if false then
-         local gv = {}
+      local gv = {}
+      if true then
          local vars = string.match(path,"\?(.*)$")
          if vars then
-            for k,v in string.gmatch(vars,"(%w+)=(%w+)&*") do
+            path = string.gsub(path,"\?(.*)$","")
+            string.gsub(vars,"(%w+)=(%w+)&*",function(k,v)
               -- todo: decode k,v
               gv[k] = v
-              print("="..k.."="..v)
-            end
+              --print("\t"..k.."="..v)
+            end)
          end
          -- we later process gv { }
       end
@@ -103,7 +113,7 @@ srv:listen(conf.port,function(conn)
          client:on("sent",function() client:close() conn = nil client = nil collectgarbage() end)
          client:send("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\ntest")
       else
-         sendFile(client,path)        -- sending file isn't that trivial
+         sendFile(client,path,request,gv)        -- sending file isn't that trivial
          conn = nil
          client = nil
          method = nil

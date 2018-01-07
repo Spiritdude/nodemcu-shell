@@ -16,21 +16,7 @@ local port = 2323
 local srv = net.createServer(net.TCP,180)
 
 local ip = wifi.ap.getip() or wifi.sta.getip()
-print("INFO: nodemcu shell started on "..ip.." port "..port)
-
-function man(n)
-   local fn
-   if file.exists("shell/"..n..".txt") then
-      fn = "shell/"..n..".txt"
-   elseif file.exists(n.."/man.txt") then
-      fn = n .. "/man.txt"
-   end
-   if fn then   
-      file.open(fn)
-      print(file.read())
-      file.close()
-   end
-end
+syslog.print(syslog.INFO,"nodemcu shell started on "..ip.." port "..port)
 
 srv:listen(port,function(socket)
    local fifo = {}
@@ -178,5 +164,5 @@ srv:listen(port,function(socket)
       collectgarbage()
    end)
    socket:on("sent",sender)
-   print("== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..")")
+   print("== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")")
 end)
