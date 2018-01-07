@@ -1,4 +1,4 @@
-conf = dofile("wifi/wifi.conf")
+local conf = dofile("wifi/wifi.conf")
 
 if(conf.mode=='station') then
    syslog.print(syslog.INFO,"wifi connecting to "..conf.station.config.ssid.." ...")
