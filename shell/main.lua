@@ -13,12 +13,12 @@
 local VERSION = '0.0.4'
 
 local port = 2323
-local srv = net.createServer(net.TCP,180)
+local shell_srv = net.createServer(net.TCP,180)
 
 local ip = wifi.ap.getip() or wifi.sta.getip()
 syslog.print(syslog.INFO,"nodemcu shell started on "..ip.." port "..port)
 
-srv:listen(port,function(socket)
+shell_srv:listen(port,function(socket)
    local fifo = {}
    local fifo_drained = true
    local prompt = false
@@ -34,7 +34,6 @@ srv:listen(port,function(socket)
          end
       end
    end
-
    local function s_output(str)
       table.insert(fifo,str)
       if socket ~= nil and fifo_drained then
@@ -42,6 +41,16 @@ srv:listen(port,function(socket)
          sender(socket)
       end
    end
+   
+   terminal = {} 
+   terminal.output = function(s)
+      s_output(s)
+   end
+   terminal.input = function(cb)
+      --socket:on("receive",cb)
+      terminal.input_callback = cb
+   end
+   
    if false then
       function print(...)
          local str = ""
@@ -62,8 +71,12 @@ srv:listen(port,function(socket)
 
    node.output(s_output,0)   -- re-direct output to function s_output
     
-   socket:on("receive", function(c, l)
+   socket:on("receive",function(c,l)      -- we receive line-wise input
       collectgarbage()
+      if terminal.input_callback then
+         terminal.input_callback(l)
+         return
+      end
       --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
       l = string.gsub(l,"[\n\r]*$","")
       a = { }

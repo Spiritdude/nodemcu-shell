@@ -241,6 +241,13 @@ Echo the arguments:
 % echo "hello world"
 hello world
 ```
+
+## CLEAR
+Clear screen:
+```
+% clear
+```
+
 ## MV
 Move or rename a file:
 ```
