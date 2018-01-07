@@ -17,16 +17,15 @@ if((not rtctime) or (rtctime and rtctime.get() == 0)) then
          end
       )
    else 
-      syslog.print(syslog.WARN,"rtc: sntp module does not exist, trying fallback ...")
-      if true then            -- future
+      syslog.print(syslog.WARN,"rtc: no sntp module, trying fallback ...")
+      if http then
          local now = tmr.time()
          local h = 'http://now.httpbin.org/'       -- http (instead of https) in case tls is not included
          http.get(h,nil,
             function(code,data)
                if code < 0 then
-                  syslog.print(syslog.WARN,"rtc: fallback failed as well ("..code.."), no time available")
-               else
-                  --print(code,data)
+                  syslog.print(syslog.WARN,"rtc: fallback failed as well, no current time available")
+               elseif sjson then
                   local d = sjson.decode(data)
                   local t = d and d.now and d.now.epoch or 0
                   if rtctime then
@@ -38,9 +37,13 @@ if((not rtctime) or (rtctime and rtctime.get() == 0)) then
                   else
                      syslog.print(syslog.WARN,"no rtctime module available, cannot set rtc time")
                   end
+               else 
+                  syslog.print(syslog.WARN,"no sjson module, can't decode http response")
                end
             end
          )
+      else
+         syslog.print(syslog.WARN,"rtc: no http module, can't fallback")
       end
    end
 end               

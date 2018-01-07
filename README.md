@@ -235,6 +235,7 @@ dofile("rtc/init.lua")
 dofile("shell/main.lua")
 
 ```
+
 ## ECHO
 Echo the arguments:
 ```
@@ -259,6 +260,7 @@ Remove a file
 ```
 % rm tst.lua
 ```
+
 ## CP
 Copy a file
 ```

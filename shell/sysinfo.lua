@@ -12,8 +12,8 @@ return function(...)
       print(s)
    end
  
-   kv('Chip ID',node.chipid())
-   kv('Flash ID',node.flashid())
+   kv('Chip ID',node.chipid().." / "..string.format("0x%x",node.chipid()))
+   kv('Flash ID',node.flashid().." / "..string.format("0x%x",node.flashid()))
    kv('Heap',node.heap())
    local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
    kv('Info',"V"..maver.."."..miver..", DevV "..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)

@@ -26,7 +26,23 @@ return function(...)
       end)
    end
    table.sort(cmd)
-   for c,n in pairs(cmd) do
-      print("\t"..n)
+   if false then
+      for c,n in pairs(cmd) do
+         print("\t"..n)
+      end
+   else 
+      local cols = 4
+      local off = #cmd / cols + (#cmd % cols and 1 or 0)
+      local i = 1
+      while(i <= off) do
+         local l = ""
+         for j=0,cols-1,1 do
+            if i+off*j <= #cmd then
+               l = l .. string.format("   %-15s",cmd[i+off*j])
+            end
+         end
+         print(l)
+         i = i + 1
+      end
    end
 end
