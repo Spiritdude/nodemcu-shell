@@ -20,7 +20,7 @@ return function(...)
          table.insert(fl,v);
       end
    end
-   local cols = opts['1'] and 1 or 2
+   local cols = opts['1'] and 1 or opts['2'] and 2 or opts['3'] and 3 or opts['4'] and 4 or 2
    local col = { }
 
    function lf(f,opts,last) 
@@ -68,7 +68,7 @@ return function(...)
             lf(nl[n],opts,#nl==n)
          end
       else
-         local off = #nl / cols + (#nl % cols)
+         local off = #nl / cols + ((#nl % cols) > 0 and 1 or 0)
          local i = 1
          while(i <= off) do
             local l = ""

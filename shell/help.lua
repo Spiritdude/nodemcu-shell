@@ -32,7 +32,7 @@ return function(...)
       end
    else 
       local cols = 4
-      local off = #cmd / cols + (#cmd % cols)
+      local off = #cmd / cols + ((#cmd % cols) > 0 and 1 or 0)
       local i = 1
       while(i <= off) do
          local l = ""

@@ -1,6 +1,9 @@
 ls [opts] [files]
    options
    -1    single column
+   -2    double columns (default)
+   -3    triple columns
+   -4    quadruple columns
    -l    long output
    
 examples:
