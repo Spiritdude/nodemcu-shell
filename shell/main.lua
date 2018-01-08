@@ -73,10 +73,10 @@ shell_srv:listen(port,function(socket)
    local function expandFilename(v)
       if string.match(v,"[*?]") then
          local re = v
-         re = "^" .. re
-         re = string.gsub(re,"%.","%.")
+         re = string.gsub(re,"[(%(%)%.%+%-%[%]%^%$)]",function(a) return "%"..a end)
          re = string.gsub(re,"%*",".*")
          re = string.gsub(re,"%?",".")
+         re = "^" .. re
          re = re .. "$"
          --print("check "..re)
          local repl = { }
