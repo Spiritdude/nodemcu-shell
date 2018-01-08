@@ -36,7 +36,7 @@ function sendFile(c,fn,req,gv)
    if file.exists(fn..".gz") then
       fn = fn .. ".gz"
       h = h .. "Content-Encoding: gzip\r\n"
-      h = h .. "Cache-Control: public, max-age=3600\r\n"
+      h = h .. "Cache-Control: public, max-age=86400\r\n"
       -- h = h .. "X-Info: something\r\n"
    end 
    
@@ -45,7 +45,7 @@ function sendFile(c,fn,req,gv)
          if conf.debug > 0 then
             print("httpd: execute",fn)
          end
-         --c:on("sent",function(c) c:close() collectgarbage() end)
+         c:on("sent",function(c) c:close() collectgarbage() end)
          dofile(fn)(c,req,gv)                   -- let's execute it
       else 
          

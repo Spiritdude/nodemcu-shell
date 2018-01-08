@@ -10,7 +10,7 @@ if file.exists("wifi/wifi.conf") then
    local conf = dofile("wifi/wifi.conf")
    
    if(conf.mode=='station') then
-      syslog.print(syslog.INFO,"wifi connecting to "..conf.station.config.ssid.." ...")
+      syslog.print(syslog.INFO,"wifi: connecting to "..conf.station.config.ssid.." ...")
       wifi.setmode(wifi.STATION) 
       --wifi.setphymode(conf.signal_mode)
       wifi.sta.config(conf.station.config)
@@ -20,7 +20,7 @@ if file.exists("wifi/wifi.conf") then
          wifi.sta.setip(conf.station.net)
       end
       wifi.eventmon.register(wifi.eventmon.STA_GOT_IP,function(args)
-         syslog.print(syslog.INFO,"wifi "..conf.station.config.ssid.." "..wifi.sta.getip().." connected")
+         syslog.print(syslog.INFO,"wifi: connected to "..conf.station.config.ssid.." "..wifi.sta.getip())
          dofile("net.up.lua")
          wifi.eventmon.register(wifi.eventmon.STA_DISCONNECTED,function(args)
             print("WARN: wifi: lost connectivity, reconnecting ...")
