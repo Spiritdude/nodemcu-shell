@@ -1,0 +1,17 @@
+led [state] or [led=state]
+
+led = [ 0..n ]
+state = [ 0, 1, on, off ]
+
+see also led/led.conf.dist for declaring at which pin an led resides
+
+examples:
+   led on    set led #0 on
+   led off   set led #0 off
+   led 0     set led #0 to 0 (on)
+   led 1     set led #0 to 1 (off)
+   led 0=on  set led #0 on
+   led 0=off  set led #0 off
+   led 0=0  set led #0 to 0 (on)
+   led 0=1  set led #0 to 1 (off)
+   led 2=on   set led #2 on
