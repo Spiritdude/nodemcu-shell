@@ -1,18 +1,21 @@
 -- == Remove ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
--- Description: remove a file
+-- Description: remove file(s)
 --
 -- History:
+-- 2018/01/08: 0.0.2: multiple files
 -- 2018/01/03: 0.0.1: first version
 
 return function(...)
-   if arg[2] then
-      if file.exists(arg[2]) then
-         file.remove(arg[2])
+   table.remove(arg,1)
+   for i,f in ipairs(arg) do
+      if file.exists(f) then
+         file.remove(f)
       else
-         print("ERROR: file <"..arg[2].."> not found")
+         print("ERROR: file <"..f.."> not found")
       end
-   else
-      print("ERROR: "..arg[1].." requires an argument")
+   end
+   if #arg == 0 then
+      print("ERROR: rm requires at least an argument")
    end
 end

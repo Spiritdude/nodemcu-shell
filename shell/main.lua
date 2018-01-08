@@ -10,7 +10,7 @@
 -- 2018/01/04: 0.0.2: simple arguments passed on, proper prompt and empty input handled
 -- 2018/01/03: 0.0.1: first version
 
-local VERSION = '0.0.4'
+local VERSION = '0.0.5'
 
 local port = 2323
 local shell_srv = net.createServer(net.TCP,180)
@@ -70,6 +70,30 @@ shell_srv:listen(port,function(socket)
       end
    end
 
+   local function expandFilename(v)
+      if string.match(v,"[*?]") then
+         local re = v
+         re = "^" .. re
+         re = string.gsub(re,"%.","%.")
+         re = string.gsub(re,"%*",".*")
+         re = string.gsub(re,"%?",".")
+         re = re .. "$"
+         --print("check "..re)
+         local repl = { }
+         for f,s in pairs(file.list()) do
+            --print("check "..f.." vs "..re)
+            if string.match(f,re) then
+               --print(re..": "..f)
+               table.insert(repl,f)
+            end
+         end
+         table.sort(repl)
+         return repl
+      else
+         return nil
+      end
+   end
+
    node.output(s_output,0)   -- re-direct output to function s_output
     
    socket:on("receive",function(c,l)      -- we receive line-wise input
@@ -81,6 +105,7 @@ shell_srv:listen(port,function(socket)
       --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
       l = string.gsub(l,"[\n\r]*$","")
       a = { }
+      local fileExpFail
       if true then                 -- argument parser
          local s = 0               -- state: 0 (default), 1 = non-space, 2 = in " string, 3 = in ' string
          local t = ""              -- current token
@@ -94,11 +119,21 @@ shell_srv:listen(port,function(socket)
             elseif(s == 0 and c == " ") then
               s = s
             elseif(s == 0) then
-              t = t..c;
+              t = t..c
               s = 1
             elseif(s == 1) then
-               if(c == " ") then                  
-                  table.insert(a,t)
+               if(c == " ") then
+                  local ex = expandFilename(t)
+                  if(ex and #ex == 0) then
+                     fileExpFail = "no match" -- for <"..t..">"
+                  elseif ex then
+                     fileExpFail = nil
+                     for i,v in ipairs(ex) do
+                        table.insert(a,v)
+                     end
+                  else
+                     table.insert(a,t)
+                  end
                   t = ""
                   s = 0
                else
@@ -122,8 +157,23 @@ shell_srv:listen(port,function(socket)
                end
              end
          end
+         
          if(string.len(t) > 0) then
-            table.insert(a,t)
+            if(s == 1) then
+               local ex = expandFilename(t)
+               if(ex and #ex == 0) then
+                  fileExpFail = "no match" -- for <"..t..">"
+               elseif ex then
+                  fileExpFail = nil
+                  for i,v in ipairs(ex) do
+                     table.insert(a,v)
+                  end
+               else
+                  table.insert(a,t)
+               end
+            else
+               table.insert(a,t)
+            end
          end
       else
          -- crude space separating arguments (no strings ".." or '..' parsed)
@@ -132,10 +182,12 @@ shell_srv:listen(port,function(socket)
             --print("="..c)    
           end)
       end
-      --for k,v in ipairs(a) do
-      --  print(k.."="..v)
-      --end
-      if(#a>0) then
+
+      if(#a > 0 and fileExpFail) then
+         c:send(a[1]..": "..fileExpFail.."\n")
+         c:send("% ")
+         prompt = true
+      elseif #a > 0 then
          local cmd = a[1]
          --print("process "..cmd)
          if cmd=='exit' then

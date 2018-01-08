@@ -44,42 +44,31 @@ return function(...)
       end
    end
    
-   if #fl > 1 then
-      --table.delete(arg,1)
-      for i,f in ipairs(fl) do
-         if i>1 then
-            if file.exists(f) then
-               lf(f,opts)
-            else
-               print("ERROR: file <"..f.."> does not exist")
-            end
-         end
+   table.remove(fl,1)
+   
+   if #fl == 0 then
+      for f,s in pairs(file.list()) do
+         table.insert(fl,f)
+      end
+      table.sort(fl)
+   end
+   
+   if(cols==1 or opts['l']) then
+      for n in pairs(fl) do      -- walk through list
+         lf(fl[n],opts,#fl==n)
       end
    else
-      local l = file.list();
-   
-      local nl = { }
-      for n in pairs(l) do       -- walk through list extract keys
-         table.insert(nl,n)
-      end
-      table.sort(nl)             -- sort keys
-      if(cols==1 or opts['l']) then
-         for n in pairs(nl) do      -- walk through list
-            lf(nl[n],opts,#nl==n)
-         end
-      else
-         local off = #nl / cols + ((#nl % cols) > 0 and 1 or 0)
-         local i = 1
-         while(i <= off) do
-            local l = ""
-            for j=0,cols-1,1 do
-               if i+off*j <= #nl then
-                  l = l .. string.format("%-32s",nl[i+off*j])
-               end
+      local off = #fl / cols + ((#fl % cols) > 0 and 1 or 0)
+      local i = 1
+      while(i <= off) do
+         local l = ""
+         for j=0,cols-1,1 do
+            if i+off*j <= #fl then
+               l = l .. string.format("%-32s",fl[i+off*j])
             end
-            print(l)
-            i = i + 1
          end
+         print(l)
+         i = i + 1
       end
    end
 end
