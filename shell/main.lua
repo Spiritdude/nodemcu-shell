@@ -12,24 +12,28 @@
 
 local VERSION = '0.0.5'
 
-local port = 2323
+local conf = {}
+
+conf.port = 2323
+
 local shell_srv = net.createServer(net.TCP,180)
 
 local ip = wifi.ap.getip() or wifi.sta.getip()
-syslog.print(syslog.INFO,"nodemcu shell started on "..ip.." port "..port)
+syslog.print(syslog.INFO,"nodemcu shell started on "..ip.." port "..conf.port)
 
-shell_srv:listen(port,function(socket)
+shell_srv:listen(conf.port,function(socket)
    local fifo = {}
    local fifo_drained = true
    local prompt = false
-    
+   local promptString = "% " 
+
    local function sender(c)
       if #fifo > 0 then
          c:send(table.remove(fifo,1))
       else
          fifo_drained = true
          if not prompt then
-            c:send("% ")
+            c:send(promptString)
             prompt = true
          end
       end
@@ -96,13 +100,7 @@ shell_srv:listen(port,function(socket)
 
    node.output(s_output,0)   -- re-direct output to function s_output
     
-   socket:on("receive",function(c,l)      -- we receive line-wise input
-      collectgarbage()
-      if terminal.input_callback then
-         terminal.input_callback(l)
-         return
-      end
-      --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
+   function processLine(l) 
       l = string.gsub(l,"[\n\r]*$","")
       a = { }
       local fileExpFail
@@ -185,7 +183,7 @@ shell_srv:listen(port,function(socket)
 
       if(#a > 0 and fileExpFail) then
          c:send(a[1]..": "..fileExpFail.."\n")
-         c:send("% ")
+         c:send(promptString)
          prompt = true
       elseif #a > 0 then
          local cmd = a[1]
@@ -220,15 +218,36 @@ shell_srv:listen(port,function(socket)
          prompt = false
          sender(socket)
       else
-         c:send("% ")
+         c:send(promptString)
          prompt = true
       end
+   end
+   
+   local line = ""
+   
+   socket:on("receive",function(c,l)      -- we receive line-wise input
+      --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
+      collectgarbage()
+      if terminal.input_callback then
+         terminal.input_callback(l)
+         return
+      end
+      if conf.port == 23 then
+         line = line .. l
+         if string.match(line,"[\r\n]$") then
+            processLine(line)
+            line = ""
+         end
+      else
+         processLine(l)
+      end
    end)
+
    socket:on("disconnection",function(c)
       node.output(nil)        -- un-register the redirect output function, output goes to serial
       socket = nil
       collectgarbage()
    end)
    socket:on("sent",sender)
-   print("== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")")
+   print("\n== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")\n")
 end)

@@ -33,7 +33,7 @@ return function(...)
                line = src:read("\n")
                if(line and string.find(line,re)) then
                   line = string.gsub(line,"[\r\n]*$","")
-                  print(line)
+                  print((#fl > 1 and f..": " or "") .. line)
                end
             until line == nil
             src:close()

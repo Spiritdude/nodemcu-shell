@@ -1,0 +1,6 @@
+mv [fileOld] [fileNew]
+mv [dirOld] [dirNew]
+
+examples:
+   mv test.lua x.lua      rename a file
+   mv httpd/www/ www/     rename a directory

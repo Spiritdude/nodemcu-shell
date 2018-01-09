@@ -4,7 +4,7 @@ return {
       sda = 1,
       scl = 2,
       sla = 0x3c,
-      drv = u8g.ssd1306_128x64_i2c
+      drv = u8g and u8g.ssd1306_128x64_i2c or nil    
    },
    w = 128,
    h = 64,

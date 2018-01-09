@@ -22,23 +22,28 @@ return function(...)
    end
    local cols = opts['1'] and 1 or opts['2'] and 2 or opts['3'] and 3 or opts['4'] and 4 or 2
    local col = { }
+   local testExist = true
 
    function lf(f,opts,last) 
       if(opts['l']) then
          local st = file.stat(f)
-         local bits = ""
-         if st.isdir then
-            bits = bits .. "d" 
-         else 
-            bits = bits .. "-"
+         if st then 
+            local bits = ""
+            if st.isdir then
+               bits = bits .. "d" 
+            else 
+               bits = bits .. "-"
+            end
+            bits = bits .. "rwx"   
+            print(string.format("%s  %6d  %s %2d %d  %s",
+               bits,
+               st['size'],
+               mo[tonumber(st.time['mon'])],st.time['day'],st.time['year'],
+               f)
+            )
+         else
+            print("ls: cannot access '"..f.."': no such file or directory")
          end
-         bits = bits .. "rwx"   
-         print(string.format("%s  %6d  %s %2d %d  %s",
-            bits,
-            st['size'],
-            mo[tonumber(st.time['mon'])],st.time['day'],st.time['year'],
-            f)
-         )
       else
          print(f)
       end
@@ -51,6 +56,14 @@ return function(...)
          table.insert(fl,f)
       end
       table.sort(fl)
+   else
+      -- check existence (and remove from list if required)
+      for i,f in ipairs(fl) do
+         if not file.exists(f) then
+            print("ls: cannot access '"..f.."': No such file or directory")
+            table.remove(fl,i)
+         end
+      end
    end
    
    if(cols==1 or opts['l']) then
