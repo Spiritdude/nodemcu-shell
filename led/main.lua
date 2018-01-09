@@ -1,0 +1,43 @@
+-- == LED ==
+-- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Description: control LEDs
+--
+-- History:
+-- 2018/01/07: 0.0.1: first version 
+
+return function(...)
+   if file.exists("led/led.conf") then 
+      local conf = dofile("led/led.conf")
+      if arg[2] then
+         local led, st = string.match(arg[2],"^(%d+)=(.+)")
+         if led and st then
+            led = tonumber(led)
+         else
+            led = 0
+            st = arg[2]
+         end
+         if st == 'on' then
+            st = 0
+         elseif st == 'off' then
+            st = 1
+         elseif string.match(st,"^[01]$") then
+            st = tonumber(st)
+         else
+            print("ERROR: unknown state <"..st..">, choose 0, 1, on or off")
+            st = nil
+         end
+         if not (conf[led] and conf[led].pin) then
+            print("ERROR: led #"..led.." not defined in led/led.conf")
+         elseif st then
+            local pin = conf[led].pin or 4
+            print("led "..led.." (pin "..pin.."): "..st)
+            gpio.mode(pin,gpio.OUTPUT)
+            gpio.write(pin,st)
+         end
+      else
+         dofile("shell/man.lua")('led','led')
+      end
+   else
+      syslog.print(syslog.WARN,"led/led.conf does not exist")
+   end
+end
