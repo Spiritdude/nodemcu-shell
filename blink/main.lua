@@ -34,14 +34,11 @@ return function(...)
             led = 1-led;
             gpio.write(pin,led)
             if(led == 1 and cnt ~= nil and cnt > 0) then     -- if off
-               print("tmr count: "..cnt)
+               --print("tmr count: "..cnt)
                cnt = cnt - 1
-               if c == 0 then
-                  print("end of timer")
-                  tmr.create():alarm(100,tmr.ALARM_SINGLE,function() 
-                     tmr.stop(id)
-                     tmr.unregister(id)
-                  end)
+               if cnt == 0 then
+                  --print("end of timer")
+                  tmr.unregister(id)
                end
             end
          end
