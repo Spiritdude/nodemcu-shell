@@ -11,7 +11,7 @@ return function(...)
    local fl = { }
    
    if #arg < 2 then
-      print("ERROR: grep takes at least 2 arguments: pattern file(s)")
+      console.print("ERROR: grep takes at least 2 arguments: pattern file(s)")
    else
       -- parsing arguments
       for k,v in ipairs(arg) do
@@ -33,12 +33,12 @@ return function(...)
                line = src:read("\n")
                if(line and string.find(line,re)) then
                   line = string.gsub(line,"[\r\n]*$","")
-                  print((#fl > 1 and f..": " or "") .. line)
+                  console.print((#fl > 1 and f..": " or "") .. line)
                end
             until line == nil
             src:close()
          else
-            print("ERROR: <"..f.."> not found")
+            console.print("ERROR: <"..f.."> not found")
          end
       end
    end

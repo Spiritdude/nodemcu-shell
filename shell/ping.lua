@@ -12,14 +12,14 @@ return function(...)
       local t = tmr.now()
       net.dns.resolve(ip,function(sk,ip) 
          if ip == nil then 
-            print("ERROR: <"..arg[1].."> did not resolve")
+            console.print("ERROR: <"..arg[1].."> did not resolve")
          else
             t = (tmr.now()-t)/1000
-            print("PING "..arg[1].." ("..ip..") time "..t.."ms")
+            console.print("PING "..arg[1].." ("..ip..") time "..t.."ms")
          end
       end)
    else 
-      print("ERROR: ping requires 1 argument")
+      console.print("ERROR: ping requires 1 argument")
    end
 end
 

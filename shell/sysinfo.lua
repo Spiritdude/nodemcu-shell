@@ -9,7 +9,7 @@
 return function(...)
    local kv = function(k,v,u) 
       local s = k..': '.. (u and v..' '..u or v);
-      print(s)
+      console.print(s)
    end
  
    kv('Chip ID',node.chipid().." / "..string.format("0x%x",node.chipid()))

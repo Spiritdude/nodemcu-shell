@@ -6,6 +6,6 @@
 -- 2018/01/04: 0.0.1: first version
 
 return function(...)
-   print(node.heap())
+   console.print(node.heap())
 end
 

@@ -13,5 +13,5 @@ return function(...)
    end
    local tm = rtctime.epoch2cal(t)
    local tz = 'UTC'
-   print(string.format("%04d/%02d/%02d %02d:%02d:%02d %s", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"], tz))
+   console.print(string.format("%04d/%02d/%02d %02d:%02d:%02d %s", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"], tz))
 end

@@ -17,7 +17,7 @@ return function(...)
          end
          if fn then
             file.open(fn)
-            print(file.read())
+            console.print(file.read())
             file.close()
          end
       end

@@ -8,7 +8,7 @@
 return function(...) 
    for k,v in ipairs(arg) do
       if k > 1 then
-         print(v)
+         console.print(v)
       end
    end
 end

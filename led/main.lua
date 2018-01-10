@@ -23,14 +23,14 @@ return function(...)
          elseif string.match(st,"^[01]$") then
             st = tonumber(st)
          else
-            print("ERROR: unknown state <"..st..">, choose 0, 1, on or off")
+            console.print("ERROR: unknown state <"..st..">, choose 0, 1, on or off")
             st = nil
          end
          if not (conf[led] and conf[led].pin) then
-            print("ERROR: led #"..led.." not defined in led/led.conf")
+            console.print("ERROR: led #"..led.." not defined in led/led.conf")
          elseif st then
             local pin = conf[led].pin or 4
-            print("led "..led.." (pin "..pin.."): "..st)
+            console.print("led "..led.." (pin "..pin.."): "..st)
             gpio.mode(pin,gpio.OUTPUT)
             gpio.write(pin,st)
          end
@@ -38,6 +38,6 @@ return function(...)
          dofile("shell/man.lua")('led','led')
       end
    else
-      syslog.print(syslog.WARN,"led/led.conf does not exist")
+      console.print("WARN: led/led.conf does not exist")
    end
 end

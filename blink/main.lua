@@ -14,7 +14,7 @@ return function(...)
       d = tonumber(arg[2])
    end
    
-   -- print("blink "..d.."ms")
+   -- console.print("blink "..d.."ms")
       
    gpio.mode(pin,gpio.OUTPUT)
    
@@ -34,10 +34,10 @@ return function(...)
             led = 1-led;
             gpio.write(pin,led)
             if(led == 1 and cnt ~= nil and cnt > 0) then     -- if off
-               --print("tmr count: "..cnt)
+               --console.print("tmr count: "..cnt)
                cnt = cnt - 1
                if cnt == 0 then
-                  --print("end of timer")
+                  --console.print("end of timer")
                   tmr.unregister(id)
                end
             end

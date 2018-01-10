@@ -18,6 +18,10 @@ if file.exists("shell/shell.conf") then
    conf = dofile("shell/shell.conf")
 end
 
+if not console then
+   dofile("lib/console.lua")
+end
+
 conf.port = conf.port or 2323
 
 local shell_srv = net.createServer(net.TCP,180)
@@ -62,7 +66,7 @@ shell_srv:listen(conf.port,function(socket)
       prompt = true
    end
    
-   if true then
+   if false then
       function print(...)
          local str = ""
          for i,v in ipairs(arg) do
@@ -80,7 +84,8 @@ shell_srv:listen(conf.port,function(socket)
          --end
       end
    else
-      node.output(s_output,0)   -- re-direct output to function s_output
+      console.output(function(s) s_output(s.."\n") end)
+      --node.output(s_output,0)   -- re-direct output to function s_output
    end
 
    local function expandFilename(v)
@@ -221,7 +226,7 @@ shell_srv:listen(conf.port,function(socket)
             dofile(cmd..".lua")(unpack(a))
             --assert(loadfile(cmd..".lua"))(unpack(a))
          else 
-            print("ERROR: command <"..cmd.."> not found")
+            console.print("ERROR: command <"..cmd.."> not found")
          end
          if not terminal.input_callback then
             prompt = false
@@ -259,5 +264,5 @@ shell_srv:listen(conf.port,function(socket)
       collectgarbage()
    end)
    socket:on("sent",sender)
-   print("\n== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")\n")
+   console.print("\n== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")\n")
 end)

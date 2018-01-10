@@ -12,11 +12,11 @@ return function(...)
       return file.exists("shell/"..f..".txt") or file.exists(f.."/man.txt")
    end
 
-   print("available commands:")
+   console.print("available commands:")
    local cmd = { }
    table.insert(cmd,"exit")         -- built-in command
    for f,k in pairs(l) do
-      --print("="..f)
+      --console.print("="..f)
       if string.find(f,"shell/") then
          string.gsub(f,"shell/(.+)\.lua$",function(c)
             if(c ~= 'main') then
@@ -39,7 +39,7 @@ return function(...)
    table.sort(cmd)
    if false then
       for c,n in pairs(cmd) do
-         print("\t"..n)
+         console.print("\t"..n)
       end
    else 
       local cols = 4
@@ -52,9 +52,9 @@ return function(...)
                l = l .. string.format("   %-15s",cmd[i+off*j])
             end
          end
-         print(l)
+         console.print(l)
          i = i + 1
       end
    end
-   -- print("+: has man page, use `man <cmd>` to read it")
+   -- console.print("+: has man page, use `man <cmd>` to read it")
 end

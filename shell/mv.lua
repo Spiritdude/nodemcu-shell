@@ -23,19 +23,19 @@ return function(...)
       for f,s in pairs(file.list()) do
          if string.find(f,arg[1]) == 1 then     -- must match from the beginning
             local d = string.sub(f,string.len(arg[1])+1)
-            print("   "..f.." to "..arg[2]..d)
+            console.print("   "..f.." to "..arg[2]..d)
             file.rename(f,arg[2]..d)
          end
       end
    elseif(#arg == 2 and arg[1] and arg[2]) then
       if file.exists(arg[1]) then
-         print("   "..arg[1].." to "..arg[2])
+         console.print("   "..arg[1].." to "..arg[2])
          file.rename(arg[1],arg[2])
       else
-         print("ERROR: file <"..arg[1].."> not found, cannot rename/move")
+         console.print("ERROR: file <"..arg[1].."> not found, cannot rename/move")
       end
    else
-      print("ERROR: mv requires two arguments")
+      console.print("ERROR: mv requires two arguments")
    end
 end
 

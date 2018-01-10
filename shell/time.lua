@@ -19,9 +19,9 @@ return function(...)
       elseif file.exists(cmd.."/main.lua") then
          dofile(cmd.."/main.lua")(unpack(arg))
       else 
-         print("ERROR: command <"..arg[1].."> does not exist")
+         console.print("ERROR: command <"..arg[1].."> does not exist")
       end
    end
-   print(((tmr.now()-t)/1000).." ms")
+   console.print(((tmr.now()-t)/1000).." ms")
 end
 

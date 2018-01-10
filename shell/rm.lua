@@ -12,10 +12,10 @@ return function(...)
       if file.exists(f) then
          file.remove(f)
       else
-         print("ERROR: file <"..f.."> not found")
+         console.print("ERROR: file <"..f.."> not found")
       end
    end
    if #arg == 0 then
-      print("ERROR: rm requires at least an argument")
+      console.print("ERROR: rm requires at least an argument")
    end
 end

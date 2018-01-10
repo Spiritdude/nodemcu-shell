@@ -43,7 +43,7 @@ if display and display.disp then
       repeat
          local y = 0;
          for i,v in ipairs(display.buffer) do
-            --print("=",v)
+            --console.print("=",v)
             display.disp:drawStr(0,y,v)
             y = y + display.fontHeight;
          end

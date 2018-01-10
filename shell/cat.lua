@@ -15,14 +15,14 @@ return function(...)
             l = file.read("\n")
             if l ~= nil then
                l = string.gsub(l,"[\r\n]*$","")
-               print(l)
+               console.print(l)
             end
          until l == nil
          file.close()
       elseif arg[2] == '-' then
          -- future: take stdin 
       else
-         print("ERROR: file <"..arg[2].."> not found")
+         console.print("ERROR: file <"..arg[2].."> not found")
       end
    end
    if #arg == 0 then

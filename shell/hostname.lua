@@ -9,6 +9,6 @@ return function(...)
    if arg[2] then
       wifi.sta.sethostname(arg[2])
    else
-      print(wifi.sta.gethostname())
+      console.print(wifi.sta.gethostname())
    end
 end

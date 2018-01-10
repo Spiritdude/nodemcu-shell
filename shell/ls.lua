@@ -35,17 +35,17 @@ return function(...)
                bits = bits .. "-"
             end
             bits = bits .. "rwx"   
-            print(string.format("%s  %6d  %s %2d %d  %s",
+            console.print(string.format("%s  %6d  %s %2d %d  %s",
                bits,
                st['size'],
                mo[tonumber(st.time['mon'])],st.time['day'],st.time['year'],
                f)
             )
          else
-            print("ls: cannot access '"..f.."': no such file or directory")
+            console.print("ls: cannot access '"..f.."': no such file or directory")
          end
       else
-         print(f)
+         console.print(f)
       end
    end
    
@@ -60,7 +60,7 @@ return function(...)
       -- check existence (and remove from list if required)
       for i,f in ipairs(fl) do
          if not file.exists(f) then
-            print("ls: cannot access '"..f.."': No such file or directory")
+            console.print("ls: cannot access '"..f.."': No such file or directory")
             table.remove(fl,i)
          end
       end
@@ -80,7 +80,7 @@ return function(...)
                l = l .. string.format("%-32s",fl[i+off*j])
             end
          end
-         print(l)
+         console.print(l)
          i = i + 1
       end
    end

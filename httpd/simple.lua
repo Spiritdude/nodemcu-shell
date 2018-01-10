@@ -43,7 +43,7 @@ function sendFile(c,fn,req,gv)
    if file.exists(fn) then
       if string.match(fn,"\.lua$") then         -- a script?
          if conf.debug > 0 then
-            print("httpd: execute",fn)
+            console.print("httpd: execute",fn)
          end
          c:on("sent",function(c) c:close() collectgarbage() end)
          dofile(fn)(c,req,gv)                   -- let's execute it
@@ -55,7 +55,7 @@ function sendFile(c,fn,req,gv)
          h = h .. "Content-Length: " .. st['size'] .. "\r\n"
          
          if(conf.debug > 0) then
-            print("httpd: send",fno,fn,m,st['size'])
+            console.print("httpd: send",fno,fn,m,st['size'])
          end
    
          h = h .. "\r\n"   -- end of header
@@ -90,9 +90,9 @@ srv:listen(conf.port,function(conn)
    conn:on("receive", function(client,request)
       collectgarbage()
       
-      --print("request="..request)
+      --console.print("request="..request)
       local method, path = string.match(request,"^([A-Z]+) (.+) HTTP");
-      --print("method="..method,"path="..path)
+      --console.print("method="..method,"path="..path)
       local gv = {}
       if true then
          local vars = string.match(path,"\?(.*)$")
@@ -101,13 +101,13 @@ srv:listen(conf.port,function(conn)
             string.gsub(vars,"(%w+)=(%w+)&*",function(k,v)
               -- todo: decode k,v
               gv[k] = v
-              --print("\t"..k.."="..v)
+              --console.print("\t"..k.."="..v)
             end)
          end
          -- we later process gv { }
       end
       if(conf.debug > 1) then
-         print("before send",node.heap())
+         console.print("before send",node.heap())
       end
       if(conf.debug > 2) then
          client:on("sent",function() client:close() conn = nil client = nil collectgarbage() end)
@@ -121,7 +121,7 @@ srv:listen(conf.port,function(conn)
          collectgarbage()
       end
       if(conf.debug > 1) then
-         print("after send",node.heap())
+         console.print("after send",node.heap())
       end
    end)
 end)

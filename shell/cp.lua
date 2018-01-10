@@ -25,6 +25,6 @@ return function(...)
          end
       end
    else 
-      print("ERROR: "..arg[1].." requires 2 arguments")
+      console.print("ERROR: "..arg[1].." requires 2 arguments")
    end
 end
