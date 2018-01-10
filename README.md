@@ -99,7 +99,19 @@ return function(...)
 end
 ```
 
-`shell/main.lua` is the NodeMCU shell main entry, it opens a telnet server at port 2323 (default).
+- every configuration has `.conf` but is also LUA code like:
+```
+return {
+   key1 = "value 1",
+   key2 = "value 2",
+   deeper = {
+      key11 = "value 1.1"
+   }
+}
+```
+- `.conf.dist` are suggested configuration, and user must copy it to `.conf` - this way you can edit `.conf` and won't be overwritten when you upload NodeMCU Shell.
+
+Finally, `shell/main.lua` is the NodeMCU shell main entry, it opens a telnet server at port 2323 (default).
 
 ## Everything is a File (No Directories)
 
