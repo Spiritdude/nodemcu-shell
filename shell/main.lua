@@ -14,7 +14,11 @@ local VERSION = '0.0.5'
 
 local conf = {}
 
-conf.port = 2323
+if file.exists("shell/shell.conf") then
+   conf = dofile("shell/shell.conf")
+end
+
+conf.port = conf.port or 2323
 
 local shell_srv = net.createServer(net.TCP,180)
 
@@ -27,7 +31,8 @@ shell_srv:listen(conf.port,function(socket)
    local prompt = false
    local promptString = "% " 
 
-   local function sender(c)
+   -- they must be global in order terminal.output to work
+   function sender(c)
       if #fifo > 0 then
          c:send(table.remove(fifo,1))
       else
@@ -38,7 +43,7 @@ shell_srv:listen(conf.port,function(socket)
          end
       end
    end
-   local function s_output(str)
+   function s_output(str)
       table.insert(fifo,str)
       if socket ~= nil and fifo_drained then
          fifo_drained = false
@@ -54,9 +59,10 @@ shell_srv:listen(conf.port,function(socket)
    terminal.input = function(cb)
       --socket:on("receive",cb)
       terminal.input_callback = cb
+      prompt = true
    end
    
-   if false then
+   if true then
       function print(...)
          local str = ""
          for i,v in ipairs(arg) do
@@ -66,12 +72,15 @@ shell_srv:listen(conf.port,function(socket)
             str = str .. v
          end
          str = str .. "\n"
-         table.insert(fifo,str)
-         if socket ~= nil and fifo_drained then
-            fifo_drained = false
-            sender(socket)
-         end
+         s_output(str)
+         --table.insert(fifo,str)
+         --if socket ~= nil and fifo_drained then
+         --   fifo_drained = false
+         --   sender(socket)
+         --end
       end
+   else
+      node.output(s_output,0)   -- re-direct output to function s_output
    end
 
    local function expandFilename(v)
@@ -98,9 +107,7 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
 
-   node.output(s_output,0)   -- re-direct output to function s_output
-    
-   function processLine(l) 
+   local function processLine(l,c) 
       l = string.gsub(l,"[\n\r]*$","")
       a = { }
       local fileExpFail
@@ -187,6 +194,7 @@ shell_srv:listen(conf.port,function(socket)
          prompt = true
       elseif #a > 0 then
          local cmd = a[1]
+         cmd = string.gsub(cmd,"[^a-zA-Z_%-/]","")     -- clean up command
          --print("process "..cmd)
          if cmd=='exit' then
             prompt = true     -- don't try to print it 
@@ -215,8 +223,10 @@ shell_srv:listen(conf.port,function(socket)
          else 
             print("ERROR: command <"..cmd.."> not found")
          end
-         prompt = false
-         sender(socket)
+         if not terminal.input_callback then
+            prompt = false
+            sender(socket)
+         end
       else
          c:send(promptString)
          prompt = true
@@ -229,17 +239,17 @@ shell_srv:listen(conf.port,function(socket)
       --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
       collectgarbage()
       if terminal.input_callback then
-         terminal.input_callback(l)
+         terminal.input_callback(l,c)
          return
       end
       if conf.port == 23 then
          line = line .. l
          if string.match(line,"[\r\n]$") then
-            processLine(line)
+            processLine(line,c)
             line = ""
          end
       else
-         processLine(l)
+         processLine(l,c)
       end
    end)
 

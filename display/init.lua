@@ -15,10 +15,10 @@ if file.exists("display/display.conf") then
    
    if(conf.mode=='i2c') then
       if conf.i2c.drv then
-         syslog.print(syslog.INFO,"init display driver, "..string.format("mode %s, %dx%d",conf.mode,conf.w,conf.h))
          i2c.setup(0,conf.i2c.sda,conf.i2c.scl,i2c.SLOW)
          display.disp = conf.i2c.drv(conf.i2c.sla)
-         if true then
+         if display.disp then
+            syslog.print(syslog.INFO,"init display driver, "..string.format("mode %s, %dx%d",conf.mode,display.disp:getWidth(),display.disp:getHeight()))
             if(u8g and u8g.font_6x10) then
                display.disp:setFont(u8g.font_6x10)
                display.disp:setFontRefHeightExtendedText()
@@ -37,6 +37,8 @@ if file.exists("display/display.conf") then
                   display.disp:drawXBM(x,y,w,h,data)
                until display.disp:nextPage() == false
             end
+         else
+            syslog.print(syslog.WARN,"display init failed")
          end
       else
          syslog.print(syslog.WARN,"display: no driver found (missing module)")

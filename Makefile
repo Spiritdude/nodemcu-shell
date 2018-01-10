@@ -15,6 +15,9 @@ upload_shell_core::
 
 # -- developer only:
 
+edit::
+	dee4 README.md Makefile *.lua */*.lua
+
 backup::
 	cd ..; tar cfvz ${BACKUP} nodemcu-shell; mv ${BACKUP} ~/Backup/
 	scp ~/Backup/${BACKUP} backup:Backup/
