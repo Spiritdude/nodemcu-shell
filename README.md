@@ -109,7 +109,7 @@ return {
    }
 }
 ```
-- `.conf.dist` are suggested configuration, and user must copy it to `.conf` - this way you can edit `.conf` and won't be overwritten when you upload NodeMCU Shell.
+- `.conf.dist` are suggested configuration, and user must copy it to `.conf` - this way you can edit `.conf` and won't be overwritten when you update and upload the NodeMCU Shell.
 
 Finally, `shell/main.lua` is the NodeMCU shell main entry, it opens a telnet server at port 2323 (default).
 

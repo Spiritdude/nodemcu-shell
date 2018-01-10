@@ -41,7 +41,7 @@ if file.exists("display/display.conf") then
             end
             if conf.console then
                dofile("lib/display.lua")
-               print = function(...)
+               console.output(function(...)
                   local str = ""
                   for i,v in ipairs(arg) do
                      if i > 1 then
@@ -50,7 +50,7 @@ if file.exists("display/display.conf") then
                      str = str .. v
                   end
                   display.print(str)
-               end
+               end)
                tmr.create():alarm(1000,tmr.ALARM_AUTO,function() 
                   display.flush()
                end)
