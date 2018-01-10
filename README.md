@@ -113,6 +113,16 @@ return {
 
 Finally, `shell/main.lua` is the NodeMCU shell main entry, it opens a telnet server at port 2323 (default).
 
+## Console vs Syslog vs Print
+
+`print()` and `node.output()` interfer with the serial port where the upload is happening. 
+To resolve this and have also a cleaner setup:
+-`console.print()`: print to the console (whereever this ends up to be)
+  -`console.output(function(s) .. end)` allows redirecting
+-`syslogs.print(type,message)` is for logging system stuff, type: `syslog.INFO`, `syslog.WARN`, `syslog.ERROR` or `syslog.FATAL`
+
+Note: do **not* use `print()` in anything, but use `console.print()` - the abstraction resides in `lib/console.log` and is called early.
+
 ## Everything is a File (No Directories)
 
 Hint: currently NodeMCU uses SPIFFS (SPI Flash File System) which is very simple with little RAM consumption:
