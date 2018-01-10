@@ -114,10 +114,12 @@ Hint: currently NodeMCU uses SPIFFS (SPI Flash File System) which is very simple
 At first you need to configure `wifi/wifi.conf`, first copy `wifi/wifi.conf.dist` to `wifi/wifi.conf` and edit it:
 ```
 return {
-   mode = "client",     -- "client" or "ap"
-   client = {
-      ssid = "yourWIFI",
-      password = "youWIFIpassword"
+   mode = "station",     -- "station" or "ap"
+   station = {
+      config = {
+         ssid = "yourWIFI",
+         password = "youWIFIpassword"
+      }
    },
    ap = { 
       config = {
