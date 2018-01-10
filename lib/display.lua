@@ -16,9 +16,9 @@
 
 if display and display.disp then
    display.buffer = {}                     -- content buffer (array of lines)
-   display.screenWidth = 128
-   display.screenHeight = 64
-   display.fontHeight = 10
+   display.screenWidth = display.disp:getWidth()
+   display.screenHeight = display.disp:getHeight()
+   display.fontHeight = display.disp:getFontAscent() - display.disp:getFontDescent() + 1
 
    display.setFont = function(fo)
       if fo then
@@ -57,15 +57,6 @@ if display and display.disp then
       --display.flush()
    end
    
-   display.setSize = function(w,h)
-      display.screenWidth = w
-      display.screenHeight = h
-   end
-   
-   display.setFontHeight = function(h)
-      display.fontHeight = h
-   end
-
    display.print = function(s)
       table.insert(display.buffer,s)
       while(#display.buffer * display.fontHeight > display.screenHeight) do   -- scrolling required?
@@ -74,7 +65,4 @@ if display and display.disp then
       --display.flush()
       collectgarbage()
    end
-   
-   display.screenWidth = display.disp:getWidth()
-   display.screenHeight = display.disp:getHeight()
 end

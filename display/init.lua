@@ -27,7 +27,6 @@ if file.exists("display/display.conf") then
             end
             local fn = (display.disp:getHeight() >= 48) and "logo48.mono" or "logo.mono"
             local sz = (display.disp:getHeight() >= 48) and 48 or 31
-            print(fn,sz)
             if file.open("display/"..fn) then
                local data = file.read()
                file.close()
@@ -39,6 +38,22 @@ if file.exists("display/display.conf") then
                repeat
                   display.disp:drawXBM(x,y,w,h,data)
                until display.disp:nextPage() == false
+            end
+            if conf.console then
+               dofile("lib/display.lua")
+               print = function(...)
+                  local str = ""
+                  for i,v in ipairs(arg) do
+                     if i > 1 then
+                        str = str .. "\t"
+                     end
+                     str = str .. v
+                  end
+                  display.print(str)
+               end
+               tmr.create():alarm(1000,tmr.ALARM_AUTO,function() 
+                  display.flush()
+               end)
             end
          else
             syslog.print(syslog.WARN,"display init failed")
