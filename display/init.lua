@@ -25,11 +25,14 @@ if file.exists("display/display.conf") then
                display.disp:setDefaultForegroundColor()
                display.disp:setFontPosTop()
             end
-            if file.open("display/logo.mono") then
+            local fn = (display.disp:getHeight() >= 48) and "logo48.mono" or "logo.mono"
+            local sz = (display.disp:getHeight() >= 48) and 48 or 31
+            print(fn,sz)
+            if file.open("display/"..fn) then
                local data = file.read()
                file.close()
-               local w = 31
-               local h = 31
+               local w = sz
+               local h = sz
                local x = display.disp:getWidth()/2 - w/2
                local y = display.disp:getHeight()/2 - h/2
                display.disp:firstPage()
