@@ -99,7 +99,7 @@ return function(...)
 end
 ```
 
-- every configuration has `.conf` but is also LUA code like:
+- every configuration has `.conf` as extension but is also LUA code like:
 ```
 return {
    key1 = "value 1",
