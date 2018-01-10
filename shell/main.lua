@@ -5,6 +5,7 @@
 --    Note: this is very experimental, telnet is a prototype interface for the shell
 --
 -- History:
+-- 2018/01/09: 0.0.6: using console.* layer so there is no print()/node.output() calls anymore
 -- 2018/01/06: 0.0.4: replacing node.output() and define dedicated print(...) 
 -- 2018/01/04: 0.0.3: unpacking args at dofile()
 -- 2018/01/04: 0.0.2: simple arguments passed on, proper prompt and empty input handled
