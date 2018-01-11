@@ -11,7 +11,7 @@
 -- 2018/01/04: 0.0.2: simple arguments passed on, proper prompt and empty input handled
 -- 2018/01/03: 0.0.1: first version
 
-local VERSION = '0.0.5'
+local VERSION = '0.0.6'
 
 local conf = {}
 
@@ -48,6 +48,7 @@ shell_srv:listen(conf.port,function(socket)
          end
       end
    end
+   
    function s_output(str)
       table.insert(fifo,str)
       if socket ~= nil and fifo_drained then
@@ -64,7 +65,11 @@ shell_srv:listen(conf.port,function(socket)
    terminal.input = function(cb)
       --socket:on("receive",cb)
       terminal.input_callback = cb
-      prompt = true
+      if cb == nil then
+         prompt = false
+      else
+         prompt = true
+      end
    end
    
    if false then
@@ -241,6 +246,11 @@ shell_srv:listen(conf.port,function(socket)
    
    local line = ""
    
+   --socket:on("connection",function(c)
+      -- make telnet go "one character at a time"
+      --c:send(string.format("%c%c%c%c%c%c",255,252,34,255,251,3))
+   --end)
+   
    socket:on("receive",function(c,l)      -- we receive line-wise input
       --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
       collectgarbage()
@@ -248,9 +258,10 @@ shell_srv:listen(conf.port,function(socket)
          terminal.input_callback(l,c)
          return
       end
-      if conf.port == 23 then
+      if(false or conf.port == 23) then
          line = line .. l
-         if string.match(line,"[\r\n]$") then
+         --console.print("'"..line.."'")
+         if string.match(line,"[\x0d\r\n]$") then
             processLine(line,c)
             line = ""
          end

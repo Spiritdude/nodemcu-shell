@@ -14,13 +14,14 @@ if file.exists("display/display.conf") then
    }    
    
    if(conf.mode=='i2c') then
-      if conf.i2c.drv then
+      if conf.i2c.driver then
          i2c.setup(0,conf.i2c.sda,conf.i2c.scl,i2c.SLOW)
-         display.disp = conf.i2c.drv(conf.i2c.sla)
+         display.disp = conf.i2c.driver(conf.i2c.sla)
          if display.disp then
             syslog.print(syslog.INFO,"init display driver, "..string.format("mode %s, %dx%d",conf.mode,display.disp:getWidth(),display.disp:getHeight()))
-            if(u8g and u8g.font_6x10) then
-               display.disp:setFont(u8g.font_6x10)
+            local fo = u8g and (u8g.font_04b_03 or u8g.font_helv08 or u8g.font_6x10) 
+            if fo then
+               display.disp:setFont(fo)
                display.disp:setFontRefHeightExtendedText()
                display.disp:setDefaultForegroundColor()
                display.disp:setFontPosTop()
@@ -50,8 +51,9 @@ if file.exists("display/display.conf") then
                      str = str .. v
                   end
                   display.print(str)
+                  -- display.print(string.sub(str,1,30))    -- truncate a bit otherwise wraps around on the left-side again
                end)
-               tmr.create():alarm(1000,tmr.ALARM_AUTO,function() 
+               tmr.create():alarm(2000,tmr.ALARM_AUTO,function() 
                   display.flush()
                end)
             end
