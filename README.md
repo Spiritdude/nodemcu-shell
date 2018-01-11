@@ -332,6 +332,7 @@ Blink the on-board LED, with a particular frequency (default 500 = 500ms), 0 or 
 ```
 % blink
 % blink 100
+% blink 300 3     (blink 3 times then off)
 % blink 0
 % blink off
 ```
