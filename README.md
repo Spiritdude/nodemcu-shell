@@ -231,7 +231,7 @@ available commands:
    
 ```
 
-## LS
+## ls
 ```
 % ls
 args/main.lua
@@ -250,7 +250,7 @@ compile/main.lua
 -rwx      81  Jan  1 1970  init.lua
 ```
 
-## CAT
+## cat & more
 Display content of a file:
 ```
 % cat net.up.lua
@@ -259,39 +259,40 @@ dofile("rtc/init.lua")
 dofile("shell/main.lua")
 
 ```
+`more` does the same as `cat` for now.
 
-## ECHO
+## echo
 Echo the arguments:
 ```
 % echo "hello world"
 hello world
 ```
 
-## CLEAR
+## clear
 Clear screen:
 ```
 % clear
 ```
 
-## MV
+## mv
 Move or rename a file:
 ```
 % mv tst.lua test.lua
 ```
  
-## RM
+## rm
 Remove a file
 ```
 % rm tst.lua
 ```
 
-## CP
+## cp
 Copy a file
 ```
 % cp tst.lua test.lua
 ```
 
-## TOUCH
+## touch
 Touch, update mtime (seems currently not working) of a file or create an empty file:
 ```
 % touch x.lua
@@ -299,7 +300,7 @@ Touch, update mtime (seems currently not working) of a file or create an empty f
 -rwx       0  Jan  1 1970  x.lua
 ```
 
-## GREP
+## grep
 Simple `grep`:
 ```
 % grep lua startup.lua
@@ -314,8 +315,8 @@ dofile("wifi/wifi.lua")
               dofile(cmd..".lua")(unpack(a))
 ```
 
-## DF
-Disk usage:
+## df
+Disk space usage:
 ```
 % df 
 Filesystem  Total    Used  Avail.   Use%  Mounted On
@@ -326,7 +327,7 @@ Filesystem  Total   Used  Avail.   Use%  Mounted On
 /flashfs    3184K   61K   3122K    1%    /
 ```
 
-## BLINK
+## blink
 Blink the on-board LED, with a particular frequency (default 500 = 500ms), 0 or "off" turns blinking off:
 ```
 % blink
@@ -335,25 +336,25 @@ Blink the on-board LED, with a particular frequency (default 500 = 500ms), 0 or 
 % blink off
 ```
 
-## HEAP
+## heap
 Display remaining heap (free RAM):
 ```
 % heap
 31064
 ```
-## UPTIME
+## uptime
 ```
 % uptime
 0d 0h 44m 26s
 ```
-## DATE
+## date
 ```
 % date
 2018/01/05 10:04:09 UTC
 ```
 Hint: include **sntp** module in the firmware, and when wifi is configured, it will retrieve current time via a ntp server, see `net.up.lua` and `rtc/init.lua`.
 
-## HOSTNAME
+## hostname
 Display or set hostname:
 ```
 % hostname
@@ -363,7 +364,7 @@ ESP-12345678
 esp1
 ```
 
-## TIME
+## time
 Measure execution time of commands:
 ```
 % time
@@ -379,7 +380,7 @@ if file.exists("startup.lua") then
    
 298 ms
 ```   
-## SYSINFO
+## sysinfo
 Display system info:
 ```
 % sysinfo
@@ -410,19 +411,19 @@ STA Broadcast IP: 192.168.2.255
 RSSI: -80 dB
 ```
 
-## PING
+## ping
 ```
 % ping slashdot.org
 PING slashdot.org (216.34.181.45) time 517ms
 ```
-## COMPILE
+## compile
 Compile does compile `.lua` into `.lc`, the shell prefers `.lc` over `.lua` when executing commands - in other words, once you start to execute `.lc` and you update the system with `.lua` files, keep your `.lc` in sync.
 ```
 % compile args/main.lua
 > compile args/main.lua: args/main.lc
 ```
 
-## ARGS
+## args
 Display arguments for debug purposes:
 ```
 % args "abc def" 5 14
@@ -431,12 +432,12 @@ arg[2] = 'abc def'
 arg[3] = '5'
 arg[4] = '14'
 ```
-## DOFILE
+## dofile
 Execute a .lua file via `dofile()`:
 ```
 % dofile example.lua
 ```
-## LUA
+## lua
 Execute actual LUA code:
 ```
 % lua 'print("abc")'
@@ -445,11 +446,11 @@ abc
 % lua 'print(node.bootreason())'
 2     6
 ```
-## REBOOT
+## reboot
 ```
 % reboot
 ```
-### EXIT
+### exit
 This is a built-in command (there is no corresponding .lua) and disconnects telnet session:
 ```
 % exit
