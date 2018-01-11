@@ -119,7 +119,7 @@ Finally, `shell/main.lua` is the NodeMCU shell main entry, it opens a telnet ser
 To resolve this and have also a cleaner setup:
 - `console.print()`: print to the console (whereever this ends up to be), defined in `lib/console.lua`
   - `console.output(function(s) .. end)` allows redirecting
--`syslogs.print(type,message)` is for logging system stuff, type: `syslog.INFO`, `syslog.WARN`, `syslog.ERROR` or `syslog.FATAL` and is defined in `lib/syslog.log`
+- `syslogs.print(type,message)` is for logging system stuff, type: `syslog.INFO`, `syslog.WARN`, `syslog.ERROR` or `syslog.FATAL` and is defined in `lib/syslog.log`
 
 Note: do **not** use `print()` in anything anymore, but use `console.print()`.
 
