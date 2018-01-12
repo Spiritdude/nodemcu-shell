@@ -18,7 +18,7 @@ if file.exists("display/display.conf") then
          i2c.setup(0,conf.i2c.sda,conf.i2c.scl,i2c.SLOW)
          display.disp = conf.i2c.driver(conf.i2c.sla)
          if display.disp then
-            syslog.print(syslog.INFO,"init display driver, "..string.format("mode %s, %dx%d",conf.mode,display.disp:getWidth(),display.disp:getHeight()))
+            syslog.print(syslog.INFO,"init display driver: "..string.format("mode %s, %dx%d",conf.mode,display.disp:getWidth(),display.disp:getHeight()))
             local fo = u8g and (u8g.font_04b_03 or u8g.font_helv08 or u8g.font_6x10) 
             if fo then
                display.disp:setFont(fo)
