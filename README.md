@@ -25,7 +25,9 @@ NodeMCU is a LUA runtime environment, so the shell is written in LUA.
 Trying 192.168.2.119...
 Connected to 192.168.2.119.
 Escape character is '^]'.
-== Welcome to NodeMCU Shell 0.0.4
+
+== Welcome to NodeMCU Shell 0.0.6 on ESP-XYZ (XYZ / 0xffffff)
+
 % ls -l
 -rwx     258  Jan  1 1970  args/main.lua
 -rwx      59  Jan  1 1970  args2/main.lua
@@ -206,7 +208,9 @@ Once your device becomes available via WIFI (as client or access point), you see
 Trying 192.168.2.119...
 Connected to 192.168.2.119.
 Escape character is '^]'.
+
 == Welcome to NodeMCU Shell 0.0.6 on ESP-XYZ (XYZ / 0xffffff)
+
 % help
 available commands:
    args            ...
