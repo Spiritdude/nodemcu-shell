@@ -55,36 +55,24 @@ dofile("wifi/wifi.lua")
 
 % help
 available commands:
-   args
-   blink
-   cat
-   compile
-   cp
-   date
-   df
-   dofile
-   echo
-   exit
-   grep
-   heap
-   help
-   hostname
-   ls
-   lua
-   mv
-   ping
-   reboot
-   rm
-   sysinfo
-   time
-   touch
-   uptime
+   args            help             ....
+   blink           hostname         ...
+   cat             ls               ..
+   compile         lua              .
+   cp              mv
+   date            ping
+   df              reboot
+   dofile          rm
+   echo            sysinfo
+   exit            time
+   grep            touch
+   heap            uptime
 
 % exit
 Connection closed by foreign host.
 ```
 
-## Layout of Commands
+## System Layout of Commands
 
 Following filesystem layout has been adopted:
 - every command or app has its own directory or namespace, with main entry point of `<appname>/main.lua`
@@ -218,26 +206,28 @@ Once your device becomes available via WIFI (as client or access point), you see
 Trying 192.168.2.119...
 Connected to 192.168.2.119.
 Escape character is '^]'.
-== Welcome to NodeMCU Shell 0.0.4
+== Welcome to NodeMCU Shell 0.0.6 on ESP-XYZ (XYZ / 0xffffff)
 % help
 available commands:
-   args
-   blink
-   cat
-   compile
-   cp
-   date
-   ...
+   args            ...
+   blink           ..
+   cat             .
+   compile         .
+   cp              .
+   date            .
+   ...             .
    
 ```
 
 ## ls
 ```
 % ls
-args/main.lua
-blink/main.lua
-compile/main.lua
-...
+args/main.lua           ....
+blink/main.lua          ...
+compile/main.lua        ..
+...                     .
+..                      .
+.                       .
 
 % ls -l
 -rwx     258  Jan  1 1970  args/main.lua
