@@ -1,6 +1,6 @@
 -- == Console ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
--- Description: print() abastraction -> console.print()
+-- Description: print() abstraction -> console.print()
 -- 
 -- History:
 -- 2018/01/10: 0.0.1: first version

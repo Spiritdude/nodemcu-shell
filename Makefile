@@ -1,5 +1,5 @@
 PORT=/dev/ttyUSB0
-BACKUP=nodemcu-`date +%F`.tar.gz
+BACKUP=nodemcu-shell-`date +%F`.tar.gz
 
 all::
 	@echo "make upload_all upload_shell upload_shell_core"

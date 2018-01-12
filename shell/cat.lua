@@ -22,7 +22,7 @@ return function(...)
       elseif arg[2] == '-' then
          -- future: take stdin 
       else
-         console.print("ERROR: file <"..arg[2].."> not found")
+         console.print("ERROR: file <"..arg[1].."> not found")
       end
    end
    if #arg == 0 then

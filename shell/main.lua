@@ -37,7 +37,7 @@ shell_srv:listen(conf.port,function(socket)
    local promptString = "% " 
 
    -- they must be global in order terminal.output to work
-   function sender(c)
+   local function sender(c)
       if #fifo > 0 then
          c:send(table.remove(fifo,1))
       else
@@ -49,7 +49,7 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
    
-   function s_output(str)
+   local function s_output(str)
       table.insert(fifo,str)
       if socket ~= nil and fifo_drained then
          fifo_drained = false
@@ -58,19 +58,18 @@ shell_srv:listen(conf.port,function(socket)
    end
    
    -- attempt to have other apps take control of the connection (like an editor)
-   terminal = {} 
-   terminal.output = function(s)
-      s_output(s)
-   end
-   terminal.input = function(cb)
-      --socket:on("receive",cb)
-      terminal.input_callback = cb
-      if cb == nil then
-         prompt = false
-      else
-         prompt = true
-      end
-   end
+   terminal = {
+      output = s_output,
+      input = function(cb)
+         terminal.input_callback = cb
+         if cb == nil then
+            prompt = false
+         else
+            prompt = true
+         end
+      end,
+      input_callback = nil
+   }
    
    if false then
       function print(...)
@@ -256,9 +255,7 @@ shell_srv:listen(conf.port,function(socket)
       collectgarbage()
       if terminal.input_callback then
          terminal.input_callback(l,c)
-         return
-      end
-      if(false or conf.port == 23) then
+      elseif(false or conf.port == 23) then
          line = line .. l
          --console.print("'"..line.."'")
          if string.match(line,"[\x0d\r\n]$") then
