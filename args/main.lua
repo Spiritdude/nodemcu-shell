@@ -1,6 +1,6 @@
 -- == Args ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
--- Description: just displays the arguments
+-- Description: just displays the command-line arguments
 --
 -- History:
 -- 2018/01/03: 0.0.1: first version

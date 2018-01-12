@@ -1,4 +1,4 @@
--- == BLINK ==
+-- == Blink ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description: just blinking
 --

@@ -412,6 +412,23 @@ STA Broadcast IP: 192.168.2.255
 RSSI: -80 dB
 ```
 
+## cpu
+Display LuaKIPS (thousands of instructions per second) or select CPU frequency (80 or 160 MHz):
+```
+% cpu
+645 LuaKIPS
+% cpu 80
+cpu freq = 80 MHz
+% cpu 
+322 LuaKIPS
+% cpu 160
+cpu freq = 160 MHz
+% cpu
+645 LuaKIPS
+% cpu 200
+ERROR: only 80 or 160 MHz supported: 200
+```
+
 ## ping
 ```
 % ping slashdot.org
@@ -422,6 +439,13 @@ Compile does compile `.lua` into `.lc`, the shell prefers `.lc` over `.lua` when
 ```
 % compile args/main.lua
 > compile args/main.lua: args/main.lc
+```
+
+## wc
+Count lines, words and characters:
+```
+% wc startup.lua
+  19    60    687 startup.lua
 ```
 
 ## args

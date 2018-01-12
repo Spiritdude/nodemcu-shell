@@ -25,13 +25,13 @@ end
 
 conf.port = conf.port or 2323
 
-local shell_srv = net.createServer(net.TCP,180)
+shell_srv = net.createServer(net.TCP,180)
 
 local ip = wifi.ap.getip() or wifi.sta.getip()
 syslog.print(syslog.INFO,"nodemcu shell started on "..ip.." port "..conf.port)
 
 shell_srv:listen(conf.port,function(socket)
-   local fifo = {}
+   local fifo = { }
    local fifo_drained = true
    local prompt = false
    local promptString = "% " 
@@ -49,17 +49,21 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
    
-   local function s_output(str)
+   local function s_output(str,s)
       table.insert(fifo,str)
       if socket ~= nil and fifo_drained then
          fifo_drained = false
-         sender(socket)
+         sender(s or socket)
       end
    end
    
+   console.output(function(str) s_output(str.."\n",socket) end)
+   --node.output(s_output,0)   -- re-direct output to function s_output
+
    -- attempt to have other apps take control of the connection (like an editor)
    terminal = {
-      output = s_output,
+      --output = s_output, 
+      output = function(str) s_output(str,c) end,
       input = function(cb)
          terminal.input_callback = cb
          if cb == nil then
@@ -71,28 +75,6 @@ shell_srv:listen(conf.port,function(socket)
       input_callback = nil
    }
    
-   if false then
-      function print(...)
-         local str = ""
-         for i,v in ipairs(arg) do
-            if i > 1 then
-               str = str .. "\t"
-            end
-            str = str .. v
-         end
-         str = str .. "\n"
-         s_output(str)
-         --table.insert(fifo,str)
-         --if socket ~= nil and fifo_drained then
-         --   fifo_drained = false
-         --   sender(socket)
-         --end
-      end
-   else
-      console.output(function(s) s_output(s.."\n") end)
-      --node.output(s_output,0)   -- re-direct output to function s_output
-   end
-
    local function expandFilename(v)
       if string.match(v,"[*?]") then
          local re = v
@@ -204,38 +186,30 @@ shell_srv:listen(conf.port,function(socket)
          prompt = true
       elseif #a > 0 then
          local cmd = a[1]
-         cmd = string.gsub(cmd,"[^a-zA-Z_%-/]","")     -- clean up command
+         cmd = string.gsub(cmd,"[^a-zA-Z_0-9%-/]","")     -- clean up command
          --print("process "..cmd)
+         --socket = c              -- clumsy switch to correct socket
+   
          if cmd=='exit' then
             prompt = true     -- don't try to print it 
             c:close()
             return
          elseif file.exists("shell/"..cmd..".lc") then
-            --print("execute "..cmd.."/main.lc")
             dofile("shell/"..cmd..".lc")(unpack(a))
-            --assert(loadfile("shell/"..cmd..".lc"))(unpack(a))
          elseif file.exists("shell/"..cmd..".lua") then
-            --print("execute "..cmd.."/main.lua")
             dofile("shell/"..cmd..".lua")(unpack(a))
-             --assert(loadfile("shell/"..cmd..".lua"))(unpack(a))
          elseif file.exists(cmd.."/main.lc") then
-            --print("execute "..cmd.."/main.lc")
             dofile(cmd.."/main.lc")(unpack(a))
-            --assert(loadfile(cmd.."/main.lc"))(unpack(a))
          elseif file.exists(cmd.."/main.lua") then
-            --print("execute "..cmd.."/main.lua")
             dofile(cmd.."/main.lua")(unpack(a))
-            --assert(loadfile(cmd.."/main.lua"))(unpack(a))
          elseif file.exists(cmd..".lua") then
-            --print("execute "..cmd..".lua")
             dofile(cmd..".lua")(unpack(a))
-            --assert(loadfile(cmd..".lua"))(unpack(a))
          else 
             console.print("ERROR: command <"..cmd.."> not found")
          end
          if not terminal.input_callback then
             prompt = false
-            sender(socket)
+            sender(c)
          end
       else
          c:send(promptString)
@@ -244,11 +218,6 @@ shell_srv:listen(conf.port,function(socket)
    end
    
    local line = ""
-   
-   --socket:on("connection",function(c)
-      -- make telnet go "one character at a time"
-      --c:send(string.format("%c%c%c%c%c%c",255,252,34,255,251,3))
-   --end)
    
    socket:on("receive",function(c,l)      -- we receive line-wise input
       --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
@@ -268,10 +237,12 @@ shell_srv:listen(conf.port,function(socket)
    end)
 
    socket:on("disconnection",function(c)
-      node.output(nil)        -- un-register the redirect output function, output goes to serial
+      node.output(nil)           -- un-register the redirect output function, output goes to serial
       socket = nil
       collectgarbage()
    end)
-   socket:on("sent",sender)
+
+   socket:on("sent",sender)      -- handle fifo 
+
    console.print("\n== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")\n")
 end)
