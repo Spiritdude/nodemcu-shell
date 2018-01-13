@@ -108,6 +108,11 @@ return {
   - `httpd/init.lua`: `httpd/httpd.conf` as configuration, simple http/web server
   - more to come ...
 
+- every **library** for common use resides in `lib/*` like:
+  - `lib/console.lua`: provides `console.print()` as replacement of `print()`
+  - `lib/syslog.lua`: simple syslog functionality to log INFO, WARN, ERROR or FATAL messages
+  - `lib/display.lua`: provides higher level display functionality (e.g. `display.print()` with autoscroll)
+
 Finally, `shell/main.lua` is the NodeMCU shell main entry, it opens a telnet server at port 2323 (default).
 
 ## Console vs Syslog vs Print
