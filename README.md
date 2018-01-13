@@ -127,7 +127,7 @@ To resolve this and have also a cleaner setup:
 
 ## Everything is a File (No Directories)
 
-Hint: currently NodeMCU uses SPIFFS (SPI Flash File System) which is very simple with little RAM consumption:
+Currently NodeMCU uses SPIFFS (SPI Flash File System) which is very simple with little RAM consumption:
 - everything is a file
 - the '/' is part of the filename, and only helps you (human) to think in terms of quasi directories
 - there are no directories, hence no `mkdir`
