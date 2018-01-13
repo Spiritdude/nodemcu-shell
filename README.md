@@ -123,7 +123,7 @@ Hint: currently NodeMCU uses SPIFFS (SPI Flash File System) which is very simple
 
 ## Network Configuration
 
-At first you need to configure `wifi/wifi.conf`, first copy `wifi/wifi.conf.dist` to `wifi/wifi.conf` and edit it:
+You need to configure `wifi/wifi.conf`: first copy `wifi/wifi.conf.dist` to `wifi/wifi.conf` and edit it:
 ```
 return {
    mode = "station",     -- "station" or "ap"
