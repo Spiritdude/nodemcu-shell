@@ -11,7 +11,7 @@ if((not rtctime) or (rtctime and rtctime.get() == 0)) then
       if http then
          local now = tmr.time()
          local h = 'http://now.httpbin.org/'       -- http (instead of https) in case tls is not included
-         http.get(h,"User-Agent: (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36\r\n",
+         http.get(h,nil,
             function(code,data)
                if code < 0 then
                   syslog.print(syslog.WARN,"rtc: fallback failed as well, no current time available")
