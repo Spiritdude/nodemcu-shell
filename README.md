@@ -422,14 +422,19 @@ Display LuaKIPS (thousands of instructions per second) or select CPU frequency (
 ```
 % cpu
 645 LuaKIPS
+
 % cpu 80
 cpu freq = 80 MHz
+
 % cpu 
 322 LuaKIPS
+
 % cpu 160
 cpu freq = 160 MHz
+
 % cpu
 645 LuaKIPS
+
 % cpu 200
 ERROR: only 80 or 160 MHz supported: 200
 ```
