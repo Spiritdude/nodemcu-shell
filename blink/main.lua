@@ -3,6 +3,7 @@
 -- Description: just blinking
 --
 -- History:
+-- 2018/01/12: 0.0.2: another argument to define how many times the blinking occurs
 -- 2018/01/04: 0.0.1: first version with blink frequency in ms as optional argument
 
 return function(...)
