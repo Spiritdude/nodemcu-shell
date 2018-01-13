@@ -77,8 +77,8 @@ Connection closed by foreign host.
 ## System Layout of Commands
 
 Following filesystem layout has been adopted:
-- every command or app has its own directory or namespace, with main entry point of `<appname>/main.lua`
-- every shell built-in command resides in `shell/<command>.lua`
+- every **command** or app has its own directory or namespace, with main entry point of `<appname>/main.lua`
+- every **shell built-in command** resides in `shell/<command>.lua`
 - each `main.lua` or `shell/<command>.lua` must conform to following skeleton:
 
 ```
@@ -89,7 +89,7 @@ return function(...)
 end
 ```
 
-- every configuration has `.conf` as extension but is also LUA code like:
+- every **configuration** has `.conf` as extension but is also LUA code like:
 ```
 return {
    key1 = "value 1",
@@ -101,7 +101,7 @@ return {
 ```
 - `.conf.dist` are suggested configuration, and user must copy it to `.conf` - this way you can edit `.conf` and won't be overwritten when you update and upload the NodeMCU Shell.
 
-- every service has a `<service>/init.lua` and if possible a `<service>/<service>.conf` along:
+- every **service** has a `<service>/init.lua` and if possible a `<service>/<service>.conf` along:
   - `wifi/init.lua`: `wifi/wifi.conf` as configuration, triggers `net.up.lua` and `net.down.lua`
   - `rtc/init.lua`: tries to retrieve real time clock from various sources (via sntpd/http)
   - `display/init.lua`: `display/display.conf` as configuration, initializes a display (e.g. an I2C OLED)
