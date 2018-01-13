@@ -1,7 +1,8 @@
 -- == Sysinfo ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description: displays sysinfo (adapted from system-info.lua)
---
+-- Todo:
+--   With NodemCU 5.1.4 it has a memory leak
 -- History:
 -- 2018/01/05: 0.0.2: better node.info() output
 -- 2018/01/03: 0.0.1: first version

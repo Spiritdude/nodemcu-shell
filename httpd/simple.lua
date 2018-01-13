@@ -18,7 +18,7 @@ syslog.print(syslog.INFO,"httpd:simple started on "..ip.." port "..conf.port)
 
 local srv = net.createServer(net.TCP,10)
 
-function sendFile(c,fn,req,gv) 
+local function sendFile(c,fn,req,gv) 
    local h = "HTTP/1.0 200 OK\r\n"
    local fno = fn
    
@@ -53,6 +53,7 @@ function sendFile(c,fn,req,gv)
          
          local st = file.stat(fn)
          h = h .. "Content-Length: " .. st['size'] .. "\r\n"
+         h = h .. "Connection: close\r\n"
          
          if(conf.debug > 0) then
             console.print("httpd: send",fno,fn,m,st['size'])
@@ -71,15 +72,16 @@ function sendFile(c,fn,req,gv)
                c:send(buf)
             end
             file.close()
+            collectgarbage()
          end
    
          c:on('sent',doSend)     -- the cumbersome part
          c:send(h)               -- send the header
-         doSend()                -- then the rest chunk-wise
+         --doSend()                -- then the rest chunk-wise
       end
    else 
       c:send("HTTP/1.1 404 Not Found\r\nContent-Type: text/plain\r\n\r\n404 NOT FOUND")
-      c:on('sent',function() c:close() end)
+      c:on('sent',function() c:close() collectgarbage() end)
    end
    collectgarbage()
 end
@@ -87,7 +89,7 @@ end
 srv:listen(conf.port,function(conn)
    collectgarbage()
    
-   conn:on("receive", function(client,request)
+   conn:on("receive",function(client,request)
       collectgarbage()
       
       --console.print("request="..request)
@@ -95,13 +97,13 @@ srv:listen(conf.port,function(conn)
       --console.print("method="..method,"path="..path)
       local gv = {}
       if true then
-         local vars = string.match(path,"\?(.*)$")
+         local vars = string.match(path,"%?(.*)$")
          if vars then
-            path = string.gsub(path,"\?(.*)$","")
-            string.gsub(vars,"(%w+)=(%w+)&*",function(k,v)
+            path = string.gsub(path,"%?.*$","")
+            string.gsub(vars,"([%w_]+)=([^&]*)&*",function(k,v)
               -- todo: decode k,v
-              gv[k] = v
               --console.print("\t"..k.."="..v)
+              gv[k] = v
             end)
          end
          -- we later process gv { }

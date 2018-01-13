@@ -49,21 +49,21 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
    
-   local function s_output(str,s)
+   local function s_output(str)
       table.insert(fifo,str)
       if socket ~= nil and fifo_drained then
          fifo_drained = false
-         sender(s or socket)
+         sender(socket)
       end
    end
    
-   console.output(function(str) s_output(str.."\n",socket) end)
+   console.output(function(str) s_output(str.."\n") end)
    --node.output(s_output,0)   -- re-direct output to function s_output
 
    -- attempt to have other apps take control of the connection (like an editor)
    terminal = {
-      --output = s_output, 
-      output = function(str) s_output(str,c) end,
+      output = s_output, 
+      --output = function(str) s_output(str,c) end,
       input = function(cb)
          terminal.input_callback = cb
          if cb == nil then
