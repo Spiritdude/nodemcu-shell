@@ -2,7 +2,7 @@
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description: displays sysinfo (adapted from system-info.lua)
 -- Todo:
---   With NodemCU 5.1.4 it has a memory leak
+--   With NodeMCU "built 2017-12-25 17:45 Lua 5.1.4 on SDK 2.1.0(116b762)" it has a memory leak
 -- History:
 -- 2018/01/05: 0.0.2: better node.info() output
 -- 2018/01/03: 0.0.1: first version
