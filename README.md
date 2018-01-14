@@ -20,6 +20,25 @@ NodeMCU is a LUA runtime environment, so the shell is written in LUA.
   - ftpd or another upload/download functionality
   
 ## Examples
+On the serial port:
+```
+NodeMCU custom build by frightanic.com
+        branch: master
+        commit: 5073c199c01d4d7bbbcd0ae1f761ecc4687f7217
+        SSL: true
+        modules: adc,bit,crypto,encoder,file,gpio,http,i2c,mdns,mqtt,net,node,rtctime,sjson,sntp,struct,tmr,u8g,uart,websocket,wifi,tls
+ build  built on: 2018-01-05 07:53
+ powered by Lua 5.1.4 on SDK 2.1.0(116b762)
+INFO [0.339] device 10448928 / 0x9f7020 starting up
+INFO [0.421] init display driver: mode i2c, 128x64
+INFO [0.741] wifi: connecting to WLAN-XYZ ...
+INFO [3.718] wifi: connected to WLAN-XYZ 192.168.2.104
+INFO [3.902] nodemcu shell started on 192.168.2.104 port 2323
+INFO [4.611] sntp:sync response from 195.50.171.101
+INFO [4.629] rtc: 2018/01/14 12:00:08 UTC (1515931208)
+```
+
+On your desktop or host:
 ```
 > telnet 192.168.2.119 2323
 Trying 192.168.2.119...

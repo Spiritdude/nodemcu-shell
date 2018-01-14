@@ -57,7 +57,7 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
    
-   console.output(function(str) s_output(str.."\n") end)
+   console.output(function(str) s_output(str.."\r\n") end)
    --node.output(s_output,0)   -- re-direct output to function s_output
 
    -- attempt to have other apps take control of the connection (like an editor)
@@ -217,6 +217,11 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
    
+   socket:on("connection",function(c)
+      -- c:send(string.format("%c%c%c%c%c%c%c%c%c",255,251,34,255,252,3,255,252,1)) -- linemode
+      -- if we send, we need to process response too in on:("receive")
+   end)
+   
    local line = ""
    
    socket:on("receive",function(c,l)      -- we receive line-wise input
@@ -234,6 +239,7 @@ shell_srv:listen(conf.port,function(socket)
       else
          processLine(l,c)
       end
+      collectgarbage()
    end)
 
    socket:on("disconnection",function(c)
