@@ -491,3 +491,7 @@ This is a built-in command (there is no corresponding .lua) and disconnects teln
 % exit
 Connection closed by foreign host.
 ```
+
+##Related Projects
+- [https://github.com/BLavery/esuite-lua](ESuite-LUA): collection of libraries, very useful, uses simple `dofile()` to load individual libraries
+
