@@ -32,8 +32,8 @@ NodeMCU custom build by frightanic.com
 INFO [0.339] device 10448928 / 0x9f7020 starting up
 INFO [0.421] init display driver: mode i2c, 128x64
 INFO [0.741] wifi: connecting to WLAN-XYZ ...
-INFO [3.718] wifi: connected to WLAN-XYZ 192.168.2.104
-INFO [3.902] nodemcu shell started on 192.168.2.104 port 2323
+INFO [3.718] wifi: connected to WLAN-XYZ 192.168.2.119
+INFO [3.902] nodemcu shell started on 192.168.2.119 port 2323
 INFO [4.611] sntp:sync response from 195.50.171.101
 INFO [4.629] rtc: 2018/01/14 12:00:08 UTC (1515931208)
 ```
