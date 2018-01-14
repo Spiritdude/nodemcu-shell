@@ -20,7 +20,7 @@ NodeMCU is a LUA runtime environment, so the shell is written in LUA.
   - ftpd or another upload/download functionality
   
 ## Examples
-On the serial port:
+After power up or reboot, on the serial port of your ESP8266 / NodeMCU device:
 ```
 NodeMCU custom build by frightanic.com
         branch: master
@@ -38,7 +38,7 @@ INFO [4.611] sntp:sync response from 195.50.171.101
 INFO [4.629] rtc: 2018/01/14 12:00:08 UTC (1515931208)
 ```
 
-On your desktop or host:
+On your desktop or host use `telnet` to enter the NodeMCU Shell:
 ```
 > telnet 192.168.2.119 2323
 Trying 192.168.2.119...
