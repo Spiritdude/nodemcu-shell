@@ -1,8 +1,10 @@
 # NodeMCU Shell (UNIX-like)
 
-**NOTE: Highly experimental: API and Filesystem skeleton might change at any time**
+**NOTE: Highly experimental, API and Filesystem skeleton might change at any time**
 
 This provides a **UNIX-like Shell for the NodeMCU platform** with **[ESP8266](https://en.wikipedia.org/wiki/ESP8266)**: 64KB/96KB RAM, 512K-16MB Flash, 80MHz RISC Processor with WIFI, cost ~ USD/EUR 1.50-5.00.
+
+## Main Features
 - simple commands with space separated arguments (including "string with spaces" or 'string with spaces' arguments)
 - every command is a .lua (or .lc) script
  - command or app resides in `<appname>/main.lua` or `shell/<cmd>.lua`, so the shell is freely extendable
@@ -10,7 +12,7 @@ This provides a **UNIX-like Shell for the NodeMCU platform** with **[ESP8266](ht
 
 NodeMCU is a LUA runtime environment, so the shell is written in LUA.
 
-**TODO**
+### TODO
 - improve stability (commands can take down the shell)
 - piping and redirecting stdout with multiple commands
 - scripting (writing scripts)
