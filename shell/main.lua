@@ -35,13 +35,14 @@ local ip = wifi.ap.getip() or wifi.sta.getip()
 syslog.print(syslog.INFO,"nodemcu shell started on "..ip.." port "..conf.port)
 
 shell_srv:listen(conf.port,function(socket)
-   local fifo = { }
-   local fifo_drained = true
+   fifo = { }                    -- these seem to be global, otherwise `edit` (editor) fails
+   fifo_drained = true
+
    local prompt = false
    local promptString = "% " 
 
    -- they must be global in order terminal.output to work
-   local function sender(c)
+   function sender(c)
       if #fifo > 0 then
          c:send(table.remove(fifo,1))
       else
@@ -53,7 +54,7 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
    
-   local function s_output(str)
+   function s_output(str)
       table.insert(fifo,str)
       if socket ~= nil and fifo_drained then
          fifo_drained = false
