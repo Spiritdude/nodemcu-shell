@@ -141,7 +141,7 @@ return {
 
 - every **service** has a `<service>/init.lua` and if possible a `<service>/<service>.conf` along:
   - `wifi/init.lua`: `wifi/wifi.conf` as configuration, triggers `net.up.lua` and `net.down.lua`
-  - `rtc/init.lua`: tries to retrieve real time clock from various sources (via sntpd/http)
+  - `rtc/init.lua`: tries to retrieve real time clock from various sources (via sntp/http)
   - `display/init.lua`: `display/display.conf` as configuration, initializes a display (e.g. an I2C OLED)
   - `httpd/init.lua`: `httpd/httpd.conf` as configuration, simple http/web server
   - more to come ...
@@ -403,7 +403,9 @@ Display or set hostname:
 ```
 % hostname
 ESP-12345678
+
 % hostname esp1
+
 % hostname
 esp1
 ```
@@ -413,9 +415,14 @@ Measure execution time of commands:
 ```
 % time
 0ms
+
 % time ls
 ....
+...
+..
+.
 520ms
+
 % time cat init.lua
 -- DO NOT CHANGE
 if file.exists("startup.lua") then
