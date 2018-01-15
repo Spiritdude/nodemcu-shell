@@ -1,6 +1,12 @@
 -- == Sample RESTful API with httpd/simple.lua ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description: gives a a basic framework to a RESTendpoint
+--    api.lua?req=<r>
+--    r:
+--       chipid
+--       heap
+--       filelist
+--       upload
 --
 -- History:
 -- 2018/01/13: 0.0.2: req=chipid and req=chipid,heap,filelist combined as well
@@ -19,6 +25,8 @@ return function(conn,req,gv)
             d.heap = node.heap()
          elseif k == 'filelist' then
             d.filelist = file.list()
+         elseif k == 'upload' then
+            -- future, uploading a file
          else
             d.error = "UNKNOWN REQUEST: "..k
          end

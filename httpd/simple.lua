@@ -10,13 +10,17 @@
 -- 2018/01/06: 0.0.2: adding collectgarbage() and nil local variables, reduces leaks but still not entirely gone
 -- 2018/01/05: 0.0.1: first version, very simple
 
+if httpd_srv then          -- httpd_srv exists already, ignore call (e.g. from net.up.lua)
+   return
+end
+
 local mm = { ["html"]="text/html", ["txt"]="text/plain", ["png"]="image/x-png", ["jpg"]="image/jpeg", ["ico"]="image/x-icon" }
 
 local conf = dofile("httpd/httpd.conf")
 local ip = wifi.ap.getip() or wifi.sta.getip()
 syslog.print(syslog.INFO,"httpd:simple started on "..ip.." port "..conf.port)
 
-local srv = net.createServer(net.TCP,10)
+httpd_srv = net.createServer(net.TCP,10)
 
 local function sendFile(c,fn,req,gv) 
    local h = "HTTP/1.0 200 OK\r\n"
@@ -86,7 +90,7 @@ local function sendFile(c,fn,req,gv)
    collectgarbage()
 end
 
-srv:listen(conf.port,function(conn)
+httpd_srv:listen(conf.port,function(conn)
    collectgarbage()
    
    conn:on("receive",function(client,request)

@@ -11,7 +11,11 @@
 -- 2018/01/04: 0.0.2: simple arguments passed on, proper prompt and empty input handled
 -- 2018/01/03: 0.0.1: first version
 
-local VERSION = '0.0.6'
+if shell_srv then    -- are we called from net.up.lua *again*, if so ignore
+   return
+end
+
+local VERSION = '0.0.7'
 
 local conf = {}
 

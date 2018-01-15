@@ -23,7 +23,7 @@ if file.exists("wifi/wifi.conf") then
          syslog.print(syslog.INFO,"wifi: connected to "..conf.station.config.ssid.." "..wifi.sta.getip())
          dofile("net.up.lua")
          wifi.eventmon.register(wifi.eventmon.STA_DISCONNECTED,function(args)
-            print("WARN: wifi: lost connectivity, reconnecting ...")
+            syslog.print(syslog.WARN,"wifi: lost connectivity, reconnecting ...")
             dofile("net.down.lua")
          end)
       end)
