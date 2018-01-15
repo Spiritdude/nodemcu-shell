@@ -512,5 +512,5 @@ Connection closed by foreign host.
 ```
 
 ## Related Projects
-- [https://github.com/BLavery/esuite-lua](ESuite-LUA): collection of libraries, very useful, uses simple `dofile()` to load individual libraries
+- [ESuite-LUA](https://github.com/BLavery/esuite-lua): collection of libraries, very useful, uses simple `dofile()` to load individual libraries
 
