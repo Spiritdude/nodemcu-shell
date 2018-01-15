@@ -30,6 +30,9 @@ return function(...)
    elseif(#arg == 2 and arg[1] and arg[2]) then
       if file.exists(arg[1]) then
          console.print("   "..arg[1].." to "..arg[2])
+         if file.exists(arg[2]) then         -- file.rename can't rename to an existing file
+            file.remove(arg[2])
+         end
          file.rename(arg[1],arg[2])
       else
          console.print("ERROR: file <"..arg[1].."> not found, cannot rename/move")
