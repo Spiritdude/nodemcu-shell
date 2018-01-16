@@ -65,10 +65,11 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
    
+   -- console.print() prints a line, terminal.print() does not
    console.output(function(str) s_output(str.."\r\n") end)
-   --node.output(s_output,0)   -- re-direct output to function s_output
 
    -- attempt to have other apps take control of the connection (like an editor)
+   -- NOTE: will soon move to lib/terminal.lua
    terminal = {
       width = 80,
       height = 24,

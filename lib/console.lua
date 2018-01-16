@@ -8,11 +8,13 @@
 
 console = {
    print = print,
-
+   receive = nil,
+   
    output = function(f) 
       console.print = f
    end,
    
    input = function(f)
+      console.receive = f
    end
 }
