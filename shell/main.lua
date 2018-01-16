@@ -243,7 +243,7 @@ shell_srv:listen(conf.port,function(socket)
       if state == 1 then                  -- process reply from client, width & height
          _buff = _buff .. l
          local m = "\255\250\031\000";
-         local sp, se = string.find(_buff,m)
+         local sp, se = string.find(_buff,m)       -- we can't string.match(_buff,"\xff\xfa\x1f\x00(.)\x00(.)\xff\xf0")
          if sp and se then
             terminal.width = string.byte(_buff,se+1)
             terminal.height = string.byte(_buff,se+3)
