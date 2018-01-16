@@ -109,6 +109,18 @@ available commands:
    grep            touch
    heap            uptime
 
+% grep dofile *.lua
+display/init.lua:    local conf = dofile("display/display.conf")
+display/init.lua:                dofile("lib/display.lua")
+edit/main.lua: dofile("edit/helpers.lua")
+httpd/init.lua: dofile("httpd/simple.lua")
+httpd/init.lua: -- dofile("httpd/complex.lua")      -- other httpd servers
+httpd/simple.lua: local conf = dofile("httpd/httpd.conf")
+httpd/simple.lua:          dofile(fn)(c,req,gv)                   -- let's execute it
+...
+..
+.
+
 % exit
 Connection closed by foreign host.
 ```
