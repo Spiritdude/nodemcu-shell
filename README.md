@@ -6,6 +6,7 @@ This provides a **UNIX-like Shell for the NodeMCU platform** with **[ESP8266](ht
 
 ## Main Features
 - simple commands with space separated arguments (including "string with spaces" or 'string with spaces' arguments)
+- arguments with `*` or `?` are expanded, e.g. `ls -l *.txt` or `grep dofile *.lua`
 - every command is a .lua (or .lc) script
  - command or app resides in `<appname>/main.lua` or `shell/<cmd>.lua`, so the shell is freely extendable
 - shell accessible via telnet session (this might change later)
