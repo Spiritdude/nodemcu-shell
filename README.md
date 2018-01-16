@@ -197,7 +197,7 @@ return {
 }
 ```
 
-Either have the device join your existing WIFI, edit then the "station" part, or let the device operate as access point (AP) then change "mode" to "ap", and keep the defaults otherwise.
+Either have the device join your existing WIFI, edit then the "station" part, or let the device operate as access point (AP) then change "mode" to "ap", or run both at the same time, being an access point and join an existing WIFI.
 
 ## Requirements
 Install `nodemcu-tool` via
