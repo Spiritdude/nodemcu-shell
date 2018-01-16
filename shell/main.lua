@@ -40,6 +40,8 @@ shell_srv:listen(conf.port,function(socket)
 
    local prompt = false
    local promptString = "% " 
+   
+   state = 0
 
    -- they must be global in order terminal.output to work
    function sender(c)
@@ -67,6 +69,8 @@ shell_srv:listen(conf.port,function(socket)
 
    -- attempt to have other apps take control of the connection (like an editor)
    terminal = {
+      width = 80,
+      height = 24,
       output = s_output, 
       --output = function(str) s_output(str,c) end,
       input = function(cb)
@@ -226,25 +230,42 @@ shell_srv:listen(conf.port,function(socket)
    socket:on("connection",function(c)
       -- c:send(string.format("%c%c%c%c%c%c%c%c%c",255,251,34,255,252,3,255,252,1)) -- linemode
       -- if we send, we need to process response too in on:("receive")
+      c:send(string.format("%c%c%c",255,253,31))
+         -- will reply 255 251 31 & 255 250 31 0 <width> 0 <height> 255 240
+      state = 1
    end)
    
    local line = ""
+   _buff = ""
    
    socket:on("receive",function(c,l)      -- we receive line-wise input
       collectgarbage()
-      if terminal.input_callback then
-         terminal.input_callback(l,c)
-      elseif(false or conf.port == 23) then
-         line = line .. l
-         --console.print("'"..line.."'")
-         if string.match(line,"[\x0d\r\n]$") then
-            processLine(line,c)
-            line = ""
+      if state == 1 then                  -- process reply from client, width & height
+         _buff = _buff .. l
+         local m = "\255\250\031\000";
+         local sp, se = string.find(_buff,m)
+         if sp and se then
+            terminal.width = string.byte(_buff,se+1)
+            terminal.height = string.byte(_buff,se+3)
+            state = 2
+            _buff = nil
+            collectgarbage()
          end
-      else
-         processLine(l,c)
+      elseif state == 2 then
+         if terminal.input_callback then
+            terminal.input_callback(l,c)
+         elseif(false or conf.port == 23) then
+            line = line .. l
+            --console.print("'"..line.."'")
+            if string.match(line,"[\x0d\r\n]$") then
+               processLine(line,c)
+               line = ""
+            end
+         else
+            processLine(l,c)
+         end
+         collectgarbage()
       end
-      collectgarbage()
    end)
 
    socket:on("disconnection",function(c)

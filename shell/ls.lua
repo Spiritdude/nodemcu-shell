@@ -20,7 +20,9 @@ return function(...)
          table.insert(fl,v);
       end
    end
-   local cols = opts['1'] and 1 or opts['2'] and 2 or opts['3'] and 3 or opts['4'] and 4 or 2
+   local cols = opts['1'] and 1 or opts['2'] and 2 or opts['3'] and 3 or opts['4'] and 4 or (terminal.width / 33)
+   cols = cols > 0 and cols or 1
+   
    local col = { }
    local testExist = true
 
