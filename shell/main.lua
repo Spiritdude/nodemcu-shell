@@ -5,6 +5,7 @@
 --    Note: this is very experimental, telnet is a prototype interface for the shell
 --
 -- History:
+-- 2018/01/16: 0.0.8: terminal.* cleaned up, to make it more consistent with console.* as well
 -- 2018/01/09: 0.0.6: using console.* layer so there is no print()/node.output() calls anymore
 -- 2018/01/06: 0.0.4: replacing node.output() and define dedicated print(...) 
 -- 2018/01/04: 0.0.3: unpacking args at dofile()
@@ -15,7 +16,7 @@ if shell_srv then    -- are we called from net.up.lua *again*, if so ignore
    return
 end
 
-local VERSION = '0.0.7'
+local VERSION = '0.0.8'
 
 local conf = {}
 
@@ -43,7 +44,7 @@ shell_srv:listen(conf.port,function(socket)
    
    state = 0
 
-   -- they must be global in order terminal.output to work
+   -- they must be global in order terminal.print() to work
    function sender(c)
       if #fifo > 0 then
          c:send(table.remove(fifo,1))
@@ -71,17 +72,21 @@ shell_srv:listen(conf.port,function(socket)
    terminal = {
       width = 80,
       height = 24,
-      output = s_output, 
-      --output = function(str) s_output(str,c) end,
-      input = function(cb)
-         terminal.input_callback = cb
-         if cb == nil then
+      print = s_output,             -- default
+      receive = nil,
+
+      output = function(f) 
+         print = f
+      end,
+
+      input = function(f)
+         terminal.receive = f
+         if f == nil then
             prompt = false
          else
             prompt = true
          end
       end,
-      input_callback = nil
    }
    
    local function expandFilename(v)
@@ -216,7 +221,7 @@ shell_srv:listen(conf.port,function(socket)
          else 
             console.print("ERROR: command <"..cmd.."> not found")
          end
-         if not terminal.input_callback then
+         if not terminal.receive then
             prompt = false
             sender(c)
          end
@@ -252,8 +257,8 @@ shell_srv:listen(conf.port,function(socket)
             collectgarbage()
          end
       elseif state == 2 then
-         if terminal.input_callback then
-            terminal.input_callback(l,c)
+         if terminal.receive then
+            terminal.receive(l,c)
          elseif(false or conf.port == 23) then
             line = line .. l
             --console.print("'"..line.."'")
