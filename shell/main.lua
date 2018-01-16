@@ -216,6 +216,7 @@ shell_srv:listen(conf.port,function(socket)
             prompt = false
             sender(c)
          end
+         collectgarbage()
       else
          c:send(promptString)
          prompt = true
@@ -230,7 +231,6 @@ shell_srv:listen(conf.port,function(socket)
    local line = ""
    
    socket:on("receive",function(c,l)      -- we receive line-wise input
-      --node.input(l)           -- works like pcall(loadstring(l)) but support multiple separate line
       collectgarbage()
       if terminal.input_callback then
          terminal.input_callback(l,c)

@@ -1,5 +1,5 @@
 return {
-   mode = "station",     -- "station" (client) or "ap"
+   mode = "ap",     -- "station" (client), "ap" (access point) or "stationap" (both)
    station = {
       config = {
          ssid = "yourWIFI",

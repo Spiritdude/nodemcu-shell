@@ -9,9 +9,18 @@
 if file.exists("wifi/wifi.conf") then
    local conf = dofile("wifi/wifi.conf")
    
-   if(conf.mode=='station') then
+   wifi.setmode(conf.mode == 'ap' and wifi.SOFTAP or conf.mode == 'station' and wifi.STATION or wifi.STATIONAP)
+   
+   if(conf.mode=='ap' or conf.mode=='stationap') then 
+      wifi.ap.config(conf.ap.config)
+      wifi.ap.setip(conf.ap.net)
+      syslog.print(syslog.INFO,"wifi "..conf.ap.config.ssid.." access point ("..wifi.sta.getmac()..") started")
+      if(conf.mode ~= 'stationap') then     -- if 'stationap' then let 'station' below call net.up.lua once
+         dofile("net.up.lua")
+      end
+   end
+   if(conf.mode=='station' or conf.mode=='stationap') then
       syslog.print(syslog.INFO,"wifi: connecting to "..conf.station.config.ssid.." ...")
-      wifi.setmode(wifi.STATION) 
       --wifi.setphymode(conf.signal_mode)
       wifi.sta.config(conf.station.config)
       wifi.sta.connect()
@@ -43,12 +52,6 @@ if file.exists("wifi/wifi.conf") then
             tmr.unregister(1)
          end
       end)
-   else 
-      wifi.setmode(wifi.SOFTAP)
-      wifi.ap.config(conf.ap.config)
-      wifi.ap.setip(conf.ap.net)
-      syslog.print(syslog.INFO,"wifi "..conf.ap.config.ssid.." access point ("..wifi.sta.getmac()..")")
-      dofile("net.up.lua")
    end
 else
    syslog.print(syslog.info,"no wifi/wifi.conf")
