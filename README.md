@@ -240,7 +240,12 @@ The recommended modules for your firmware from [nodemcu-build.com](https://nodem
 - **wifi**
 - **tls** (enable it after the list of the modules)
 
-Install the firmware with `esptool.py` or other flashing tool; preferably choose the **-integer.bin** as some code assumes integer arithmetic (this will change later).
+Install the firmware with `esptool.py` or other flashing tool.
+
+### Float vs Integer Firmware
+`lib/integer.lua` contains a single function called `int()` and converts a number (integer or float) to an integer.
+Whenever you code with integers in mind, convert with `int()` so regardless which firmware is loaded the code behaves
+the same way.
 
 ## Installation
 To install the shell with its own `init.lua` and `startup.lua` chain:
