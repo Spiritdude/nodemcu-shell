@@ -3,6 +3,7 @@
 -- Description: try to get realtime clock with actual time (if required) from various sources
 --
 -- History: 
+-- 2018/01/17: 0.0.3: rtctime.set,get,epoch2cal implemented as fallback
 -- 2018/01/12: 0.0.2: better fallback and proper JSON epoch parsing (indirect)
 -- 2018/01/04: 0.0.1: first version
 
@@ -59,8 +60,8 @@ if rtctime then
       end
    end
 else
-   -- FUTURE: we could still try to query but save it aside of the rtctime module
    syslog.print(syslog.WARN,"rtc: no rtctime module available")
+   -- this below likely will move to lib/rtctime.lua
    rtctime = {
       t = 0,
       set = function(t) 
@@ -70,19 +71,29 @@ else
          return rtctime.t + tmr.time()
       end,
       epoch2cal = function(t)
-         local tm
-         tm.sec = t % 60
-         t = t/60
-         tm.min = t % 60
-         t = t/60
-         tm.hour = t % 24
-         t = t/24 
-         -- todo: calculate yyyy/mm/dd properly
-         --           1    2   3   4   5   6   7   8   9  10  11  12
-         local dm = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
-         tm.day = 1
+         local tm = { }
+         local dc = t % (24*60*60)     -- based on gmtime.c
+         tm.sec = dc % 60
+         tm.min = (dc % 3600) / 60
+         tm.hour = dc / 3600
+         local y = 1970
+         local dno = t / (24*60*60)
+         local dm = { { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }, { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 } }
+         local lp = function(y) return ((y%4) == 0) and not ((y%100)==0 and (y%400)~=0) end
+         local ys = function(y) return 365 + (lp(y) and 1 or 0) end
+         tm.wday = (dno + 4) % 7
+         while(dno >= ys(y)) do
+            dno = dno - ys(y)
+            y = y + 1
+         end
+         tm.yday = dno
          tm.mon = 1
-         tm.year = 1970
+         while(dno >= dm[lp(y) and 2 or 1][tm.mon]) do
+            dno = dno - dm[lp(y) and 2 or 1][tm.mon]
+            tm.mon = tm.mon+1
+         end
+         tm.day = dno+1
+         tm.year = y
          return tm
       end
    }
