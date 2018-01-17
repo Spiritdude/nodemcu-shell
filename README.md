@@ -96,18 +96,14 @@ end)
                                                             
 % help
 available commands:
-   args            help             ....
-   blink           hostname         ...
-   cat             ls               ..
-   compile         lua              .
-   cp              mv
-   date            ping
-   df              reboot
-   dofile          rm
-   echo            sysinfo
-   exit            time
-   grep            touch
-   heap            uptime
+   args              dofile            ls                sysinfo        
+   blink             echo              lua               time           
+   cat               exit              man               touch          
+   clear             grep              more              uptime         
+   cp                heap              mv                wc             
+   cpu               help              ping           
+   date              hostname          reboot         
+   df                led               rm             
 
 % grep dofile *.lua
 display/init.lua:    local conf = dofile("display/display.conf")
@@ -276,36 +272,58 @@ Escape character is '^]'.
 
 % help
 available commands:
-   args            ...
-   blink           ..
-   cat             .
-   compile         .
-   cp              .
-   date            .
-   ...             .
+   args              dofile            ls                sysinfo        
+   blink             echo              lua               time           
+   cat               exit              man               touch          
+   clear             grep              more              uptime         
+   cp                heap              mv                wc             
+   cpu               help              ping           
+   date              hostname          reboot         
+   df                led               rm             
    
 ```
 
 ## ls
 ```
 % ls
-args/main.lua           ....
-blink/main.lua          ...
-compile/main.lua        ..
-...                     .
-..                      .
-.                       .
+args/main.lua                   rtc/init.lua                    shell/ping.lua                  
+blink/main.lua                  shell/cat.lua                   shell/reboot.lua                
+cpu/main.lua                    shell/clear.lua                 shell/rm.lua                    
+display/init.lua                shell/cp.lua                    shell/sysinfo.lua               
+display/logo.mono               shell/date.lua                  shell/time.lua                  
+display/logo48.mono             shell/df.lua                    shell/touch.lua                 
+display/readme.txt              shell/dofile.lua                shell/uptime.lua                
+httpd/header.lua                shell/echo.lua                  shell/wc.lua                    
+httpd/init.lua                  shell/grep.lua                  startup.lua                     
+httpd/readme.txt                shell/heap.lua                  wifi/init.lua                   
+httpd/simple.lua                shell/help.lua                  wifi/readme.txt                 
+init.lua                        shell/hostname.lua              wifi/wifi.conf                  
+led/main.lua                    shell/ls.lua                    www/api.lua                     
+led/man.txt                     shell/ls.txt                    www/favicon.ico.gz              
+led/readme.txt                  shell/lua.lua                   www/imgs/esp8266.png.gz         
+lib/console.lua                 shell/main.lua                  www/imgs/espressif.png.gz       
+lib/display.lua                 shell/man.lua                   www/imgs/nodemcu.png.gz         
+lib/syslog.lua                  shell/more.lua                  www/index.html                  
+net.down.lua                    shell/mv.lua                    www/simple.lua                  
+net.up.lua                      shell/mv.txt                    www/sysinfo.lua      
 
 % ls -l
 -rwx     258  Jan  1 1970  args/main.lua
--rwx      59  Jan  1 1970  args2/main.lua
 -rwx     540  Jan  1 1970  blink/main.lua
 -rwx    1108  Jan  1 1970  compile/main.lua
 ...
+..
+.
 
 % ls -l init.lua
 -rwx      81  Jan  1 1970  init.lua
 ```
+options:
+- `-1` single column
+- `-2` double column
+- `-3` triple column
+- `-4` quadruple column
+- `-l` long output
 
 ## cat & more
 Display content of a file:
