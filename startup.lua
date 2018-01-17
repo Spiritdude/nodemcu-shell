@@ -1,5 +1,6 @@
 -- add action done at boot/startup
 node.setcpufreq(node.CPU160MHZ)  -- 2x the speed
+dofile("lib/integer.lua")
 dofile("lib/console.lua")
 dofile("lib/syslog.lua")
 syslog.print(syslog.INFO,"device #"..node.chipid()..string.format(" / 0x%x",node.chipid()).." starting up")

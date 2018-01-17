@@ -14,7 +14,7 @@ return function(...)
          if ip == nil then 
             console.print("ERROR: <"..arg[1].."> did not resolve")
          else
-            t = (tmr.now()-t)/1000
+            t = int((tmr.now()-t)/1000)
             console.print("PING "..arg[1].." ("..ip..") time "..t.."ms")
          end
       end)

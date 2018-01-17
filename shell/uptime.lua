@@ -7,5 +7,5 @@
 
 return function(...) 
    local t = tmr.time()
-   console.print(string.format("%dd %dh %dm %ds",t/24/3600,(t/3600)%60,(t/60)%60,t%60))
+   console.print(string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%60,int(t/60)%60,t%60))
 end

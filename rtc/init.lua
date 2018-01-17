@@ -24,7 +24,7 @@ local function httpsync()
                   rtctime.set(t)
                   local tm = rtctime.epoch2cal(t)
                   local tz = 'UTC'
-                  syslog.print(syslog.INFO,"rtc: "..string.format("%04d/%02d/%02d %02d:%02d:%02d %s", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"], tz).." ("..t..")")
+                  syslog.print(syslog.INFO,"rtc: "..string.format("%04d/%02d/%02d %02d:%02d:%02d %s",tm["year"],tm["mon"],tm["day"],tm["hour"],tm["min"],tm["sec"],tz).." ("..t..")")
                else
                   syslog.print(syslog.WARN,"no rtctime module available, cannot set rtc time")
                end
@@ -47,7 +47,7 @@ if rtctime then
                syslog.print(syslog.INFO,"sntp:sync response from "..server)
                local tm = rtctime.epoch2cal(t)
                local tz = "UTC"
-               syslog.print(syslog.INFO,"rtc: "..string.format("%04d/%02d/%02d %02d:%02d:%02d %s", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"], tz).." ("..t..")")
+               syslog.print(syslog.INFO,"rtc: "..string.format("%04d/%02d/%02d %02d:%02d:%02d %s",tm["year"],tm["mon"],tm["day"],tm["hour"],tm["min"],tm["sec"],tz).." ("..t..")")
             end,
             function()
                syslog.print(syslog.WARN,"sntp.sync failed")
@@ -74,10 +74,10 @@ else
          local tm = { }
          local dc = t % (24*60*60)     -- based on gmtime.c
          tm.sec = dc % 60
-         tm.min = (dc % 3600) / 60
-         tm.hour = dc / 3600
+         tm.min = int(dc % 3600) / 60
+         tm.hour = int(dc / 3600)
          local y = 1970
-         local dno = t / (24*60*60)
+         local dno = int(t / (24*60*60))
          local dm = { { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }, { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 } }
          local lp = function(y) return ((y%4) == 0) and not ((y%100)==0 and (y%400)~=0) end
          local ys = function(y) return 365 + (lp(y) and 1 or 0) end

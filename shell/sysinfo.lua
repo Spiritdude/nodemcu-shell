@@ -20,7 +20,7 @@ return function(...)
    kv('Info',"V"..maver.."."..miver..", DevV "..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
    
    local t = tmr.time();
-   kv("Uptime",string.format("%dd %dh %dm %ds",t/24/3600,(t/3600)%24,(t/60)%60,t%60))
+   kv("Uptime",string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%24,int(t/60)%60,t%60))
        
    if adc then     -- make it conditional in case it doesn't exist
       adc.force_init_mode(adc.INIT_VDD33)
@@ -33,7 +33,7 @@ return function(...)
  
    if rtctime then
       local tm = rtctime.epoch2cal(rtctime.get())
-      kv('RTC Time',string.format("%04d/%02d/%02d %02d:%02d:%02d %s", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"], 'UTC'))
+      kv('RTC Time',string.format("%04d/%02d/%02d %02d:%02d:%02d %s",tm["year"],tm["mon"],tm["day"],tm["hour"],tm["min"],tm["sec"],'UTC'))
    end
    
    local remain, used, total = file.fsinfo()

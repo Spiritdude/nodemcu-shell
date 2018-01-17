@@ -22,6 +22,6 @@ return function(...)
          console.print("ERROR: command <"..arg[1].."> does not exist")
       end
    end
-   console.print(((tmr.now()-t)/1000).." ms")
+   console.print(int((tmr.now()-t)/1000).." ms")
 end
 

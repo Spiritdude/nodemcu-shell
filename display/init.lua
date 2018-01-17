@@ -33,8 +33,8 @@ if file.exists("display/display.conf") then
                file.close()
                local w = sz
                local h = sz
-               local x = display.disp:getWidth()/2 - w/2
-               local y = display.disp:getHeight()/2 - h/2
+               local x = int(display.disp:getWidth()/2 - w/2)
+               local y = int(display.disp:getHeight()/2 - h/2)
                display.disp:firstPage()
                repeat
                   display.disp:drawXBM(x,y,w,h,data)

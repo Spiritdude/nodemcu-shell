@@ -23,7 +23,7 @@ syslog = {
 
    print = function(type,m)
       local tm = { [0]='INFO', [1]='WARN', [2]='ERROR', [3]='FATAL' }
-      local t = tmr and (tmr.time() .. "." .. string.format("%03d",((tmr.now()/1000)%1000))) or 0
+      local t = tmr and (tmr.time() .. "." .. string.format("%03d",int((tmr.now()/1000)%1000))) or 0
       console.print((tm[type] or 'UNKNOWN') .. " [" .. t .. "] " .. m)
    end
 }

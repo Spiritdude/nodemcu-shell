@@ -11,9 +11,8 @@ return function(...)
    console.print(string.format(fmt,"Filesystem","Total","Used","Available","Use%","Mounted on"))
    
    if(arg[2] and arg[2]=='-h') then
-      --console.print("/flashfs",(total/1024).."K",(used/1024).."K",((total-used)/1024).."K",(100*used/total).."%","/")
-      console.print(string.format(fmt,"/flashfs",(total/1024).."K",(used/1024).."K",((total-used)/1024).."K",(100*used/total).."%","/"))
+      console.print(string.format(fmt,"/flashfs",int(total/1024).."K",int(used/1024).."K",int((total-used)/1024).."K",int(100*used/total).."%","/"))
    else
-      console.print(string.format(fmt,"/flashfs",total.."",used.."",(total-used).."",(100*used/total).."%","/"))
+      console.print(string.format(fmt,"/flashfs",total.."",used.."",(total-used).."",int(100*used/total).."%","/"))
    end
 end

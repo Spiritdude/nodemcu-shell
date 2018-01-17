@@ -21,7 +21,7 @@ return function(...)
       -- n = instructions per t[us]
       -- n * 1000000 / t         -- instructions per 1s
       -- n = n * 10000 / (t/100) -- instructions per 1s
-      n = n * 10 / (t/100)       -- k instructions per 1s
+      n = int(n * 10 / (t/100))  -- k instructions per 1s
       console.print(n.." LuaKIPS") 
    elseif #arg == 1 then
       if arg[1] == '80' or arg[1] == '160' then
