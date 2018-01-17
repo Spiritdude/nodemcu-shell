@@ -325,6 +325,8 @@ options:
 - `-4` quadruple column
 - `-l` long output
 
+By default the amount of columns are calculated according size of shell window.
+
 ## cat & more
 Display content of a file:
 ```
