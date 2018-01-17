@@ -544,7 +544,18 @@ arg[1] = 'args'
 arg[2] = 'abc def'
 arg[3] = '5'
 arg[4] = '14'
+
+% args *.txt
+arg[1] = 'args'
+arg[2] = 'display/readme.txt'
+arg[3] = 'httpd/readme.txt'
+arg[4] = 'led/man.txt'
+arg[5] = 'led/readme.txt'
+arg[6] = 'shell/ls.txt'
+arg[7] = 'shell/mv.txt'
+arg[8] = 'wifi/readme.txt'
 ```
+
 ## dofile
 Execute a .lua file via `dofile()`:
 ```
