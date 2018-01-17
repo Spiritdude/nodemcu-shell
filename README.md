@@ -243,7 +243,9 @@ The recommended modules for your firmware from [nodemcu-build.com](https://nodem
 Install the firmware with `esptool.py` or other flashing tool.
 
 ### Float vs Integer Firmware
-`lib/integer.lua` contains a single function called `int()` and converts a number (integer or float) to an integer.
+NodeMCU Shell is tolerant whether you use `-float.bin` or `-integer.bin` firmware. 
+
+Hint: `lib/integer.lua` contains a single function called `int()` and converts a number (integer or float) to an integer.
 Whenever you code with integers in mind, convert with `int()` so regardless which firmware is loaded the code behaves
 the same way.
 
