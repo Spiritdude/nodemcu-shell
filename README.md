@@ -243,7 +243,7 @@ The recommended modules for your firmware from [nodemcu-build.com](https://nodem
 Install the firmware with `esptool.py` or other flashing tool.
 
 ### Float vs Integer Firmware
-NodeMCU Shell is tolerant whether you use `-float.bin` or `-integer.bin` firmware, but for the ESP8266 preferably use the `-integer.bin` which is apprx. 5.4KB RAM/Heap lighter (NodeMCU 2.1).
+NodeMCU Shell is tolerant whether you use `-float.bin` or `-integer.bin` firmware, but for the ESP8266 preferably use the `-integer.bin` which is apprx. ~3.5KB RAM/Heap lighter (NodeMCU 2.1).
 
 Hint: `lib/integer.lua`, which is loaded by default, contains a single function called `int()` and converts a number (integer or float) to an integer.
 Whenever you code with integers in mind, convert with `int()` so regardless which firmware is loaded the code behaves
