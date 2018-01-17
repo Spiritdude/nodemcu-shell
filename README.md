@@ -239,7 +239,7 @@ The recommended modules for your firmware from [nodemcu-build.com](https://nodem
 - **wifi**
 - **tls** (enable it after the list of the modules)
 
-Install proper firmware with `esptool.py` or other flashing tool.
+Install the firmware with `esptool.py` or other flashing tool; preferably choose the **-integer.bin** as some code assumes integer arithmetic (this will change later).
 
 ## Installation
 To install the shell with its own `init.lua` and `startup.lua` chain:
