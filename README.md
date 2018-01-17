@@ -550,6 +550,11 @@ Execute a .lua file via `dofile()`:
 ```
 % dofile example.lua
 ```
+
+Note: commands which can be executed by the shell need to return a function, `dofile` just executes a "raw" .lua file;
+unfortunately `dofile("test.lua")` (raw) and `dofile("test.lua")()` (returns a function) are two different things and
+not interchangable.
+
 ## lua
 Execute actual LUA code:
 ```
