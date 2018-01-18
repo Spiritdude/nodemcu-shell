@@ -37,6 +37,10 @@ return function(...)
          end
       elseif cmd == 'clear' then
          display.clear()
+      elseif cmd == 'on' then
+         display.disp:sleepOff()
+      elseif cmd == 'off' then
+         display.disp:sleepOn()
       elseif cmd == 'info' or cmd == nil then
          console.print(string.format("size: %dx%d",display.width,display.height))
       else 

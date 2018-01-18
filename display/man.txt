@@ -1,5 +1,7 @@
 display <cmd> <settings>
    commands:
+      on                   display on (default)
+      off                  display off (sleep)
       contrast <value>     value: 0..255
       font <font>          font: font_chikita, font_6x10 etc
       rotate <angle>       angle: 0, 90, 180, 270
