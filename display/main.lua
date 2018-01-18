@@ -1,7 +1,7 @@
 -- == Display CLI ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description:
---
+--    Misc. commands dealing with display via CLI, see `man display`
 -- History:
 -- 2018/01/18: 0.0.1: first version
 
