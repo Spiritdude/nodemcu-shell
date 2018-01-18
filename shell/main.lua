@@ -204,7 +204,7 @@ shell_srv:listen(conf.port,function(socket)
          cmd = string.gsub(cmd,"[^a-zA-Z_0-9%-/]","")     -- clean up command
          --print("process "..cmd)
          --socket = c              -- clumsy switch to correct socket
-   
+         local st,err,f
          if cmd=='exit' then
             prompt = true     -- don't try to print it 
             c:close()
@@ -221,6 +221,9 @@ shell_srv:listen(conf.port,function(socket)
             dofile(cmd..".lua")(unpack(a))
          else 
             console.print("ERROR: command <"..cmd.."> not found")
+         end
+         if not st and err then
+            console.print("ERROR: "..err)
          end
          if not terminal.receive then
             prompt = false

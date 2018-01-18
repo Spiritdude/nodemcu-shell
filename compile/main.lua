@@ -7,11 +7,11 @@
 -- 2018/01/03: 0.0.1: first version, leave /*.lua untouched, but all */*.lua do compile
 
 return function(...)
-   if(arg[2] and arg[2]=='*' or arg[2]=='all') then
+   if(arg[2] and arg[2]=='all') then
       local l = file.list()
       for k,v in pairs(l) do
          --if(not (k == 'init.lua') and not (k == 'startup.lua') and string.find(k,"\.lua$")) then
-         if(string.find(k,"/") and string.find(k,"\.lua$")) then
+         if(string.find(k,"/") and string.find(k,"\.lua$")) then      -- any top-level .lua (without /) are ignored
             --console.print("% process ",k)
             local lc = string.gsub(k,"\.lua$",".lc")
             file.remove(lc)

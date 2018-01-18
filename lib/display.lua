@@ -12,12 +12,15 @@
 --    display.print()   print a string to the display
 --    display.flush()   render clear/print to display
 --
---  Heap Weight: ~2400 bytes
+--  Weight: ~2400 bytes heap
+--
+-- History: 
+-- 2018/01/09: 0.0.1: from display/init.lua extracted
 
 if display and display.disp then
    display.buffer = {}                     -- content buffer (array of lines)
-   display.screenWidth = display.disp:getWidth()
-   display.screenHeight = display.disp:getHeight()
+   display.width = display.disp:getWidth()
+   display.height = display.disp:getHeight()
    display.fontHeight = display.disp:getFontAscent() - display.disp:getFontDescent() + 1
 
    display.setFont = function(fo)
@@ -59,7 +62,7 @@ if display and display.disp then
    
    display.print = function(s)
       table.insert(display.buffer,s)
-      while(#display.buffer * display.fontHeight > display.screenHeight) do   -- scrolling required?
+      while(#display.buffer * display.fontHeight > display.height) do   -- scrolling required?
          table.remove(display.buffer,1)
       end
       --display.flush()
