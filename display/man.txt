@@ -1,0 +1,7 @@
+display <cmd> <settings>
+   commands:
+      contrast <value>     value: 0..255
+      font <font>          font: font_chikita, font_6x10 etc
+      rotate <angle>       angle: 0, 90, 180, 270
+      clear                clear screen
+      info                 show display info

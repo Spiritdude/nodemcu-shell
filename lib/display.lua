@@ -32,7 +32,25 @@ if display and display.disp then
          display.fontHeight = display.disp:getFontAscent() - display.disp:getFontDescent() + 1
       end
    end
-   
+
+   display.setRotation = function(a) 
+      local w = display.width
+      local h = display.height
+      if a == 0 then
+         display.disp:undoRotation()
+      elseif a == 90 then
+         display.disp:setRot90()
+         display.width = h
+         display.height = w
+      elseif a == 180 then
+         display.disp:setRot180()
+      elseif a == 270 then
+         display.disp:setRot270()
+         display.width = h
+         display.height = w
+      end
+   end
+
    display.render = function(f)            -- render content (anything)
       display.disp:firstPage()
       repeat
