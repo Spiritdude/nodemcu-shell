@@ -39,8 +39,8 @@ shell_srv:listen(conf.port,function(socket)
    fifo = { }                    -- these seem to be global, otherwise `edit` (editor) fails
    fifo_drained = true
 
-   local prompt = false
-   local promptString = "% " 
+   prompt = false
+   promptString = "% " 
    
    state = 0
 
@@ -87,7 +87,7 @@ shell_srv:listen(conf.port,function(socket)
          else
             prompt = true
          end
-      end,
+      end
    }
    
    local function expandFilename(v)
@@ -278,7 +278,6 @@ shell_srv:listen(conf.port,function(socket)
    end)
 
    socket:on("disconnection",function(c)
-      node.output(nil)           -- un-register the redirect output function, output goes to serial
       socket = nil
       collectgarbage()
    end)

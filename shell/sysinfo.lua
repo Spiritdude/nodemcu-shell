@@ -17,7 +17,7 @@ return function(...)
    kv('Flash ID',node.flashid().." / "..string.format("0x%x",node.flashid()))
    kv('Heap',node.heap())
    local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
-   kv('Info',"V"..maver.."."..miver..", DevV "..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
+   kv('Info',"V"..maver.."."..miver.."."..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
    
    local t = tmr.time();
    kv("Uptime",string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%24,int(t/60)%60,t%60))

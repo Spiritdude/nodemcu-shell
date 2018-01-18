@@ -1,4 +1,4 @@
--- == Display Library
+-- == Display Library ==
 -- Author: Rene K. Mueller <spiritdude@gmail.com>
 -- Description: 
 --    This small library provides some higher level print() functionality
@@ -6,7 +6,7 @@
 --       when all display.print() or display.clear() is done
 --    Depending on the screen height there is auto-scroll.
 --
---    display.disp      
+--    display.disp      display pointer, to access lower-level functionality
 --    display.setFont()
 --    display.clear()   clear screen
 --    display.print()   print a string to the display
