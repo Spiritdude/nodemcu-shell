@@ -35,6 +35,10 @@ return function(...)
          else
             man('display')
          end
+      elseif cmd == 'print' then
+         for i,v in ipairs(arg) do
+            display.print(v)
+         end
       elseif cmd == 'clear' then
          display.clear()
       elseif cmd == 'on' then

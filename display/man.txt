@@ -2,8 +2,14 @@ display <cmd> <settings>
    commands:
       on                   display on (default)
       off                  display off (sleep)
+      print <string> ..    print strings (like `echo`)
       contrast <value>     value: 0..255
       font <font>          font: font_chikita, font_6x10 etc
       rotate <angle>       angle: 0, 90, 180, 270
       clear                clear screen
       info                 show display info
+      
+   examples:
+      % display print "hello world"
+      % display font font_6x10
+      % display rotate 90

@@ -564,6 +564,31 @@ arg[7] = 'shell/mv.txt'
 arg[8] = 'wifi/readme.txt'
 ```
 
+## display
+Manipulate the display (e.g. I2C connected OLED as configured in `display/display.conf`):
+```
+Usage: display <cmd> <settings>
+   commands:
+      on                   display on (default)
+      off                  display off (sleep)
+      print <string> ..    print strings (like `echo`)
+      contrast <value>     value: 0..255
+      font <font>          font: font_chikita, font_6x10 etc
+      rotate <angle>       angle: 0, 90, 180, 270
+      clear                clear screen
+      info                 show display info
+```
+Examples:
+```
+% display print "hello world"
+% display font font_6x10
+% display rotate 90
+% display off
+% display on
+```
+
+Note: you can only select fonts which are included in the firmware.
+
 ## dofile
 Execute a .lua file via `dofile()`:
 ```
