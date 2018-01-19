@@ -27,7 +27,7 @@ if file.exists("display/display.conf") then
                display.disp:setFontPosTop()
             end
             local fn = (display.disp:getHeight() >= 48) and "logo48.mono" or "logo.mono"
-            local sz = (display.disp:getHeight() >= 48) and 48 or 31
+            local sz = (display.disp:getHeight() >= 48) and 48 or 32
             if file.open("display/"..fn) then
                local data = file.read()
                file.close()
