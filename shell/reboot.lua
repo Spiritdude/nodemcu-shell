@@ -1,5 +1,6 @@
 -- == Reboot ==
--- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
+-- License: MIT License (see LICENSE file)
 -- Description: just restart device
 --
 -- History:

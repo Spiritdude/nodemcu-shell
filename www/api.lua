@@ -1,5 +1,6 @@
 -- == Sample RESTful API with httpd/simple.lua ==
--- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
+-- License: MIT License (see LICENSE file)
 -- Description: gives a a basic framework to a RESTendpoint
 --    api.lua?req=<r>
 --    r:

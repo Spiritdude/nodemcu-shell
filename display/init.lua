@@ -1,5 +1,6 @@
 -- == Display ==
--- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
+-- License: MIT License (see LICENSE file)
 -- Description: use display.conf to define a display, and set 'disp' as global variable
 -- 
 -- History:

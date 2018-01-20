@@ -1,5 +1,6 @@
 -- == Display Library ==
--- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
+-- License: MIT License (see LICENSE file)
 -- Description: 
 --    This small library provides some higher level print() functionality
 --    Note that all rendering is performed by display.flush(), so call it when

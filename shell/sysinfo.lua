@@ -1,5 +1,6 @@
 -- == Sysinfo ==
--- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
+-- License: MIT License (see LICENSE file)
 -- Description: displays sysinfo (adapted from system-info.lua)
 -- Todo:
 --   With NodeMCU "built 2017-12-25 17:45 Lua 5.1.4 on SDK 2.1.0(116b762)" it has a memory leak
@@ -18,7 +19,7 @@ return function(...)
    kv('Heap',node.heap())
    local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
    kv('Info',"V"..maver.."."..miver.."."..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
-   
+
    local t = tmr.time();
    kv("Uptime",string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%24,int(t/60)%60,t%60))
        

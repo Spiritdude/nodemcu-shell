@@ -1,5 +1,6 @@
 -- == RTC ==
--- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
+-- License: MIT License (see LICENSE file)
 -- Description: try to get realtime clock with actual time (if required) from various sources
 --
 -- History: 

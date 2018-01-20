@@ -1,5 +1,6 @@
 -- == NodeMCU Shell ==
--- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
+-- License: MIT License (see LICENSE file)
 -- Description: adapted from telnet.lua and further extended to provide NodeMCU shell functionality
 --    See http://github.com/Spiritdude/nodemcu-shell for details
 --    Note: this is very experimental, telnet is a prototype interface for the shell

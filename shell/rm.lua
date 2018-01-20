@@ -1,5 +1,6 @@
--- == Remove ==
--- Author: Rene K. Mueller <spiritdude@gmail.com>
+-- == Rm(Remove) ==
+-- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
+-- License: MIT License (see LICENSE file)
 -- Description: remove file(s)
 --
 -- History:
