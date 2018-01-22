@@ -2,3 +2,4 @@
 dofile("rtc/init.lua")
 dofile("shell/main.lua")
 --dofile("httpd/init.lua")
+--dofile("tftpd/init.lua")()
