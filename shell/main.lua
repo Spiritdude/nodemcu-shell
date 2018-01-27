@@ -37,18 +37,19 @@ local ip = wifi.ap.getip() or wifi.sta.getip()
 syslog.print(syslog.INFO,"nodemcu shell started on "..ip.." port "..conf.port)
 
 shell_srv:listen(conf.port,function(socket)
-   fifo = { }                    -- these seem to be global, otherwise `edit` (editor) fails
-   fifo_drained = true
+   local fifo = { }                    -- fifo[ref][..] per socket/ref
+   local fifo_drained = true
 
-   prompt = false
-   promptString = "% " 
+   local prompt = false
+   local promptString = "% " 
    
-   state = 0
+   local state = 0
 
    -- they must be global in order terminal.print() to work
-   function sender(c)
-      if #fifo > 0 then
-         c:send(table.remove(fifo,1))
+   local function sender(c)
+      local ref = tostring(c)
+      if #fifo[ref] ~= nil and #fifo[ref] > 0 then
+         c:send(table.remove(fifo[ref],1))
       else
          fifo_drained = true
          if not prompt then
@@ -58,8 +59,13 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
    
-   function s_output(str)
-      table.insert(fifo,str)
+   local function s_output(str)
+      local ref = tostring(socket)
+      --print("[2] socket="..tostring(socket))
+      if fifo[ref] == nil then
+         fifo[ref] = { }
+      end
+      table.insert(fifo[ref],str)
       if socket ~= nil and fifo_drained then
          fifo_drained = false
          sender(socket)
@@ -246,7 +252,7 @@ shell_srv:listen(conf.port,function(socket)
    end)
    
    local line = ""
-   _buff = ""
+   local _buff = ""
    
    socket:on("receive",function(c,l)      -- we receive line-wise input
       collectgarbage()
@@ -262,6 +268,7 @@ shell_srv:listen(conf.port,function(socket)
             collectgarbage()
          end
       elseif state == 2 then
+         --console.print("[1]socket="..tostring(socket))
          if terminal.receive then
             terminal.receive(l,c)
          elseif(false or conf.port == 23) then

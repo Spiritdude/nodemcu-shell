@@ -20,6 +20,17 @@ if file.exists("display/display.conf") then
          display.disp = conf.i2c.driver(conf.i2c.sla)
          if display.disp then
             syslog.print(syslog.INFO,"init display driver: "..string.format("mode %s, %dx%d",conf.mode,display.disp:getWidth(),display.disp:getHeight()))
+            if conf.rotate then
+               if conf.rotate == 90 then
+                  display.disp:setRot90()
+               elseif conf.rotate == 180 then
+                  display.disp:setRot180()
+               elseif conf.rotate == 270 then
+                  display.disp:setRot270()
+               elseif conf.rotate == 0 then
+                  display.disp:undoRotation()
+               end
+            end
             local fo = u8g and (u8g.font_04b_03 or u8g.font_helv08 or u8g.font_6x10) 
             if fo then
                display.disp:setFont(fo)
@@ -64,6 +75,10 @@ if file.exists("display/display.conf") then
       else
          syslog.print(syslog.WARN,"display: no driver found (missing module)")
       end
+   end
+   if conf and conf.vcc then     -- any GIOP used as VCC?
+      gpio.mode(conf.vcc,gpio.OUTPUT)
+      gpio.write(conf.vcc,1)
    end
 else
    syslog.print(syslog.INFO,"no display/display.conf")

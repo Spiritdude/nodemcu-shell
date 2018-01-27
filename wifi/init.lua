@@ -49,12 +49,13 @@ if file.exists("wifi/wifi.conf") then
       end)
       tmr.alarm(1,5000,1,function() 
          local s = wifi.sta.status()
+         local ap = sta_id > 0 and conf.station[sta_id].config.ssid or conf.station.config.ssid
          if(s ~= wifi.STA_GOTIP) then
             syslog.print(syslog.INFO,"wifi: " .. (
                s == wifi.STA_IDLE and "idle ..." or
                s == wifi.STA_CONNECTING and "connecting ..." or
                s == wifi.STA_WRONGPWD and "wrong password" or
-               s == wifi.STA_APNOTFOUND and "ap not found" or
+               s == wifi.STA_APNOTFOUND and "ap "..ap.." not found" or
                s == wifi.STA_FAIL and "fail" or
                s == wifi.STA_GOTIP and "got ip" or "" )
             )

@@ -622,4 +622,5 @@ Connection closed by foreign host.
 ## Related Projects
 - [NodeMCU Platform](https://github.com/devyte/nodemcu-platform): some formalism on apps on ESP8266, conceived 2016, abandoned in 2017/01.
 - [ESuite-LUA](https://github.com/BLavery/esuite-lua): collection of libraries, very useful, uses simple `dofile()` to load individual libraries
+- [ESP8266 Frankenstein](https://github.com/nekromant/esp8266-frankenstein): terminal software with a few useful commands specific to ESP8266.
 

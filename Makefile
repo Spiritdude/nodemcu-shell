@@ -2,7 +2,7 @@ PORT=/dev/ttyUSB0
 BACKUP=nodemcu-shell-`date +%F`.tar.gz
 
 all::
-	@echo "make upload_all upload_shell upload_shell_core"
+	@echo "make upload_all upload_shell upload_shell_core console terminal"
 
 upload_all::
 	nodemcu-tool --port ${PORT} upload --keeppath *.lua */*.lua */*.txt */*.conf */*.dist display/*.mono www/imgs/* www/*.html www/favicon.ico.gz
@@ -19,6 +19,12 @@ upload_shell_core::
 upload_new::
 	find -newer .lastupload | xargs nodemcu-tool --port ${PORT} upload --keeppath
 	touch .lastupload
+
+console::
+	nodemcu-tool --port ${PORT} terminal
+
+terminal::
+	nodemcu-tool --port ${PORT} terminal
 
 # -- developer only:
 
