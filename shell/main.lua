@@ -6,6 +6,7 @@
 --    Note: this is very experimental, telnet is a prototype interface for the shell
 --
 -- History:
+-- 2018/01/30: 0.0.9: dedicated fifo per socket, arch dependent code (terrible)
 -- 2018/01/16: 0.0.8: terminal.* cleaned up, to make it more consistent with console.* as well
 -- 2018/01/09: 0.0.6: using console.* layer so there is no print()/node.output() calls anymore
 -- 2018/01/06: 0.0.4: replacing node.output() and define dedicated print(...) 
@@ -17,7 +18,7 @@ if shell_srv then    -- are we called from net.up.lua *again*, if so ignore
    return
 end
 
-local VERSION = '0.0.8'
+local VERSION = '0.0.9'
 
 local conf = {}
 
@@ -32,9 +33,12 @@ end
 conf.port = conf.port or 2323
 
 shell_srv = net.createServer(net.TCP,180)
-
-local ip = wifi.ap.getip() or wifi.sta.getip()
-syslog.print(syslog.INFO,"nodemcu shell started on "..ip.." port "..conf.port)
+if arch=='esp8266' then
+   local ip = wifi.ap.getip() or wifi.sta.getip()
+   syslog.print(syslog.INFO,"nodemcu shell started on "..ip.." port "..conf.port)
+else
+   syslog.print(syslog.INFO,"nodemcu shell started on port "..conf.port)
+end
 
 shell_srv:listen(conf.port,function(socket)
    local fifo = { }                    -- fifo[ref][..] per socket/ref
@@ -48,7 +52,7 @@ shell_srv:listen(conf.port,function(socket)
    -- they must be global in order terminal.print() to work
    local function sender(c)
       local ref = tostring(c)
-      if #fifo[ref] ~= nil and #fifo[ref] > 0 then
+      if #fifo and #fifo[ref] ~= nil and #fifo[ref] > 0 then
          c:send(table.remove(fifo[ref],1))
       else
          fifo_drained = true
@@ -246,8 +250,10 @@ shell_srv:listen(conf.port,function(socket)
    socket:on("connection",function(c)
       -- c:send(string.format("%c%c%c%c%c%c%c%c%c",255,251,34,255,252,3,255,252,1)) -- linemode
       -- if we send, we need to process response too in on:("receive")
-      c:send(string.format("%c%c%c",255,253,31))
-         -- will reply 255 251 31 & 255 250 31 0 <width> 0 <height> 255 240
+      if arch == 'esp8266' then                 -- esp32 struggles to get response
+         c:send(string.format("%c%c%c",255,253,31))
+            -- will reply 255 251 31 & 255 250 31 0 <width> 0 <height> 255 240
+      end
       state = 1
    end)
    
@@ -256,6 +262,9 @@ shell_srv:listen(conf.port,function(socket)
    
    socket:on("receive",function(c,l)      -- we receive line-wise input
       collectgarbage()
+      if arch ~= 'esp8266' then           -- if esp32 then go to state 2 right away (no probing of console-window size)
+         state = 2
+      end
       if state == 1 then                  -- process reply from client, width & height
          _buff = _buff .. l
          local m = "\255\250\031\000";
@@ -273,7 +282,7 @@ shell_srv:listen(conf.port,function(socket)
             terminal.receive(l,c)
          elseif(false or conf.port == 23) then
             line = line .. l
-            --console.print("'"..line.."'")
+            console.print("'"..line.."'")
             if string.match(line,"[\x0d\r\n]$") then
                processLine(line,c)
                line = ""
@@ -292,5 +301,9 @@ shell_srv:listen(conf.port,function(socket)
 
    socket:on("sent",sender)      -- handle fifo 
 
-   console.print("\n== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")\n")
+   if arch=='esp8266' then
+      console.print("\n== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")\n")
+   else 
+      console.print("\n== Welcome to NodeMCU Shell "..VERSION.." on "..node.chipid().."\n")
+   end
 end)

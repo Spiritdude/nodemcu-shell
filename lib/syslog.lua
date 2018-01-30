@@ -17,14 +17,21 @@ syslog = {
    FATAL = 3,
 
    level = 0,
-
+   count = 0,
+   
    verbose = function(lv)
       level = lv
    end,
 
    print = function(type,m)
       local tm = { [0]='INFO', [1]='WARN', [2]='ERROR', [3]='FATAL' }
-      local t = tmr and (tmr.time() .. "." .. string.format("%03d",int((tmr.now()/1000)%1000))) or 0
+      local t
+      --if arch=='esp8266' then
+         t = timer and (timer.time() .. "." .. string.format("%03d",int((timer.now()/1000)%1000))) or 0
+      --else
+      --   t = syslog.count
+      --   syslog.count = syslog.count + 1
+      --end
       console.print((tm[type] or 'UNKNOWN') .. " [" .. t .. "] " .. m)
    end
 }

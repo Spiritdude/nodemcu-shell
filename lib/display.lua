@@ -80,7 +80,26 @@ if display and display.disp then
    end
    
    display.print = function(s)
-      table.insert(display.buffer,s)
+      if true then               -- autowrap lines
+         local e = s:len()
+         repeat
+            local f = s:sub(1,e)
+            -- if string is too long, getStrWidth() reports wrong width, make sure e < 60 or so
+            if e < 60 and display.disp:getStrWidth(f) <= display.width then
+               table.insert(display.buffer,f)
+               if(e==s:len()) then
+                  s = ""
+               else
+                  s = s:sub(e+1)
+                  e = s:len()
+               end
+            else
+               e = e-1
+            end
+         until s:len() == 0 
+      else
+         table.insert(display.buffer,s)
+      end
       while(#display.buffer * display.fontHeight > display.height) do   -- scrolling required?
          table.remove(display.buffer,1)
       end
