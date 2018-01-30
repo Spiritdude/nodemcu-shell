@@ -81,6 +81,6 @@ if file.exists("display/display.conf") then
       gpio.write(conf.vcc,1)
    end
 else
-   syslog.print(syslog.INFO,"no display/display.conf")
+   syslog.print(syslog.INFO,"display: no display/display.conf")
 end
 

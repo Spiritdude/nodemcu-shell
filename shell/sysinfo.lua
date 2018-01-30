@@ -5,6 +5,7 @@
 -- Todo:
 --   With NodeMCU "built 2017-12-25 17:45 Lua 5.1.4 on SDK 2.1.0(116b762)" it has a memory leak
 -- History:
+-- 2018/01/30: 0.0.3: tmr.* to timer.*
 -- 2018/01/05: 0.0.2: better node.info() output
 -- 2018/01/03: 0.0.1: first version
 
@@ -13,14 +14,20 @@ return function(...)
       local s = k..': '.. (u and v..' '..u or v);
       console.print(s)
    end
- 
-   kv('Chip ID',node.chipid().." / "..string.format("0x%x",node.chipid()))
-   kv('Flash ID',node.flashid().." / "..string.format("0x%x",node.flashid()))
-   kv('Heap',node.heap())
-   local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
-   kv('Info',"V"..maver.."."..miver.."."..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
 
-   local t = tmr.time();
+   if arch=='esp8266' then
+      kv('Chip ID',node.chipid().." / "..string.format("0x%x",node.chipid()))
+      kv('Flash ID',node.flashid().." / "..string.format("0x%x",node.flashid()))
+   else 
+      kv('Chip ID',node.chipid())
+      --kv('Flash ID',node.flashid())     -- not yet
+   end
+   kv('Heap',node.heap())
+   if arch=='esp8266' then
+      local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
+      kv('Info',"V"..maver.."."..miver.."."..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
+   end
+   local t = timer.time();
    kv("Uptime",string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%24,int(t/60)%60,t%60))
        
    if adc then     -- make it conditional in case it doesn't exist

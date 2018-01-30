@@ -10,14 +10,14 @@ if arch=='esp32' then
 end
 dofile("lib/console.lua")
 dofile("lib/syslog.lua")
---dofile("display/init.lua")
+dofile("display/init.lua")
 
 if arch=='esp32' then
    -- has no node.info()
-   syslog.print(syslog.INFO,"device "..node.chipid().." starting up")
+   syslog.print(syslog.INFO,"device "..node.chipid().." ("..arch..") starting up")
 else
    local ma,mi,de = node.info()
-   syslog.print(syslog.INFO,"device #"..node.chipid()..string.format(" / 0x%x",node.chipid()).." (NodeMCU-"..ma.."."..mi.."."..de..(1/2==0 and "-integer" or "-float")..") starting up")
+   syslog.print(syslog.INFO,"device #"..node.chipid()..string.format(" / 0x%x",node.chipid()).." ("..arch..", NodeMCU-"..ma.."."..mi.."."..de..(1/2==0 and "-integer" or "-float")..") starting up")
 end
 
 dofile(arch=='esp8266' and "wifi/init.lua" or "wifi/init32.lua")

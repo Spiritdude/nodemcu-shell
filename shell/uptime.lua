@@ -7,6 +7,6 @@
 -- 2018/01/03: 0.0.1: first version
 
 return function(...) 
-   local t = tmr.time()
+   local t = timer.time()
    console.print(string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%60,int(t/60)%60,t%60))
 end
