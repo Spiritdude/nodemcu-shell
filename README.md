@@ -2,7 +2,9 @@
 
 **NOTE: Highly experimental, API and Filesystem skeleton might change at any time**
 
-This provides a **UNIX-like Shell for the NodeMCU platform** with **[ESP8266](https://en.wikipedia.org/wiki/ESP8266)**: 64KB/96KB RAM, 512K-16MB Flash, 80/160MHz RISC Processor with WIFI, cost ~ USD/EUR 1.50-5.00.
+This provides a **UNIX-like Shell for the NodeMCU/LUA platform** with 
+- **[ESP8266](https://en.wikipedia.org/wiki/ESP8266)**: 64KB/96KB RAM, 512KB-16MB Flash, 80/160MHz RISC Processor with WIFI, cost ~ USD/EUR 1.50-5.00 (2018/01)
+- **[ESP32](https://en.wikipedia.org/wiki/ESP32)**: 512KB RAM, 4MB-16MB Flash, 160/240MHz RISC Processor with WIFI, Bluetooth, cost ~ USD/EUR 4-7.00 (2018/01)
 
 ## Main Features
 - **commands with space separated arguments** (including "string with spaces" or 'string with spaces' arguments)
