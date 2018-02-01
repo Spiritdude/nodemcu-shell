@@ -31,7 +31,7 @@ return function(...)
 
    function lf(f,opts,last) 
       if(opts['l']) then
-         local st = file.stat(f)
+         local st = arch=='esp8266' and file.stat(f) or { time = { mon=1, day=1, year=1970 }, size=0 }
          if st then 
             local bits = ""
             if st.isdir then

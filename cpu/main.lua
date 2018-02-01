@@ -11,18 +11,20 @@
 return function(...)
    table.remove(arg,1)
    if #arg == 0 then
-      local n = 10000
-      local t = tmr.now()
+      local n = arch=='esp32' and 1000000 or 10000
+      local t = timer.now()
       local i = n
+      console.print(t)
       while i > 0 do
          i = i - 1
       end
-      t = tmr.now() - t       -- us or 1/1,000,000s
+      t = timer.now() - t       -- us or 1/1,000,000s
       -- console.print(t.." "..n)
       -- n = instructions per t[us]
       -- n * 1000000 / t         -- instructions per 1s
       -- n = n * 10000 / (t/100) -- instructions per 1s
       n = int(n * 10 / (t/100))  -- k instructions per 1s
+      console.print(timer.now())
       console.print(n.." LuaKIPS") 
    elseif #arg == 1 then
       if arg[1] == '80' or arg[1] == '160' then

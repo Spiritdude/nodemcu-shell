@@ -10,12 +10,12 @@ return function(...)
    table.remove(arg,1)   -- remove first argument, the name of the command
    if #arg > 0 then
       ip = arg[1]
-      local t = tmr.now()
+      local t = timer.now()
       net.dns.resolve(ip,function(sk,ip) 
          if ip == nil then 
             console.print("ERROR: <"..arg[1].."> did not resolve")
          else
-            t = int((tmr.now()-t)/1000)
+            t = int((timer.now()-t)/1000)
             console.print("PING "..arg[1].." ("..ip..") time "..t.."ms")
          end
       end)

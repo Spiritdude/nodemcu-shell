@@ -21,8 +21,8 @@ if arch == 'esp32' then
    
    -- simulate timer.now() in microseconds
    timer._now = 0
-   tmr.create():alarm(10,tmr.ALARM_AUTO,function()
-      timer._now = timer._now+1000*10
+   tmr.create():alarm(100,tmr.ALARM_AUTO,function()
+      timer._now = timer._now+1000*100
    end)
    timer.now = function() return timer._now end
    tmr.now = timer.now  -- won't work
