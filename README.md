@@ -159,7 +159,9 @@ return {
   - `lib/console.lua`: provides `console.print()` as replacement of `print()`
   - `lib/syslog.lua`: simple syslog functionality to log INFO, WARN, ERROR or FATAL messages
   - `lib/display.lua`: provides higher level display functionality (e.g. `display.print()` with autoscroll)
-
+  - `lib/timer.lua`: replacing `tmr.*` to make ESP32 / ESP8266 compatible
+  - `lib/http.lua`: ESP32 only `http` library (ESP8266 has it already)
+  
 Finally, `shell/main.lua` is the NodeMCU shell main entry, it opens a telnet server at port 2323 (default).
 
 ## Console vs Syslog vs Print
