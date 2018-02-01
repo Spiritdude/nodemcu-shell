@@ -1,8 +1,6 @@
 # NodeMCU Shell (UNIX-like)
 
-**NOTE: Highly experimental, API and Filesystem skeleton might change at any time**
-
-This provides a **UNIX-like Shell for the NodeMCU/LUA platform** with 
+This provides a **UNIX-like Shell for the NodeMCU/LUA platform** for
 - **[ESP8266](https://en.wikipedia.org/wiki/ESP8266)**: 64KB/96KB RAM, 512KB-16MB Flash, 80/160MHz RISC Processor with WIFI, cost ~EUR 1.50-5.00 (2018/01)
 - **[ESP32](https://en.wikipedia.org/wiki/ESP32)**: 512KB RAM, 4MB-16MB Flash, 160/240MHz RISC Processor with WIFI, Bluetooth, cost ~EUR 4-7.00 (2018/01)
 
@@ -23,9 +21,11 @@ NodeMCU is a LUA runtime environment, so the shell is written in LUA.
 - always more commands
   - editor
   - ftpd or another upload/download functionality
+
+**Note**: API and Filesystem skeleton might change at any time.
   
 ## Examples
-After power up or reboot, on the serial port of your ESP8266 / NodeMCU device:
+After power up or reboot, on the serial port of your ESP8266 or ESP32 NodeMCU/LUA device:
 ```
 NodeMCU custom build by frightanic.com
         branch: master
