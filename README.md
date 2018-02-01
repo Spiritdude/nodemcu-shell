@@ -5,11 +5,11 @@
 This provides a **UNIX-like Shell for the NodeMCU platform** with **[ESP8266](https://en.wikipedia.org/wiki/ESP8266)**: 64KB/96KB RAM, 512K-16MB Flash, 80/160MHz RISC Processor with WIFI, cost ~ USD/EUR 1.50-5.00.
 
 ## Main Features
-- simple commands with space separated arguments (including "string with spaces" or 'string with spaces' arguments)
-- arguments with `*` or `?` are expanded, e.g. `ls -l *.txt` or `grep dofile *.lua`
-- every command is a .lua (or .lc) script
+- **commands with space separated arguments** (including "string with spaces" or 'string with spaces' arguments)
+- **arguments with `*` or `?` are expanded**, e.g. `ls -l *.txt` or `grep dofile *.lua`
+- **every command is a .lua (or .lc) script**
  - command or app resides in `<appname>/main.lua` or `shell/<cmd>.lua`, so the shell is freely extendable
-- shell accessible via telnet session (this might change later)
+- **shell accessible via telnet session** (this might change later)
 
 NodeMCU is a LUA runtime environment, so the shell is written in LUA.
 
