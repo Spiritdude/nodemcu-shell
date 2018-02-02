@@ -239,21 +239,6 @@ shell_srv:listen(conf.port,function(socket)
                console.print("ERROR: command <"..cmd.."> not found")
             end
          end
-         if false then
-            if file.exists("shell/"..cmd..".lc") then
-               dofile("shell/"..cmd..".lc")(unpack(a))
-            elseif file.exists("shell/"..cmd..".lua") then
-               dofile("shell/"..cmd..".lua")(unpack(a))
-            elseif file.exists(cmd.."/main.lc") then
-               dofile(cmd.."/main.lc")(unpack(a))
-            elseif file.exists(cmd.."/main.lua") then
-               dofile(cmd.."/main.lua")(unpack(a))
-            elseif file.exists(cmd..".lua") then
-               dofile(cmd..".lua")(unpack(a))
-            else 
-               console.print("ERROR: command <"..cmd.."> not found")
-            end
-         end
          if not st and err then
             console.print("ERROR: "..err)
          end
