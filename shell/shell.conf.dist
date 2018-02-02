@@ -1,3 +1,5 @@
 return {
-   port = 2323          -- 2323 (experimental), later then 23
+   port = 2323,         -- 2323 (experimental), later then 23
+   width = 80,          -- default screen width
+   height = 24          -- default screen height
 }

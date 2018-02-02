@@ -82,8 +82,8 @@ shell_srv:listen(conf.port,function(socket)
    -- attempt to have other apps take control of the connection (like an editor)
    -- NOTE: will soon move to lib/terminal.lua
    terminal = {
-      width = 80,
-      height = 24,
+      width = conf and conf.width or 80,
+      height = conf and conf.height or 24,
       print = s_output,             -- default
       receive = nil,
 
