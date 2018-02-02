@@ -222,10 +222,15 @@ shell_srv:listen(conf.port,function(socket)
             return
          else
             local done = false
+            local types = { '' }
+            if arch=='esp32' then
+               types = { '32', '' }
+            end
             for j,loc in pairs({"shell/"..cmd, cmd.."/main"}) do
                for k,kind in pairs({".lc", ".lua"}) do
-                  for i,type in pairs({"32", ""}) do
+                  for i,type in pairs(types) do
                      if file.exists(loc..type..kind) then
+                        --print("execute "..loc..type..kind)
                         dofile(loc..type..kind)(unpack(a))
                         done = true
                      end
