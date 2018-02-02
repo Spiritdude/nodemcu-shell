@@ -4,6 +4,7 @@
 -- Description: use display.conf to define a display, and set 'disp' as global variable
 -- 
 -- History:
+-- 2018/02/01: 0.0.3: using timer.* instead of tmr.*
 -- 2018/01/09: 0.0.2: more structured setup
 -- 2018/01/06: 0.0.1: rudimentary
 
@@ -65,7 +66,7 @@ if file.exists("display/display.conf") then
                   display.print(str)
                   -- display.print(string.sub(str,1,30))    -- truncate a bit otherwise wraps around on the left-side again
                end)
-               tmr.create():alarm(2000,tmr.ALARM_AUTO,function() 
+               timer.create():alarm(2000,timer.ALARM_AUTO,function() 
                   display.flush()
                end)
             end

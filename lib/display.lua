@@ -19,7 +19,8 @@
 -- 2018/01/09: 0.0.1: from display/init.lua extracted
 
 if display and display.disp then
-   display.buffer = {}                     -- content buffer (array of lines)
+   display.buffer = {}                    -- content buffer (array of lines)
+   display._changed = false
    display.width = display.disp:getWidth()
    display.height = display.disp:getHeight()
    display.fontHeight = display.disp:getFontAscent() - display.disp:getFontDescent() + 1
@@ -61,21 +62,25 @@ if display and display.disp then
    end
    
    display.flush = function()               -- render content (strings)
-      display.disp:firstPage()
-      repeat
-         local y = 0;
-         for i,v in ipairs(display.buffer) do
-            --console.print("=",v)
-            display.disp:drawStr(0,y,v)
-            y = y + display.fontHeight;
-         end
-      until display.disp:nextPage() == false
+      if display._changed then
+         display.disp:firstPage()
+         repeat
+            local y = 0;
+            for i,v in ipairs(display.buffer) do
+               --console.print("=",v)
+               display.disp:drawStr(0,y,v)
+               y = y + display.fontHeight;
+            end
+         until display.disp:nextPage() == false
+      end
+      display._changed = false
       collectgarbage()
    end
 
    -- global functions
    display.clear = function()
       display.buffer = {}
+      display._changed = true
       --display.flush()
    end
    
@@ -84,8 +89,8 @@ if display and display.disp then
          local e = s:len()
          repeat
             local f = s:sub(1,e)
-            -- if string is too long, getStrWidth() reports wrong width, make sure e < 60 or so
-            if e < 60 and display.disp:getStrWidth(f) <= display.width then
+            -- if string is too long, getStrWidth() reports wrong width, make sure e < 50 or so
+            if e < 50 and display.disp:getStrWidth(f) <= display.width then
                table.insert(display.buffer,f)
                if(e==s:len()) then
                   s = ""
@@ -103,6 +108,7 @@ if display and display.disp then
       while(#display.buffer * display.fontHeight > display.height) do   -- scrolling required?
          table.remove(display.buffer,1)
       end
+      display._changed = true
       --display.flush()
       collectgarbage()
    end
