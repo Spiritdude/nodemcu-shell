@@ -1,4 +1,4 @@
--- == Time Library ==
+-- == Timer Library ==
 -- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
 -- License: MIT License (see LICENSE file)
 -- Description: 
