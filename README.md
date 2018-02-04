@@ -219,6 +219,8 @@ Install `nodemcu-tool` via
 sudo npm install nodemcu-tool -g
 ```
 
+ESP32 Support: see [https://github.com/Spiritdude/NodeMCU-Tool](NodeMCU-Tool with ESP32 support), contains a patch so ESP32 is supported as well, I expect my PR or equivalant being included soon (2018/02/04).
+
 ## Firmware
 The recommended modules for your firmware from [nodemcu-build.com](https://nodemcu-build.com):
 - **adc** (recommended)
