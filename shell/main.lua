@@ -312,9 +312,11 @@ shell_srv:listen(conf.port,function(socket)
 
    socket:on("sent",sender)      -- handle fifo 
 
+   local m = "\n== Welcome to NodeMCU Shell "..VERSION.."/"..arch.." on "
    if arch=='esp8266' then
-      console.print("\n== Welcome to NodeMCU Shell "..VERSION.." on "..wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")\n")
+      m = m .. wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")"
    else 
-      console.print("\n== Welcome to NodeMCU Shell "..VERSION.." on "..node.chipid().."\n")
+      m = m .. node.chipid()
    end
+   console.print(m.."\n")
 end)
