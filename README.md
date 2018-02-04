@@ -219,7 +219,7 @@ Install `nodemcu-tool` via
 sudo npm install nodemcu-tool -g
 ```
 
-ESP32 Support: see [https://github.com/Spiritdude/NodeMCU-Tool](NodeMCU-Tool with ESP32 support), contains a patch so ESP32 is supported as well, I expect my PR or equivalant being included soon (2018/02/04).
+ESP32 Support: see [NodeMCU-Tool with ESP32 support](https://github.com/Spiritdude/NodeMCU-Tool), contains a patch so ESP32 is supported as well, I expect my PR or equivalant being included soon (2018/02/04).
 
 ## Firmware
 The recommended modules for your firmware from [nodemcu-build.com](https://nodemcu-build.com):
@@ -268,7 +268,7 @@ If your device resides somewhere else than the default (`/dev/ttyUSB0`), set it 
 % make PORT=/dev/ttyUSB4 upload_all
 ```
 
-In case you develop with multiple attached NodeMCU devices, consider my [https://github.com/Spiritdude/nodemcu-enum](nodemcu-enum).
+In case you develop with multiple attached NodeMCU devices, consider my [nodemcu-enum](https://github.com/Spiritdude/nodemcu-enum).
 
 Once all uploaded fine, you reset the device.
 
