@@ -268,6 +268,8 @@ If your device resides somewhere else than the default (`/dev/ttyUSB0`), set it 
 % make PORT=/dev/ttyUSB4 upload_all
 ```
 
+In case you develop with multiple attached NodeMCU devices, consider my [https://github.com/Spiritdude/nodemcu-enum](nodemcu-enum).
+
 Once all uploaded fine, you reset the device.
 
 Preferably start a terminal to see the NodeMCU console:
