@@ -2,7 +2,7 @@
 
 This provides a **UNIX-like Shell for the NodeMCU/LUA platform** for
 - **[ESP8266](https://en.wikipedia.org/wiki/ESP8266)**: 64KB/96KB RAM, 512KB-16MB Flash, 80/160MHz RISC Processor with WIFI, cost ~EUR 1.50-5.00 (2018/01)
-- **[ESP32](https://en.wikipedia.org/wiki/ESP32)**: 512KB RAM, 4MB-16MB Flash, 160/240MHz RISC Processor with WIFI, Bluetooth, cost ~EUR 4-7.00 (2018/01)
+- **[ESP32](https://en.wikipedia.org/wiki/ESP32)**: 512KB RAM, 4MB-16MB Flash, 160/240MHz RISC Processor with WIFI, Bluetooth, cost ~EUR 4.00-7.00 (2018/01)
 
 ## Main Features
 - **commands with space separated arguments** (including "string with spaces" or 'string with spaces' arguments)
@@ -128,7 +128,7 @@ Connection closed by foreign host.
 Following filesystem layout has been adopted:
 - every **command** or app has its own directory or namespace, with main entry point of `<appname>/main.lua`
 - every **shell built-in command** resides in `shell/<command>.lua`
-- each `main.lua` or `shell/<command>.lua` must conform to following skeleton:
+- each `<appname>/main.lua` or `shell/<command>.lua` must conform to following skeleton:
 
 ```
 return function(...) 

@@ -19,31 +19,8 @@
    </head>
    <body>
       <h1>Hello World</h1>
-      <!--<img class=logo src="imgs/espressif.png">
-      <img class=logo src="imgs/nodemcu.png">-->
+      <img class=logo src="imgs/espressif.png">
+      <img class=logo src="imgs/nodemcu.png">
       <p>NodeMCU httpd is responding ...</p>
-      <div id=output>requesting sysinfo ...</div>
-      <script>
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-         if(xhr.readyState == XMLHttpRequest.DONE) {
-            var data = xhr.responseText;
-            var mime = 'text/plain';
-
-            //try {
-            //   //data = decodeURIComponent(escape(data));       // decode utf8 properly
-            //} catch(e) {
-            //}
-            
-            if(mime == 'application/javascript') 
-               data = JSON.parse(data);
-               
-            document.getElementById('output').innerHTML = "<pre>" + data + "</pre>"
-         }
-      }
-      xhr.open("GET","/api.lua?req=sysinfo",true);
-      xhr.open("GET","/sysinfo.lua",true);
-      xhr.send();
-      </script>
    </body>
 </html>
