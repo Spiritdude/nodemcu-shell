@@ -5,6 +5,7 @@ if arch=='esp8266' then
 end
 dofile("lib/integer.lua")
 dofile("lib/timer.lua")
+dofile("lib/gpiox.lua")
 if arch=='esp32' then
    dofile("lib/http.lua")
 end

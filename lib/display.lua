@@ -21,17 +21,27 @@
 if display and display.disp then
    display.buffer = {}                    -- content buffer (array of lines)
    display._changed = false
-   display.width = display.disp:getWidth()
-   display.height = display.disp:getHeight()
-   display.fontHeight = display.disp:getFontAscent() - display.disp:getFontDescent() + 1
+   display.width = display.width or display.disp:getWidth()
+   display.height = display.height or display.disp:getHeight()
+   if arch=='esp8266' then
+      display.fontHeight = display.disp:getFontAscent() - display.disp:getFontDescent() + 1
+   else
+      display.fontHeight = display.disp:getAscent() - display.disp:getDescent() + 1
+   end
 
    display.setFont = function(fo)
       if fo then
          display.disp:setFont(fo)
          display.disp:setFontRefHeightExtendedText()
-         display.disp:setDefaultForegroundColor()
+         if arch=='esp8266' then
+            display.disp:setDefaultForegroundColor()
+         end
          display.disp:setFontPosTop()
-         display.fontHeight = display.disp:getFontAscent() - display.disp:getFontDescent() + 1
+         if arch=='esp8266' then
+            display.fontHeight = display.disp:getFontAscent() - display.disp:getFontDescent() + 1
+         else
+            display.fontHeight = display.disp:getAscent() - display.disp:getDescent() + 1
+         end
       end
    end
 
@@ -63,15 +73,26 @@ if display and display.disp then
    
    display.flush = function()               -- render content (strings)
       if display._changed then
-         display.disp:firstPage()
-         repeat
+         if arch=='esp8266' then
+            display.disp:firstPage()
+            repeat
+               local y = 0;
+               for i,v in ipairs(display.buffer) do
+                  --console.print("=",v)
+                  display.disp:drawStr(0,y,v)
+                  y = y + display.fontHeight;
+               end
+            until display.disp:nextPage() == false
+         else
+            display.disp:clearBuffer()
             local y = 0;
             for i,v in ipairs(display.buffer) do
                --console.print("=",v)
                display.disp:drawStr(0,y,v)
                y = y + display.fontHeight;
             end
-         until display.disp:nextPage() == false
+            display.disp:sendBuffer()
+         end
       end
       display._changed = false
       collectgarbage()

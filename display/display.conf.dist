@@ -4,7 +4,10 @@ return {
       sda = 1,
       scl = 2,
       sla = 0x3c,
-      driver = u8g and u8g.ssd1306_128x64_i2c or nil    
+      driver = (u8g and u8g.ssd1306_128x64_i2c) or (u8g2 and u8g2.ssd1306_i2c_128x64_noname) or nil
    },
-   console = false                  -- take console (redirect all console-output to the display)
+   -- rotate = 180,
+   -- vcc = 4,          -- in case you piggyback OLED 0.96" (128x64) direct back-to-back to Wemos D1, use Dx as VCC (turn high)
+                        --    see https://blog.squix.org/2016/06/new-weather-station-demo-on-github.html as example
+   console = true
 }

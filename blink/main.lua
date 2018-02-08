@@ -8,9 +8,11 @@
 -- 2018/01/04: 0.0.1: first version with blink frequency in ms as optional argument
 
 return function(...)
-   id = 6
+   if blink_tmr == nil then
+      blink_tmr = timer.create()
+   end
    d = 500
-   pin = 4
+   pin = arch=='esp8266' and 4 or 22
 
    if(arg[2] and string.match(arg[2],"^%d+$") and tonumber(arg[2]) > 0) then
       d = tonumber(arg[2])
@@ -18,29 +20,29 @@ return function(...)
    
    -- console.print("blink "..d.."ms")
       
-   gpio.mode(pin,gpio.OUTPUT)
+   gpiox.mode(pin,gpiox.OUTPUT)
    
    led = 0
    
    if(arg[2] and (arg[2] == 'off' or arg[2] == '0')) then
-      tmr.unregister(id)
-      gpio.write(pin,1)
+      blink_tmr:unregister()
+      gpiox.write(pin,1)
    else 
       local cnt
       if(arg[3] and string.match(arg[3],"^(%d+)$")) then
          cnt = tonumber(arg[3])
       end
-      gpio.write(pin,led)
-      tmr.alarm(id,d,1, 
+      gpiox.write(pin,led)
+      blink_tmr:alarm(d,1, 
          function()
             led = 1-led;
-            gpio.write(pin,led)
+            gpiox.write(pin,led)
             if(led == 1 and cnt ~= nil and cnt > 0) then     -- if off
                --console.print("tmr count: "..cnt)
                cnt = cnt - 1
                if cnt == 0 then
                   --console.print("end of timer")
-                  tmr.unregister(id)
+                  blink_tmr:unregister()
                end
             end
          end
