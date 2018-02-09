@@ -1,3 +1,4 @@
 return {
-   [0] = { pin = 4 }
+   [0] = { pin = 4 }    -- wemos d1 mini
+   -- [0] = { pin = 22 }   -- lolin32 lite 
 }

@@ -4,6 +4,7 @@
 -- Description: use display.conf to define a display, and set 'disp' as global variable
 -- 
 -- History:
+-- 2018/02/08: 0.0.4; esp32 support and u8g2 added (not yet tested)
 -- 2018/02/01: 0.0.3: using timer.* instead of tmr.*
 -- 2018/01/09: 0.0.2: more structured setup
 -- 2018/01/06: 0.0.1: rudimentary
@@ -101,13 +102,8 @@ if file.exists("display/display.conf") then
       end
    end
    if conf and conf.vcc and display and display.disp then     -- any GIOP used as VCC?
-      if arch=='esp8266' then
-         gpio.mode(conf.vcc,gpio.OUTPUT)
-         gpio.write(conf.vcc,1)
-      else     -- <annoyed>yes, and another "change" for esp32 nodemcu - why keep things simple and compatible, let's change it ...</annoyed>
-         gpio.config({gpio=conf.vcc, dir=gpio.OUT, pull=PULL_UP})
-         gpio.write(conf.vcc,1)
-      end 
+      gpiox.mode(conf.vcc,gpio.OUTPUT)
+      gpiox.write(conf.vcc,1)
    end
 else
    syslog.print(syslog.INFO,"display: no display/display.conf")

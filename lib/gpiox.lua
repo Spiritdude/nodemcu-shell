@@ -8,6 +8,7 @@
 -- Todo:
 --    - gpio.trig()
 -- History: 
+-- 2018/02/09: 0.0.2: gpiox.trig() added
 -- 2018/02/08: 0.0.1: timer.time() and timer.now() for ESP32
 
 if arch=='esp32' then
@@ -41,6 +42,21 @@ if arch=='esp32' then
    end
    gpiox.read = gpio.read
    gpiox.write = gpio.write
+   gpiox.trig = function(p,t,cb)
+      local ty = gpio.INTR_UP
+      if t=='up' then
+         ty = gpio.INTR_UP
+      elseif t=='down' then
+         ty = gpio.INTR_DOWN
+      elseif t=='both' then
+         ty = gpio.INTR_UP_DOWN
+      elseif t=='low' then
+         ty = gpio.INTR_LOW
+      elseif t=='high' then
+         ty = gpio.INTR_HIGH
+      end
+      gpio.trig(p,ty,cb)
+   end
 else 
    gpiox = gpio
 end

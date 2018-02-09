@@ -16,6 +16,7 @@
 --  Weight: ~2400 bytes heap
 --
 -- History: 
+-- 2018/02/08: 0.0.2: esp32 support with u8g2
 -- 2018/01/09: 0.0.1: from display/init.lua extracted
 
 if display and display.disp then
