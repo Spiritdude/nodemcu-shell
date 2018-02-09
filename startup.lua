@@ -1,5 +1,6 @@
 -- add action done at boot/startup
 arch = string.match(node.chipid(),"^0x") and 'esp32' or 'esp8266'
+sysconf = { arch=arch }
 if arch=='esp8266' then
    node.setcpufreq(node.CPU160MHZ)  -- 2x the speed
 end
