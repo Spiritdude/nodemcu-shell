@@ -9,7 +9,8 @@
 -- 2018/01/03: 0.0.1: first version, leave /*.lua untouched, but all */*.lua do compile
 
 return function(...)
-   if(arg[2] and arg[2]=='all') then
+   table.remove(arg,1)
+   if(arg[1] and arg[1]=='all') then
       local l = file.list()
       for k,v in pairs(l) do
          --if(not (k == 'init.lua') and not (k == 'startup.lua') and string.find(k,"\.lua$")) then
@@ -18,7 +19,7 @@ return function(...)
             local lc = string.gsub(k,"\.lua$",".lc")
             file.remove(lc)
             if(not file.exists(lc)) then
-               console.print("   compile " .. k .. " to " .. lc)
+               console.print("   compiling " .. k .. " to " .. lc)
                node.compile(k)
             end
          end
@@ -27,7 +28,7 @@ return function(...)
       for i,f in pairs(arg) do
          if file.exists(f) then
             local lc = string.gsub(f,"\.lua$",".lc")
-            console.print("   compile " .. f .. " to " .. lc)
+            console.print("   compiling " .. f .. " to " .. lc)
             node.compile(f)
          end
       end

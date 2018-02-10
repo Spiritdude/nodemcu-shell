@@ -11,21 +11,28 @@
 if arch == 'esp32' then
    timer = { }
 
-   -- simulate actual time (UNIX epoch)
-   timer._time = 0
-   tmr.create():alarm(1000,tmr.ALARM_AUTO,function()
-      timer._time = timer._time + 1
-   end)
-   timer.time = function() return timer._time end
-   tmr.time = timer.time   -- won't work
-   
-   -- simulate timer.now() in microseconds
-   timer._now = 0
-   tmr.create():alarm(100,tmr.ALARM_AUTO,function()
-      timer._now = timer._now+1000*100
-   end)
-   timer.now = function() return timer._now end
-   tmr.now = timer.now  -- won't work
+   if tmr.time then        -- github.com/Spiritdude/nodemcu-firmware/dev-esp32 has it
+      timer.time = tmr.time
+   else
+      -- simulate actual time (UNIX epoch)
+      timer._time = 0
+      tmr.create():alarm(1000,tmr.ALARM_AUTO,function()
+         timer._time = timer._time + 1
+      end)
+      timer.time = function() return timer._time end
+      tmr.time = timer.time   -- won't work
+   end
+   if tmr.now then         -- github.com/Spiritdude/nodemcu-firmware/dev-esp32 has it
+      timer.now = tmr.now
+   else 
+      -- simulate timer.now() in microseconds
+      timer._now = 0
+      tmr.create():alarm(100,tmr.ALARM_AUTO,function()
+         timer._now = timer._now+1000*100
+      end)
+      timer.now = function() return timer._now end
+      tmr.now = timer.now  -- won't work
+   end
    
    timer.create = tmr.create
    timer.ALARM_SINGLE = tmr.ALARM_SINGLE
