@@ -6,7 +6,7 @@
 --       as ESP32 NodeMCU gpio.* breaks compatibility
 --    Use gpiox.* instead of gpio.* to stay compatible
 -- Todo:
---    - gpio.trig()
+--    - gpio.trig() [done, but not yet tested]
 -- History: 
 -- 2018/02/09: 0.0.2: gpiox.trig() added
 -- 2018/02/08: 0.0.1: timer.time() and timer.now() for ESP32
