@@ -56,8 +56,8 @@ Escape character is '^]'.
 -rwx     258  Jan  1 1970  args/main.lua
 -rwx      59  Jan  1 1970  args2/main.lua
 -rwx     540  Jan  1 1970  blink/main.lua
--rwx    1108  Jan  1 1970  compile/main.lua
 -rwx      81  Jan  1 1970  init.lua
+-rwx    1108  Jan  1 1970  luac/main.lua
 -rwx      30  Jan  1 1970  net.down.lua
 -rwx      76  Jan  1 1970  net.up.lua
 -rwx    1359  Jan  1 1970  rtc/init.lua
@@ -326,7 +326,6 @@ net.up.lua                      shell/mv.txt                    www/sysinfo.lua
 % ls -l
 -rwx     258  Jan  1 1970  args/main.lua
 -rwx     540  Jan  1 1970  blink/main.lua
--rwx    1108  Jan  1 1970  compile/main.lua
 ...
 ..
 .
@@ -538,11 +537,11 @@ ERROR: only 80 or 160 MHz supported: 200
 % ping slashdot.org
 PING slashdot.org (216.34.181.45) time 517ms
 ```
-## compile
+## luac
 Compile does compile `.lua` into `.lc`, the shell prefers `.lc` over `.lua` when executing commands - in other words, once you start to execute `.lc` and you update the system with `.lua` files, keep your `.lc` in sync.
 ```
-% compile args/main.lua
-> compile args/main.lua: args/main.lc
+% luac args/main.lua
+> luac args/main.lua: args/main.lc
 ```
 
 ## wc
