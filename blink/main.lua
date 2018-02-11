@@ -20,23 +20,23 @@ return function(...)
    
    -- console.print("blink "..d.."ms")
       
-   gpio.mode(pin,gpio.OUTPUT)
+   gpiox.mode(pin,gpiox.OUTPUT)
    
    led = 0
    
    if(arg[2] and (arg[2] == 'off' or arg[2] == '0')) then
       blink_tmr:unregister()
-      gpio.write(pin,1)
+      gpiox.write(pin,1)
    else 
       local cnt
       if(arg[3] and string.match(arg[3],"^(%d+)$")) then
          cnt = tonumber(arg[3])
       end
-      gpio.write(pin,led)
+      gpiox.write(pin,led)
       blink_tmr:alarm(d,1, 
          function()
             led = 1-led;
-            gpio.write(pin,led)
+            gpiox.write(pin,led)
             if(led == 1 and cnt ~= nil and cnt > 0) then     -- if off
                --console.print("tmr count: "..cnt)
                cnt = cnt - 1
