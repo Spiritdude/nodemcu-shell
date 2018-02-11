@@ -9,7 +9,7 @@
 --    - gpio.trig() [done, but not yet tested]
 -- History: 
 -- 2018/02/09: 0.0.2: gpiox.trig() added
--- 2018/02/08: 0.0.1: timer.time() and timer.now() for ESP32
+-- 2018/02/08: 0.0.1: gpiox.* common layer for ESP8266 and ESP32, later might be implemented in the firmware direct
 
 if arch=='esp32' then
    gpiox = { }

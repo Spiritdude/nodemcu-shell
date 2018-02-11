@@ -6,7 +6,7 @@
 --    or set cpu 80/160 MHz
 --
 -- History:
--- 2018/02/10: 0.0.2: esp32 support
+-- 2018/02/10: 0.0.2: esp32 support (via timer.now())
 -- 2018/01/11: 0.0.1: first version
  
 return function(...)
@@ -27,7 +27,7 @@ return function(...)
       console.print(n.." LuaKIPS") 
    elseif #arg == 1 then
       if arch=='esp32' then
-         console.print("cpu freq setting for esp32 not yet implemented")
+         console.print("cpu freq setting for esp32 not implemented")
       else
          if arg[1] == '80' or arg[1] == '160' then
             console.print("cpu freq = "..arg[1].." MHz")
