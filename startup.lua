@@ -5,13 +5,13 @@ if arch=='esp8266' then
    node.setcpufreq(node.CPU160MHZ)  -- 2x the speed
 end
 dofile("lib/integer.lua")
+dofile("lib/console.lua")
+dofile("lib/syslog.lua")
 dofile("lib/timer.lua")
 dofile("lib/gpiox.lua")
 if arch=='esp32' then
    dofile("lib/http.lua")
 end
-dofile("lib/console.lua")
-dofile("lib/syslog.lua")
 dofile("display/init.lua")
 
 if arch=='esp32' then

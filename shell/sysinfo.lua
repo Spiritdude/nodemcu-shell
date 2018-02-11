@@ -31,7 +31,7 @@ return function(...)
    local t = timer.time();
    kv("Uptime",string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%24,int(t/60)%60,t%60))
        
-   if adc then     -- make it conditional in case it doesn't exist
+   if adc and arch=='esp8266' then     -- make it conditional in case it doesn't exist
       adc.force_init_mode(adc.INIT_VDD33)
       kv('Vdd',adc.readvdd33(),'mV')
    end

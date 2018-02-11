@@ -21,24 +21,37 @@ if arch=='esp32' then
    gpiox.PULLUP = 6
    gpiox.PULLDOWN = 7
    gpiox.PULLUPDOWN = 8
-   gpiox.mode = function(p,m,pu)
-      local d = gpio.IN
-      if m==gpiox.INPUT then
-         d = gpio.IN
-      elseif m==gpiox.OUTPUT then
-         d = gpio.OUT
-      elseif m==gpiox.INPUT_OUTPUT then
-         d = gpio.IN_OUT
+   if gpio.mode then                -- does it exist?
+      if arch ~= 'esp8266' then
+         syslog.print(syslog.INFO,"gpiox: gpio.mode() natively exists, using it")
       end
-      local px = gpio.FLOATING
-      if pu==gpiox.PULLUP then
-         px = gpio.PULL_UP
-      elseif pu==gpiox.PULLDOWN then
-         px = gpio.PULL_DOWN
-      elseif pu==gpiox.PULLUPDOWN then
-         px = gpio.PULL_UP_DOWN
+      gpiox.mode = gpio.mode
+      gpiox.INPUT = gpio.INPUT      -- but we need also to copy/hand-over the respective consts
+      gpiox.OUTPUT = gpio.OUT
+      gpiox.INPUT_OUTPUT = gpio.IN_OUT
+      gpiox.PULLUP = gpio.PULL_UP
+      gpiox.PULLDOWN = gpio.PULL_DOWN
+      gpiox.PULLUPDOWN = gpio.PULL_UP_DOWN
+   else 
+      gpiox.mode = function(p,m,pu)
+         local d = gpio.IN
+         if m==gpiox.INPUT then
+            d = gpio.IN
+         elseif m==gpiox.OUTPUT then
+            d = gpio.OUT
+         elseif m==gpiox.INPUT_OUTPUT then
+            d = gpio.IN_OUT
+         end
+         local px = gpio.FLOATING
+         if pu==gpiox.PULLUP then
+            px = gpio.PULL_UP
+         elseif pu==gpiox.PULLDOWN then
+            px = gpio.PULL_DOWN
+         elseif pu==gpiox.PULLUPDOWN then
+            px = gpio.PULL_UP_DOWN
+         end
+         gpio.config({gpio=p, dir=d, pull=px})
       end
-      gpio.config({gpio=p, dir=d, pull=px})
    end
    gpiox.read = gpio.read
    gpiox.write = gpio.write
