@@ -294,8 +294,12 @@ Once your device becomes available via WIFI (as client or access point), you see
 Trying 192.168.2.119...
 Connected to 192.168.2.119.
 Escape character is '^]'.
-
-== Welcome to NodeMCU Shell 0.0.6 on ESP-XYZ (XYZ / 0xffffff)
+ _  _         _     __  __  ___ _   _   ___ ___ ___ ___ ___  __   __ 
+| \| |___  __| |___|  \/  |/ __| | | | | __/ __| _ ( _ )_  )/ /  / / 
+| .` / _ \/ _` / -_) |\/| | (__| |_| | | _|\__ \  _/ _ \/ // _ \/ _ \
+|_|\_\___/\__,_\___|_|  |_|\___|\___/  |___|___/_| \___/___\___/\___/
+                                                                     
+Welcome to NodeMCU Shell 0.0.6 on ESP-XYZ (XYZ / 0xffffff)
 
 % help
 available commands:
