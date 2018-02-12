@@ -49,8 +49,12 @@ On your desktop or host use `telnet` to enter the NodeMCU Shell:
 Trying 192.168.2.119...
 Connected to 192.168.2.119.
 Escape character is '^]'.
+ _  _         _     __  __  ___ _   _   ___ ___ ___ ___ ___  __   __ 
+| \| |___  __| |___|  \/  |/ __| | | | | __/ __| _ ( _ )_  )/ /  / / 
+| .` / _ \/ _` / -_) |\/| | (__| |_| | | _|\__ \  _/ _ \/ // _ \/ _ \
+|_|\_\___/\__,_\___|_|  |_|\___|\___/  |___|___/_| \___/___\___/\___/
 
-== Welcome to NodeMCU Shell 0.0.6 on ESP-XYZ (XYZ / 0xffffff)
+Welcome to NodeMCU Shell 0.0.6 on ESP-XYZ (XYZ / 0xffffff)
 
 % ls -l
 -rwx     258  Jan  1 1970  args/main.lua
