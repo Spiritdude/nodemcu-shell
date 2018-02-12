@@ -34,6 +34,11 @@ NodeMCU custom build by frightanic.com
         modules: adc,bit,crypto,encoder,file,gpio,http,i2c,mdns,mqtt,net,node,rtctime,sjson,sntp,struct,tmr,u8g,uart,websocket,wifi,tls
  build  built on: 2018-01-05 07:53
  powered by Lua 5.1.4 on SDK 2.1.0(116b762)
+ _  _         _     __  __  ___ _   _   ___ ___ ___ ___ ___  __   __ 
+| \| |___  __| |___|  \/  |/ __| | | | | __/ __| _ ( _ )_  )/ /  / / 
+| .` / _ \/ _` / -_) |\/| | (__| |_| | | _|\__ \  _/ _ \/ // _ \/ _ \
+|_|\_\___/\__,_\___|_|  |_|\___|\___/  |___|___/_| \___/___\___/\___/
+                                                                     
 INFO [0.339] device 10448928 / 0x9f7020 starting up
 INFO [0.421] init display driver: mode i2c, 128x64
 INFO [0.741] wifi: connecting to WLAN-XYZ ...
