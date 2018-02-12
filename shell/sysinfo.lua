@@ -16,15 +16,14 @@ return function(...)
    end
 
    kv('Architecture',arch)
-   if arch=='esp8266' then
+   if node.chipid then
       kv('Chip ID',node.chipid().." / "..string.format("0x%x",node.chipid()))
+   end
+   if node.flashid then
       kv('Flash ID',node.flashid().." / "..string.format("0x%x",node.flashid()))
-   else 
-      kv('Chip ID',node.chipid())
-      --kv('Flash ID',node.flashid())     -- not yet
    end
    kv('Heap',node.heap(),'bytes')
-   if arch=='esp8266' then
+   if node.info then
       local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
       kv('Info',"V"..maver.."."..miver.."."..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
    end
