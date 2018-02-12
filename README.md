@@ -123,6 +123,8 @@ httpd/simple.lua:          dofile(fn)(c,req,gv)                   -- let's execu
 Connection closed by foreign host.
 ```
 
+**Hint**: hit CTRL + ']' and then 'q' to exist the current telnet session.
+
 ## System Layout of Commands
 
 Following filesystem layout has been adopted:
