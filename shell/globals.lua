@@ -28,7 +28,9 @@ return function(...)
             local ty = type(ta[k])
             if ty=='table' then
                console.print(off..k.." ("..type(ta[k])..")")
-               printTable(ta[k],lv+1)
+               if lv > 0 then
+                  printTable(ta[k],lv+1)
+               end
             elseif ty=='string' or ty=='number' then
                console.print(off..k.." ("..type(ta[k]).."): "..ta[k])
             else
@@ -38,8 +40,11 @@ return function(...)
       end
    end
    table.remove(arg,1)
-   if arg[1] then
-      printTable(_G[arg[1]])
+   if #arg > 0 then
+      for i,k in ipairs(arg) do
+         console.print(k..":")
+         printTable(_G[k],1)
+      end
    else
       printTable(_G)
    end

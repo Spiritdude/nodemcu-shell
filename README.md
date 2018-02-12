@@ -510,6 +510,47 @@ STA Broadcast IP: 192.168.2.255
 RSSI: -80 dB
 ```
 
+## globals
+Displays global variables (_G table):
+```
+% globals
+__index (lightfunction)
+__nmtwrite (function)
+a (table)
+   1 (string): globals
+arch (string): esp8266
+console (table)
+   input (function)
+   output (function)
+   print (function)
+gpiox (romtable)
+int (function)
+ipairs (function)
+module (function)
+newproxy (function)
+package (table)
+   config (string): /
+...
+..
+
+% globals terminal syslog
+terminal:
+   height (number): 32
+   input (function)
+   output (function)
+   print (function)
+   width (number): 132
+syslog:
+   ERROR (number): 2
+   FATAL (number): 3
+   INFO (number): 0
+   WARN (number): 1
+   count (number): 0
+   level (number): 0
+   print (function)
+   verbose (function)
+```
+
 ## cpu
 Display LuaKIPS (thousands of instructions per second) or select CPU frequency (80 or 160 MHz):
 ```
