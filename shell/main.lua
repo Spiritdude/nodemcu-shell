@@ -312,16 +312,17 @@ shell_srv:listen(conf.port,function(socket)
 
    socket:on("sent",sender)      -- handle fifo 
 
+   local ms = ""
    if file.exists("shell/"..arch..".bw.txt") then
       dofile("shell/cat.lua")('cat',"shell/"..arch..".bw.txt")
    else
-      console.print("")
+      ms = "\n== "
    end
-   local m = "Welcome to NodeMCU Shell " .. VERSION .. "/" .. arch .. " on "
+   ms = ms .. "Welcome to NodeMCU Shell " .. VERSION .. "/" .. arch .. " on "
    if wifi.sta and wifi.sta.gethostname then
-      m = m .. wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")"
+      ms = ms .. wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")"
    else 
-      m = m .. "("..node.chipid()..string.format("/0x%x",node.chipid())..")"
+      ms = ms .. "("..node.chipid()..string.format("/0x%x",node.chipid())..")"
    end
-   console.print(m.."\n")
+   console.print(ms.."\n")
 end)
