@@ -26,7 +26,7 @@ return function(...)
          end
          for i,k in pairs(t) do
             local ty = type(ta[k])
-            if ty=='table' then
+            if ty=='table' or ty=='romtable' then
                console.print(off..k.." ("..type(ta[k])..")")
                if lv > 0 then
                   printTable(ta[k],lv+1)
@@ -41,9 +41,13 @@ return function(...)
    end
    table.remove(arg,1)
    if #arg > 0 then
-      for i,k in ipairs(arg) do
-         console.print(k..":")
-         printTable(_G[k],1)
+      if arg[1] == '-r' then
+         printTable(_G,1)
+      else 
+         for i,k in ipairs(arg) do
+            console.print(k..":")
+            printTable(_G[k],1)
+         end
       end
    else
       printTable(_G)

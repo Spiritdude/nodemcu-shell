@@ -517,21 +517,51 @@ Displays global variables (_G table):
 __index (lightfunction)
 __nmtwrite (function)
 a (table)
-   1 (string): globals
 arch (string): esp8266
 console (table)
-   input (function)
-   output (function)
-   print (function)
 gpiox (romtable)
 int (function)
 ipairs (function)
 module (function)
 newproxy (function)
 package (table)
-   config (string): /
+pairs (function)
+printTable (function)
+require (function)
+shell_srv (userdata)
+sysconf (table)
+syslog (table)
+terminal (table)
+timer (romtable)
+
+% globals -r
+   __index (lightfunction)
+   __nmtwrite (function)
+   a (table)
+      1 (string): globals
+      2 (string): -r
+   arch (string): esp8266
+   console (table)
+      input (function)
+      output (function)
+      print (function)
+   gpiox (romtable)
+      FLOAT (number): 0
+      HIGH (number): 1
+      INPUT (number): 0
+      INT (number): 2
+      LOW (number): 0
+      OPENDRAIN (number): 3
+      OUTPUT (number): 1
+      PULLUP (number): 1
+      mode (lightfunction)
+      read (lightfunction)
+      serout (lightfunction)
+      trig (lightfunction)
+      write (lightfunction)
 ...
 ..
+.
 
 % globals terminal syslog
 terminal:
