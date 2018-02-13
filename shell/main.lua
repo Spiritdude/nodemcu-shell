@@ -313,8 +313,8 @@ shell_srv:listen(conf.port,function(socket)
    socket:on("sent",sender)      -- handle fifo 
 
    local ms = ""
-   if file.exists("shell/"..arch..".bw.txt") then
-      dofile("shell/cat.lua")('cat',"shell/"..arch..".bw.txt")
+   if conf and conf.banner and file.exists("shell/"..arch.."."..(conf and conf.banner_type or 'bw')..".txt") then
+      dofile("shell/cat.lua")('cat',"shell/"..arch.."."..(conf and conf.banner_type or 'bw')..".txt")
    else
       ms = "\n== "
    end

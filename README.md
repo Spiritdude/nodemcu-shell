@@ -1,6 +1,6 @@
 # NodeMCU Shell (UNIX-like)
 
-This provides a **UNIX-like Shell for the NodeMCU/LUA platform** for
+This provides a **UNIX-like Shell for the NodeMCU/Lua platform** for
 - **[ESP8266](https://en.wikipedia.org/wiki/ESP8266)**: 64KB/96KB RAM, 512KB-16MB Flash, 80/160MHz RISC Processor with WIFI, cost ~EUR 1.50-5.00 (2018/01)
 - **[ESP32](https://en.wikipedia.org/wiki/ESP32)**: 512KB RAM, 4MB-16MB Flash, 160/240MHz RISC Processor with WIFI, Bluetooth, cost ~EUR 4.00-7.00 (2018/01)
 
@@ -11,7 +11,7 @@ This provides a **UNIX-like Shell for the NodeMCU/LUA platform** for
  - command or app resides in `<appname>/main.lua` or `shell/<cmd>.lua`, so the shell is freely extendable
 - **shell accessible via telnet session** (this might change later)
 
-NodeMCU is a LUA runtime environment, so the shell is written in LUA.
+NodeMCU is a Lua runtime environment, so the shell is written in Lua.
 
 ### TODO
 - improve stability (commands can take down the shell)
@@ -25,7 +25,7 @@ NodeMCU is a LUA runtime environment, so the shell is written in LUA.
 **Note**: API and Filesystem skeleton might change at any time.
   
 ## Examples
-After power up or reboot, on the serial port of your ESP8266 or ESP32 NodeMCU/LUA device:
+After power up or reboot, on the serial port of your ESP8266 or ESP32 NodeMCU/Lua device:
 ```
 NodeMCU custom build by frightanic.com
         branch: master
@@ -149,7 +149,7 @@ return function(...)
 end
 ```
 
-- every **configuration** has `.conf` as extension but is also LUA code like:
+- every **configuration** has `.conf` as extension but is also Lua code like:
 ```
 return {
    key1 = "value 1",
@@ -693,7 +693,7 @@ unfortunately `dofile("test.lua")` (raw) and `dofile("test.lua")()` (returns a f
 not interchangable.
 
 ## lua
-Execute actual LUA code:
+Execute actual Lua code:
 ```
 % lua 'print("abc")'
 abc
@@ -714,6 +714,6 @@ Connection closed by foreign host.
 
 ## Related Projects
 - [NodeMCU Platform](https://github.com/devyte/nodemcu-platform): some formalism on apps on ESP8266, conceived 2016, abandoned in 2017/01.
-- [ESuite-LUA](https://github.com/BLavery/esuite-lua): collection of libraries, very useful, uses simple `dofile()` to load individual libraries
+- [ESuite-Lua](https://github.com/BLavery/esuite-lua): collection of libraries, very useful, uses simple `dofile()` to load individual libraries
 - [ESP8266 Frankenstein](https://github.com/nekromant/esp8266-frankenstein): terminal software with a few useful commands specific to ESP8266.
 
