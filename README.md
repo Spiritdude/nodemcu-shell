@@ -61,7 +61,56 @@ Escape character is '^]'.
 
 Welcome to NodeMCU Shell 0.0.6 on ESP-XYZ (XYZ / 0xffffff)
 
+% ls
+args/                           md5sum/                         
+args2/                          net.down.lua*                   
+bench/                          net.up.lua*                     
+blink/                          private/                        
+buggy.lua*                      rtc/                            
+cpu/                            shell/                          
+display/                        smtpd/                          
+edit/                           startup.lua*                    
+empty.lua*                      telnet/                         
+httpd/                          test.lua*                       
+init.lua*                       test2.lua*                      
+ipscan/                         tftpd/                          
+led/                            wget/                           
+lib/                            wifi/                           
+luac/                           www/              
+
+% ls -R
+args/main.lua*                  shell/bnr.esp8266.bw.txt        
+args2/main.lua*                 shell/bnr.esp8266.co.txt        
+bench/main.lua*                 shell/buggy.lua*                
+blink/main.lua*                 shell/cat.lua*                  
+buggy.lua*                      shell/clear.lua*                
+cpu/main.lua*                   shell/cp.lua*                   
+display/display.conf.dist       shell/date.lua*                 
+display/init.lua*               shell/df.lua*                   
+display/logo.mono               shell/dofile.lua*               
+display/logo48.mono             shell/echo.lua*                 
+display/main.lua*               shell/exec.lua*      
+....
+..
+.
+
 % ls -l
+drwx       0  Jan  1 1970  args/
+drwx       0  Jan  1 1970  args2/
+drwx       0  Jan  1 1970  bench/
+drwx       0  Jan  1 1970  blink/
+-rwx      14  Jan  1 1970  buggy.lua
+drwx       0  Jan  1 1970  cpu/
+drwx       0  Jan  1 1970  display/
+drwx       0  Jan  1 1970  edit/
+-rwx       0  Jan  1 1970  empty.lua
+drwx       0  Jan  1 1970  httpd/
+-rwx      81  Jan  1 1970  init.lua
+....
+...
+.
+
+% ls -lR
 -rwx     258  Jan  1 1970  args/main.lua
 -rwx      59  Jan  1 1970  args2/main.lua
 -rwx     540  Jan  1 1970  blink/main.lua
@@ -76,6 +125,8 @@ Welcome to NodeMCU Shell 0.0.6 on ESP-XYZ (XYZ / 0xffffff)
 -rwx     537  Jan  1 1970  shell/df.lua
 -rwx     246  Jan  1 1970  shell/dofile.lua
 ...
+..
+.
                          
 % df
 Filesystem    Total    Used   Avail.   Use%  Mounted On
@@ -315,28 +366,42 @@ available commands:
 ```
 
 ## ls
+List content of flash storage, by default it presents "pseudo" directory view (all files with '/'), `-R` shows all files:
 ```
 % ls
-args/main.lua                   rtc/init.lua                    shell/ping.lua                  
-blink/main.lua                  shell/cat.lua                   shell/reboot.lua                
-cpu/main.lua                    shell/clear.lua                 shell/rm.lua                    
-display/init.lua                shell/cp.lua                    shell/sysinfo.lua               
-display/logo.mono               shell/date.lua                  shell/time.lua                  
-display/logo48.mono             shell/df.lua                    shell/touch.lua                 
-display/readme.txt              shell/dofile.lua                shell/uptime.lua                
-httpd/header.lua                shell/echo.lua                  shell/wc.lua                    
-httpd/init.lua                  shell/grep.lua                  startup.lua                     
-httpd/readme.txt                shell/heap.lua                  wifi/init.lua                   
-httpd/simple.lua                shell/help.lua                  wifi/readme.txt                 
-init.lua                        shell/hostname.lua              wifi/wifi.conf                  
-led/main.lua                    shell/ls.lua                    www/api.lua                     
+args/                           ipscan/                         startup.lua*                    
+args2/                          led/                            telnet/                         
+bench/                          lib/                            test.lua*                       
+blink/                          luac/                           test/                           
+buggy.lua*                      md5sum/                         test2.lua*                      
+cpu/                            net.down.lua*                   tftpd/                          
+display/                        net.up.lua*                     wget/                           
+edit/                           private/                        wifi/                           
+empty.lua*                      rtc/                            www/                            
+httpd/                          shell/                          
+init.lua*                       smtpd/                          
+
+% ls -R
+args/main.lua*                  rtc/init.lua*                   shell/ping.lua*                 
+blink/main.lua*                 shell/cat.lua*                  shell/reboot.lua*               
+cpu/main.lua*                   shell/clear.lua*                shell/rm.lua*                   
+display/init.lua*               shell/cp.lua*                   shell/sysinfo.lua*              
+display/logo.mono               shell/date.lua*                 shell/time.lua*                 
+display/logo48.mono             shell/df.lua*                   shell/touch.lua*                
+display/readme.txt              shell/dofile.lua*               shell/uptime.lua*               
+httpd/header.lua*               shell/echo.lua*                 shell/wc.lua*                   
+httpd/init.lua*                 shell/grep.lua*                 startup.lua*                    
+httpd/readme.txt                shell/heap.lua*                 wifi/init.lua*                  
+httpd/simple.lua*               shell/help.lua*                 wifi/readme.txt                 
+init.lua*                       shell/hostname.lua*             wifi/wifi.conf                  
+led/main.lua*                   shell/ls.lua*                   www/api.lua*                    
 led/man.txt                     shell/ls.txt                    www/favicon.ico.gz              
-led/readme.txt                  shell/lua.lua                   www/imgs/esp8266.png.gz         
-lib/console.lua                 shell/main.lua                  www/imgs/espressif.png.gz       
-lib/display.lua                 shell/man.lua                   www/imgs/nodemcu.png.gz         
-lib/syslog.lua                  shell/more.lua                  www/index.html                  
-net.down.lua                    shell/mv.lua                    www/simple.lua                  
-net.up.lua                      shell/mv.txt                    www/sysinfo.lua      
+led/readme.txt                  shell/lua.lua*                  www/imgs/esp8266.png.gz         
+lib/console.lua*                shell/main.lua*                 www/imgs/espressif.png.gz       
+lib/display.lua*                shell/man.lua*                  www/imgs/nodemcu.png.gz         
+lib/syslog.lua*                 shell/more.lua*                 www/index.html                  
+net.down.lua*                   shell/mv.lua*                   www/simple.lua*                 
+net.up.lua*                     shell/mv.txt                    www/sysinfo.lua*     
 
 % ls -l
 -rwx     258  Jan  1 1970  args/main.lua

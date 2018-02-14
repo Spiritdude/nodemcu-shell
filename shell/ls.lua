@@ -81,10 +81,14 @@ return function(...)
    else
       -- check existence (and remove from list if required)
       for i,f in ipairs(fl) do
-         if f:match("/$") then         -- list just content of a "pseudo" directory
+         if (not file.exists(f)) or f:match("/$") then         -- list just content of a "pseudo" directory
             local d = f
             local fl2 = { }
             local fl3 = { }
+            
+            if not d:match("/$") then
+               d = d .. "/"
+            end
             for f,s in pairs(file.list()) do
                table.insert(fl2,f)
             end
@@ -94,10 +98,12 @@ return function(...)
                   table.insert(fl3,f)
                end
             end
-            fl = fl3
-         elseif not file.exists(f) then
-            console.print("ls: cannot access '"..f.."': No such file or directory")
-            table.remove(fl,i)
+            if #fl3 > 0 then
+               fl = fl3
+            else
+               console.print("ls: cannot access '"..f.."': No such file or directory")
+               table.remove(fl,i)
+            end
          end
       end
    end
