@@ -412,6 +412,24 @@ net.up.lua*                     shell/mv.txt                    www/sysinfo.lua*
 
 % ls -l init.lua
 -rwx      81  Jan  1 1970  init.lua
+
+% ls shell
+shell/bnr.esp32.bw.txt          shell/esp8266.co.txt            shell/mv.txt                    
+shell/bnr.esp32.co.txt          shell/exec.lua*                 shell/ping.lua*                 
+shell/bnr.esp8266.bw.txt        shell/globals.lua*              shell/reboot.lua*               
+shell/bnr.esp8266.co.txt        shell/grep.lua*                 shell/rm.lua*                   
+shell/buggy.lua*                shell/heap.lua*                 shell/shell.conf                
+shell/cat.lua*                  shell/help.lua*                 shell/shell.conf.dist           
+shell/clear.lua*                shell/hostname.lua*             shell/sysinfo.lua*              
+shell/cp.lua*                   shell/ls.lua*                   shell/template                  
+shell/date.lua*                 shell/ls.txt                    shell/time.lua*                 
+shell/df.lua*                   shell/lua.lua*                  shell/touch.lua*                
+shell/dofile.lua*               shell/main-ss.lua*              shell/uptime.lua*               
+shell/echo.lua*                 shell/main.lua*                 shell/wc.lua*                   
+shell/esp32.bw.txt              shell/man.lua*                  shell/wifi.lua*                 
+shell/esp32.co.txt              shell/more.lua*                 
+shell/esp8266.bw.txt            shell/mv.lua*                   
+
 ```
 options:
 - `-1` single column
@@ -419,6 +437,7 @@ options:
 - `-3` triple column
 - `-4` quadruple column
 - `-l` long output
+- `-R` recursive
 
 By default the amount of columns are calculated according size of shell window.
 
