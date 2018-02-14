@@ -5,9 +5,14 @@ ls [opts] [files]
    -3    triple columns
    -4    quadruple columns
    -l    long output
+   -R    recursive
    
 examples:
    ls
    ls -1
    ls -l
    ls -l test.lua
+   ls shell/
+   ls -R
+   ls -Rl
+   

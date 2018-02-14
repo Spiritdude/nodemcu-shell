@@ -4,6 +4,7 @@
 -- Description: list files
 --
 -- History:
+-- 2018/02/13: 0.0.4: nicer output, provide "pseudo" directory view by default, '-R' for recursive view
 -- 2018/01/06: 0.0.3: default 2 columns output (filename max 32 chars anyway)
 -- 2018/01/04: 0.0.2: ls with individual files
 -- 2018/01/03: 0.0.1: alphabetical sorting
@@ -15,8 +16,8 @@ return function(...)
    
    -- parsing arguments
    for k,v in ipairs(arg) do
-      if string.find(v,"^-%w+") then
-         string.gsub(v,"-(%w+)$",function(fl) opts[fl] = 1 end)
+      if string.find(v,"^-%w+$") then
+         string.gsub(v,"(%w)",function(fl) opts[fl] = 1 end)
       else 
          table.insert(fl,v);
       end
@@ -34,7 +35,7 @@ return function(...)
          local st = file.stat and file.stat(f) or { time = { mon=1, day=1, year=1970 }, size=0 }
          if st then 
             local bits = ""
-            if st.isdir then
+            if st.isdir or f:match("/$") then
                bits = bits .. "d" 
             else 
                bits = bits .. "-"
@@ -61,10 +62,40 @@ return function(...)
          table.insert(fl,f)
       end
       table.sort(fl)
+
+      if not opts['R'] then
+         -- post-process, and omit files and list "pseudo" directories
+         local dl
+         local fl2 = { }
+         for i,f in ipairs(fl) do
+            local d = f:match("([^/]+)/.*")
+            if d and d ~= dl then
+               table.insert(fl2,d.."/")
+            elseif not d then
+               table.insert(fl2,f)
+            end
+            dl = d
+         end
+         fl = fl2
+      end
    else
       -- check existence (and remove from list if required)
       for i,f in ipairs(fl) do
-         if not file.exists(f) then
+         if f:match("/$") then         -- list just content of a "pseudo" directory
+            local d = f
+            local fl2 = { }
+            local fl3 = { }
+            for f,s in pairs(file.list()) do
+               table.insert(fl2,f)
+            end
+            table.sort(fl2)
+            for i,f in ipairs(fl2) do
+               if f:find(d) then
+                  table.insert(fl3,f)
+               end
+            end
+            fl = fl3
+         elseif not file.exists(f) then
             console.print("ls: cannot access '"..f.."': No such file or directory")
             table.remove(fl,i)
          end
@@ -82,7 +113,9 @@ return function(...)
          local l = ""
          for j=0,cols-1,1 do
             if i+off*j <= #fl then
-               l = l .. string.format("%-32s",fl[i+off*j])
+               local f = fl[i+off*j]
+               f = f:gsub(".lua$",".lua*")
+               l = l .. string.format("%-32s",f)
             end
          end
          console.print(l)

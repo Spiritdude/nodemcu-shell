@@ -69,8 +69,9 @@ shell_srv:listen(conf.port,function(socket)
       if fifo[ref] == nil then
          fifo[ref] = { }
       end
-      table.insert(fifo[ref],str)
-      if socket ~= nil and fifo_drained then
+      table.insert(fifo[ref],str)      -- this is where esp8266 struggles if a lot of output is arriving (heap -> 0)
+      --print("fifo: "..#fifo[ref].." ("..ref.."), "..node.heap()..": "..str)
+      if fifo_drained then
          fifo_drained = false
          sender(socket)
       end
