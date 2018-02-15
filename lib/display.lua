@@ -22,6 +22,7 @@
 if display and display.disp then
    display.buffer = {}                    -- content buffer (array of lines)
    display._changed = false
+   display._rot = 0
    display.width = display.width or display.disp:getWidth()
    display.height = display.height or display.disp:getHeight()
    if arch=='esp8266' then
@@ -51,17 +52,30 @@ if display and display.disp then
       local h = display.height
       if a == 0 then
          display.disp:undoRotation()
+         if display._rot == 90 or display._rot == 270 then
+            display.width = h
+            display.height = w
+         end
       elseif a == 90 then
          display.disp:setRot90()
-         display.width = h
-         display.height = w
+         if display._rot == 0 or display._rot == 180 then
+            display.width = h
+            display.height = w
+         end
       elseif a == 180 then
          display.disp:setRot180()
+         if display._rot == 90 or display._rot == 270 then
+            display.width = h
+            display.height = w
+         end
       elseif a == 270 then
          display.disp:setRot270()
-         display.width = h
-         display.height = w
+         if display._rot == 0 or display._rot == 180 then
+            display.width = h
+            display.height = w
+         end
       end
+      display._rot = a
    end
 
    display.render = function(f)            -- render content (anything)
