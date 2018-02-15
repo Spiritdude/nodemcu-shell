@@ -35,7 +35,7 @@ if file.exists("wifi/wifi.conf") then
          syslog.print(syslog.INFO,"wifi: connecting to "..conf.station[sta_id].config.ssid.." ...")
       end
       wifi.sta.connect()
-      wifi.sta.sethostname("ESP-"..node.chipid())
+      wifi.sta.sethostname(string.format("esp-%06x",node.chipid()))
       if conf.station.net then
          wifi.sta.setip(conf.station.net)
       end

@@ -48,7 +48,7 @@ if file.exists("display/display.conf") then
                   display.disp:undoRotation()
                end
             end
-            local fo = u8g and (u8g.font_04b_03 or u8g.font_helv08 or u8g.font_6x10) or (u8g2 and u8g2.font_6x10_tf) or nil
+            local fo = u8g and (u8g.font_04b_03 or u8g.font_helv08 or u8g.font_6x10) or (u8g2 and u8g2.font_baby_tf or u8g2.font_u8glib_4_tf or u8g2.font_chikita_tf or u8g2.font_6x10_tf) or nil
             if fo then
                display.disp:setFont(fo)
                display.disp:setFontRefHeightExtendedText()
@@ -90,7 +90,7 @@ if file.exists("display/display.conf") then
                   display.print(str)
                   -- display.print(string.sub(str,1,30))    -- truncate a bit otherwise wraps around on the left-side again
                end)
-               timer.create():alarm(2000,timer.ALARM_AUTO,function() 
+               timer.create():alarm(arch=='esp32' and 500 or 2000,timer.ALARM_AUTO,function() 
                   display.flush()
                end)
             end

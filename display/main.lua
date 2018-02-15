@@ -21,7 +21,8 @@ return function(...)
          end
       elseif cmd == 'font' then
          if arg[1] then
-            local f,err = loadstring("display.setFont(u8g."..arg[1]..")")
+            local lib = u8g2 and "u8g2" or "u8g"
+            local f,err = loadstring("display.setFont("..lib.."."..arg[1]..")")
             if f then
                f()
             else

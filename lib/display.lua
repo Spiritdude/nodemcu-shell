@@ -44,6 +44,7 @@ if display and display.disp then
          else
             display.fontHeight = display.disp:getAscent() - display.disp:getDescent() + 1
          end
+         display._changed = true
       end
    end
 
@@ -76,6 +77,7 @@ if display and display.disp then
          end
       end
       display._rot = a
+      display._changed = true
    end
 
    display.render = function(f)            -- render content (anything)
