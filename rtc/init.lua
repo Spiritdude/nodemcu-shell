@@ -63,7 +63,7 @@ if rtctime then
       end
    end
 else
-   syslog.print(syslog.WARN,"rtc: no rtctime module available, using LUA rtctime module")
+   syslog.print(syslog.WARN,"rtc: no rtctime module available, using Lua rtctime module")
    dofile("lib/rtctime.lua")
    httpsync()
 end

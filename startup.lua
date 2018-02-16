@@ -15,7 +15,7 @@ dofile("lib/syslog.lua")
 dofile("shell/cat.lua")('cat',"shell/bnr."..arch..".bw.txt")
 dofile("lib/timer.lua")
 dofile("lib/gpiox.lua")
-if arch=='esp32' then
+if not http then
    dofile("lib/http.lua")
 end
 dofile("display/init.lua")

@@ -26,7 +26,7 @@ if arch=='esp32' then
          syslog.print(syslog.INFO,"gpiox: gpio.mode() natively exists, using it")
       end
       gpiox.mode = gpio.mode
-      gpiox.INPUT = gpio.INPUT      -- but we need also to copy/hand-over the respective consts
+      gpiox.INPUT = gpio.IN         -- but we need also to copy/hand-over the respective consts
       gpiox.OUTPUT = gpio.OUT
       gpiox.INPUT_OUTPUT = gpio.IN_OUT
       gpiox.PULLUP = gpio.PULL_UP

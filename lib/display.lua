@@ -28,7 +28,7 @@ if display and display.disp then
    if arch=='esp8266' then
       display.fontHeight = display.disp:getFontAscent() - display.disp:getFontDescent() + 1
    else
-      display.fontHeight = display.disp:getAscent() - display.disp:getDescent() + 1
+      display.fontHeight = display.disp:getAscent() - display.disp:getDescent()
    end
 
    display.setFont = function(fo)
