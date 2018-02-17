@@ -43,7 +43,7 @@ if arch=='esp32' then
          elseif pu==gpio.PULLUPDOWN then
             px = gpio.PULL_UP_DOWN
          end
-         gpio.config({gpio=p, dir=d, pull=px})
+         gpio_esp32.config({gpio=p, dir=d, pull=px})
       end
    end
    gpio.trig = function(p,t,cb)
