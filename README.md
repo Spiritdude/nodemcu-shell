@@ -802,6 +802,19 @@ hello world
 hello world
 
 % repeat 3 time bench
+arithmetic: 212 LuaKIPS
+while-loop: 733 LuaKIPS
+function: 283 LuaKIPS
+822 ms
+arithmetic: 211 LuaKIPS
+while-loop: 746 LuaKIPS
+function: 285 LuaKIPS
+811 ms
+arithmetic: 204 LuaKIPS
+while-loop: 746 LuaKIPS
+function: 296 LuaKIPS
+811 ms
+
 ```
 
 ## reboot
