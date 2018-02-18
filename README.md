@@ -786,6 +786,13 @@ abc
 2     6
 ```
 
+## exec
+Execute another program with its optional arguments:
+```
+% exec echo "hello world"
+hello world
+```
+
 ## repeat
 Repeat n-times another program with its arguments:
 ```
@@ -795,13 +802,6 @@ hello world
 hello world
 
 % repeat 3 time bench
-```
-
-## exec
-Execute another program with its optional arguments:
-```
-% exec echo "hello world"
-hello world
 ```
 
 ## reboot
