@@ -13,6 +13,11 @@ This provides a **UNIX-like Shell for the NodeMCU/Lua platform** for
 
 NodeMCU is a Lua runtime environment, so the shell is written in Lua.
 
+## Updates
+0.1.0: `exec`, `repeat` command added, `lib/exec.lua` to execute a program with arguments, `cp` works on esp32 as well
+0.0.9: `ls` list pseudo directories to decrease verbosity, `globals` list global variables
+0.0.1: basic functionality
+
 ### TODO
 - improve stability (commands can take down the shell)
 - piping and redirecting stdout with multiple commands
