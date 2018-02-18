@@ -6,6 +6,7 @@
 --    Note: this is very experimental, telnet is a prototype interface for the shell
 --
 -- History:
+-- 2018/02/18: 0.1.0: extended path search (*/main.lua, shell/*.lua, apps/*.lua)
 -- 2018/01/30: 0.0.9: dedicated fifo per socket, arch dependent code (terrible)
 -- 2018/01/16: 0.0.8: terminal.* cleaned up, to make it more consistent with console.* as well
 -- 2018/01/09: 0.0.6: using console.* layer so there is no print()/node.output() calls anymore
@@ -18,7 +19,7 @@ if shell_srv then    -- are we called from net.up.lua *again*, if so ignore
    return
 end
 
-local VERSION = '0.0.9'
+local VERSION = '0.1.0'
 
 local conf = {}
 
@@ -227,12 +228,13 @@ shell_srv:listen(conf.port,function(socket)
             if arch=='esp32' then
                types = { '32', '' }
             end
-            for j,loc in pairs({"shell/"..cmd, cmd.."/main"}) do
+            local f
+            for j,loc in pairs({"shell/"..cmd, cmd.."/main", "apps/"..cmd}) do
                for k,kind in pairs({".lc", ".lua"}) do
                   for i,type in pairs(types) do
                      if file.exists(loc..type..kind) then
                         --print("execute "..loc..type..kind)
-                        dofile(loc..type..kind)(unpack(a))
+                        f = dofile(loc..type..kind)
                         done = true
                      end
                      if done then break end
@@ -240,6 +242,9 @@ shell_srv:listen(conf.port,function(socket)
                   if done then break end
                end
                if done then break end
+            end
+            if f and type(f)=='function' then
+               f(unpack(a))
             end
             if done ~= true then
                console.print("ERROR: command <"..cmd.."> not found")

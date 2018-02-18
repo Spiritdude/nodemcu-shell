@@ -785,6 +785,25 @@ abc
 % lua 'print(node.bootreason())'
 2     6
 ```
+
+## repeat
+Repeat n-times another program with its arguments:
+```
+% repeat 3 echo "hello world"
+hello world
+hello world
+hello world
+
+% repeat 3 time bench
+```
+
+## exec
+Execute another program with its optional arguments:
+```
+% exec echo "hello world"
+hello world
+```
+
 ## reboot
 ```
 % reboot
