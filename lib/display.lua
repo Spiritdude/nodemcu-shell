@@ -52,25 +52,25 @@ if display and display.disp then
       local w = display.width
       local h = display.height
       if a == 0 then
-         display.disp:undoRotation()
+         _ = u8g and display.disp:undoRotation() or display.disp:setDisplayRotation(u8g2.R0 or 0)
          if display._rot == 90 or display._rot == 270 then
             display.width = h
             display.height = w
          end
       elseif a == 90 then
-         display.disp:setRot90()
+         _ = u8g and display.disp:setRot90() or display.disp:setDisplayRotation(u8g2.R1 or 1)
          if display._rot == 0 or display._rot == 180 then
             display.width = h
             display.height = w
          end
       elseif a == 180 then
-         display.disp:setRot180()
+         _ = u8g and display.disp:setRot180() or display.disp:setDisplayRotation(u8g2.R2 or 2)
          if display._rot == 90 or display._rot == 270 then
             display.width = h
             display.height = w
          end
       elseif a == 270 then
-         display.disp:setRot270()
+         _ = u8g and display.disp:setRot270() or display.disp:setDisplayRotation(u8g2.R3 or 3)
          if display._rot == 0 or display._rot == 180 then
             display.width = h
             display.height = w
