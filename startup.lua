@@ -13,8 +13,8 @@ dofile("lib/integer.lua")
 dofile("lib/console.lua")
 dofile("lib/syslog.lua")
 dofile("shell/cat.lua")('cat',"shell/bnr."..arch..".bw.txt")
-dofile("lib/timer.lua")
-dofile("lib/gpiox.lua")
+dofile("lib/tmr.lua")
+dofile("lib/gpio.lua")
 if not http then
    dofile("lib/http.lua")
 end
@@ -31,12 +31,15 @@ end
 dofile(arch=='esp8266' and "wifi/init.lua" or "wifi/init32.lua")
 
 -- a slight delay in case startup/* script resets device, we can overwrite something (interrupt reboot loop)
-timer.create():alarm(3000,timer.ALARM_SINGLE,function()
+tmr.create():alarm(3000,tmr.ALARM_SINGLE,function()
    if true then      -- experimental
-      for f in pairs(file.list()) do
-         if f.match(f,"^startup/") then
-            syslog.print(syslog.INFO,"startup: execute "..f)
-            dofile(f)
+      for fn in pairs(file.list()) do
+         if string.match(fn,"^startup/") then
+            syslog.print(syslog.INFO,"startup: execute "..fn)
+            local f = dofile(fn)
+            if f and type(f)=='function' then
+               f(fn)
+            end
          end
       end
    end

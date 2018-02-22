@@ -32,8 +32,8 @@ return function(...)
          elseif st then
             local pin = conf[led].pin or 4
             console.print("led "..led.." (pin "..pin.."): "..st)
-            gpiox.mode(pin,gpio.OUTPUT)
-            gpiox.write(pin,st)
+            gpio.mode(pin,gpio.OUTPUT)
+            gpio.write(pin,st)
          end
       else
          dofile("shell/man.lua")('led','led')

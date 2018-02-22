@@ -4,6 +4,7 @@
 -- Description: try to get realtime clock with actual time (if required) from various sources
 --
 -- History: 
+-- 2018/02/22: 0.0.5: timer.* -> tmr.* (possible now)
 -- 2018/01/30: 0.0.4: switching from tmr.* to timer.*
 -- 2018/01/17: 0.0.3: rtctime.set,get,epoch2cal implemented as fallback
 -- 2018/01/12: 0.0.2: better fallback and proper JSON epoch parsing (indirect)
@@ -11,7 +12,7 @@
 
 local function httpsync() 
    if http then
-      local now = timer.time()
+      local now = tmr.time()
       local h = 'http://now.httpbin.org/'       -- http (instead of https) in case tls is not included
       http.get(h,nil,
          function(code,data)
@@ -23,7 +24,7 @@ local function httpsync()
                --local t = d and d.now and d.now.epoch or 0
                local t = string.match(data,'"epoch":%s*(%d+)')    -- we parse JSON portion direct
                if rtctime then
-                  t = t + (timer.time() - now)    -- try to adjust connection & retrieval time (only 1 sec exact)
+                  t = t + (tmr.time() - now)    -- try to adjust connection & retrieval time (only 1 sec exact)
                   rtctime.set(t)
                   local tm = rtctime.epoch2cal(t)
                   local tz = 'UTC'

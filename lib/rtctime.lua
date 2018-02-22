@@ -9,10 +9,10 @@
 rtctime = {
    t = 0,
    set = function(t) 
-      rtctime.t = t - timer.time()
+      rtctime.t = t - tmr.time()
    end,
    get = function()
-      return rtctime.t + timer.time()
+      return rtctime.t + tmr.time()
    end,
    epoch2cal = function(t)
       local tm = { }

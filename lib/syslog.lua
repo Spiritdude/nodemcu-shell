@@ -27,7 +27,7 @@ syslog = {
       local tm = { [0]='INFO', [1]='WARN', [2]='ERROR', [3]='FATAL' }
       local t
       --if arch=='esp8266' then
-         t = timer and (timer.time() .. "." .. string.format("%03d",int((timer.now()/1000)%1000))) or 0
+         t = tmr and (tmr.time() .. "." .. string.format("%03d",int((tmr.now()/1000)%1000))) or 0
       --else
       --   t = syslog.count
       --   syslog.count = syslog.count + 1

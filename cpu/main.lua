@@ -6,19 +6,19 @@
 --    or set cpu 80/160 MHz
 --
 -- History:
--- 2018/02/10: 0.0.2: esp32 support (via timer.now())
+-- 2018/02/10: 0.0.2: esp32 support (via tmr.now())
 -- 2018/01/11: 0.0.1: first version
  
 return function(...)
    table.remove(arg,1)
    if #arg == 0 then
       local n = 10000
-      local t = timer.now()
+      local t = tmr.now()
       local i = n
       while i > 0 do
          i = i - 1
       end
-      t = timer.now() - t       -- us or 1/1,000,000s
+      t = tmr.now() - t       -- us or 1/1,000,000s
       -- console.print(t.." "..n)
       -- n = instructions per t[us]
       -- n * 1000000 / t         -- instructions per 1s

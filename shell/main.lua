@@ -64,13 +64,18 @@ shell_srv:listen(conf.port,function(socket)
       end
    end
    
-   local function s_output(str)
+   local function s_output(...)
+      local s = ""
+      for i,v in ipairs(arg) do
+         s = s .. (i>1 and " " or "")
+         s = s .. tostring(v)
+      end
       local ref = tostring(socket)
       --print("[2] socket="..tostring(socket))
       if fifo[ref] == nil then
          fifo[ref] = { }
       end
-      table.insert(fifo[ref],str)      -- this is where esp8266 struggles if a lot of output is arriving (heap -> 0)
+      table.insert(fifo[ref],s)      -- this is where esp8266 struggles if a lot of output is arriving (heap -> 0)
       --print("fifo: "..#fifo[ref].." ("..ref.."), "..node.heap()..": "..str)
       if fifo_drained then
          fifo_drained = false
@@ -79,7 +84,7 @@ shell_srv:listen(conf.port,function(socket)
    end
    
    -- console.print() prints a line, terminal.print() does not
-   console.output(function(str) s_output(str.."\r\n") end)
+   console.output(function(...) s_output(unpack(arg)) s_output("\r\n") end)
 
    -- attempt to have other apps take control of the connection (like an editor)
    -- NOTE: will soon move to lib/terminal.lua

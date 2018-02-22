@@ -30,7 +30,7 @@ if arch=='esp32' then
          local d = gpio.IN
          if m==gpio.INPUT then
             d = gpio.IN
-         elseif m==gpiox.OUTPUT then
+         elseif m==gpio.OUTPUT then
             d = gpio.OUT
          elseif m==gpio.INPUT_OUTPUT then
             d = gpio.IN_OUT

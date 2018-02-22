@@ -5,6 +5,7 @@
 -- Todo:
 --   With NodeMCU "built 2017-12-25 17:45 Lua 5.1.4 on SDK 2.1.0(116b762)" it has a memory leak
 -- History:
+-- 2018/02/22: 0.0.4: timer.* -> tmr.* (possible now)
 -- 2018/01/30: 0.0.3: tmr.* to timer.*
 -- 2018/01/05: 0.0.2: better node.info() output
 -- 2018/01/03: 0.0.1: first version
@@ -27,7 +28,7 @@ return function(...)
       local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
       kv('Info',"V"..maver.."."..miver.."."..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
    end
-   local t = timer.time();
+   local t = tmr.time();
    kv("Uptime",string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%24,int(t/60)%60,t%60))
        
    if adc and arch=='esp8266' then     -- make it conditional in case it doesn't exist

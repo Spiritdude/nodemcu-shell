@@ -4,6 +4,7 @@
 -- Description: use display.conf to define a display, and set 'disp' as global variable
 -- 
 -- History:
+-- 2018/02/22: 0.0.5: timer.* -> tmr.* (possible now)
 -- 2018/02/08: 0.0.4; esp32 support and u8g2 added (not yet tested)
 -- 2018/02/01: 0.0.3: using timer.* instead of tmr.*
 -- 2018/01/09: 0.0.2: more structured setup
@@ -90,7 +91,7 @@ if file.exists("display/display.conf") then
                   display.print(str)
                   -- display.print(string.sub(str,1,30))    -- truncate a bit otherwise wraps around on the left-side again
                end)
-               timer.create():alarm(arch=='esp32' and 500 or 2000,timer.ALARM_AUTO,function() 
+               tmr.create():alarm(arch=='esp32' and 500 or 2000,tmr.ALARM_AUTO,function() 
                   display.flush()
                end)
             end

@@ -122,7 +122,12 @@ if display and display.disp then
       --display.flush()
    end
    
-   display.print = function(s)
+   display.print = function(...)
+      local s = ""
+      for i,v in ipairs(arg) do
+         s = s .. (i>1 and " " or "")
+         s = s .. tostring(v)
+      end
       if true then               -- autowrap lines
          local e = s:len()
          repeat

@@ -24,7 +24,7 @@ return function(conn,req,gv)
       local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
       kv('Info',"V"..maver.."."..miver.."."..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
    end
-   local t = timer.time();
+   local t = tmr.time();
    kv("Uptime",string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%24,int(t/60)%60,t%60))
        
    if adc then     -- make it conditional in case it doesn't exist
