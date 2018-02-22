@@ -103,8 +103,8 @@ if file.exists("display/display.conf") then
       end
    end
    if conf and conf.vcc and display and display.disp then     -- any GIOP used as VCC?
-      gpiox.mode(conf.vcc,gpio.OUTPUT)
-      gpiox.write(conf.vcc,1)
+      gpio.mode(conf.vcc,gpio.OUTPUT)
+      gpio.write(conf.vcc,1)
    end
 else
    syslog.print(syslog.INFO,"display: no display/display.conf")
