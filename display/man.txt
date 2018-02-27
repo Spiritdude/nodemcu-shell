@@ -7,6 +7,7 @@ display <cmd> <settings>
       font <font>          font: font_chikita, font_6x10 etc
       rotate <angle>       angle: 0, 90, 180, 270
       clear                clear screen
+      flush                display lines from queue (if console isn't redirected)
       info                 show display info
       
    examples:

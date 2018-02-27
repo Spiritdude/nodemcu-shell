@@ -4,6 +4,7 @@
 -- Description: 
 --    Providing rtctime in case module doesn't exist
 -- History: 
+-- 2018/02/27: 0.0.2: tm.min fixed for -float firmware (e.g. ESP32)
 -- 2018/02/10: 0.0.1: moved from rtc/init.lua to here
 
 rtctime = {
@@ -18,7 +19,7 @@ rtctime = {
       local tm = { }
       local dc = t % (24*60*60)     -- based on gmtime.c
       tm.sec = dc % 60
-      tm.min = int(dc % 3600) / 60
+      tm.min = int((dc % 3600) / 60)
       tm.hour = int(dc / 3600)
       local y = 1970
       local dno = int(t / (24*60*60))

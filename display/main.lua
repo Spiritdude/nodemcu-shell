@@ -13,6 +13,9 @@ return function(...)
 
    if display and display.disp then
       local cmd = table.remove(arg,1)
+      if not display.print then
+         dofile("lib/display.lua")
+      end
       if cmd == 'contrast' then
          if arg[1] then
             display.disp:setContrast(arg[1] and tonumber(arg[1]) or 255)
@@ -43,6 +46,8 @@ return function(...)
          end
       elseif cmd == 'clear' then
          display.clear()
+      elseif cmd == 'flush' then
+         display.flush()
       elseif cmd == 'on' then
          display.disp:sleepOff()
       elseif cmd == 'off' then

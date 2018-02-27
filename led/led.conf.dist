@@ -1,4 +1,4 @@
 return {
-   [0] = { pin = 4 }    -- wemos d1 mini
-   -- [0] = { pin = 22 }   -- lolin32 lite 
+   [0] = { pin = 4 }    -- esp8266 wemos d1 mini
+   -- [0] = { pin = 22 }   -- esp32 lolin32 lite 
 }

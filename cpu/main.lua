@@ -13,12 +13,16 @@ return function(...)
    table.remove(arg,1)
    if #arg == 0 then
       local n = 10000
-      local t = tmr.now()
+      local t = tmr.uptime and tmr.uptime() or tmr.now()
       local i = n
       while i > 0 do
          i = i - 1
       end
-      t = tmr.now() - t       -- us or 1/1,000,000s
+      if tmr.uptime then
+         t = (tmr.uptime() - t) * 1000000
+      else 
+         t = tmr.now() - t       -- us or 1/1,000,000s
+      end
       -- console.print(t.." "..n)
       -- n = instructions per t[us]
       -- n * 1000000 / t         -- instructions per 1s
@@ -28,13 +32,15 @@ return function(...)
    elseif #arg == 1 then
       if arch=='esp32' then
          console.print("cpu freq setting for esp32 not implemented")
-      else
+      elseif arch=='esp8266' then
          if arg[1] == '80' or arg[1] == '160' then
             console.print("cpu freq = "..arg[1].." MHz")
             node.setcpufreq(arg[1] == '80' and node.CPU80MHZ or node.CPU160MHZ)
          else
             console.print("ERROR: only 80 or 160 MHz supported: "..arg[1])
          end
+      else
+         console.print("ERROR: cpu freq setting not yet supported")
       end
    end
 end

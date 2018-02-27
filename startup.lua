@@ -28,7 +28,9 @@ else
    syslog.print(syslog.INFO,"device "..node.chipid().." ("..arch..") starting up")
 end
 
-dofile(arch=='esp8266' and "wifi/init.lua" or "wifi/init32.lua")
+if wifi then
+   dofile(arch=='esp8266' and "wifi/init.lua" or "wifi/init32.lua")
+end
 
 -- a slight delay in case startup/* script resets device, we can overwrite something (interrupt reboot loop)
 tmr.create():alarm(3000,tmr.ALARM_SINGLE,function()

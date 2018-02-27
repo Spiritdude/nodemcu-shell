@@ -2,4 +2,6 @@ toilet -f small "NodeMCU ESP8266" > bnr.esp8266.bw.txt
 toilet -f small --filter metal "NodeMCU ESP8266" > bnr.esp8266.co.txt
 toilet -f small "NodeMCU ESP32" > bnr.esp32.bw.txt
 toilet -f small --filter metal "NodeMCU ESP32" > bnr.esp32.co.txt
+toilet -f small "NodeMCU LINUX" > bnr.linux.bw.txt
+toilet -f small --filter metal "NodeMCU LINUX" > bnr.linux.co.txt
 
