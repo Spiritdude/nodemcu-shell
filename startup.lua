@@ -30,7 +30,7 @@ end
 
 if wifi then
    dofile(arch=='esp8266' and "wifi/init.lua" or "wifi/init32.lua")
-elseif net then
+elseif arch=='linux' and net then
    dofile("net.up.lua")
 end
 
