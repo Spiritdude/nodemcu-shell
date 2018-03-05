@@ -1,5 +1,6 @@
 PORT=/dev/ttyUSB0
-BACKUP=nodemcu-shell-`date +%F`.tar.gz
+NAME=NodeMCU-Shell
+BACKUP=${NAME}-`date +%F`.tar.gz
 
 all::
 	@echo "make upload_all upload_shell upload_shell_core console terminal"
@@ -34,5 +35,5 @@ edit::
 	dee4 README.md Makefile *.lua */*.lua
 
 backup::
-	cd ..; tar cfvz ${BACKUP} nodemcu-shell; mv ${BACKUP} ~/Backup/
+	cd ..; tar cfvz ${BACKUP} ${NAME}; mv ${BACKUP} ~/Backup/
 	scp ~/Backup/${BACKUP} backup:Backup/

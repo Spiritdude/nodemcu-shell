@@ -30,19 +30,23 @@ end
 
 if wifi then
    dofile(arch=='esp8266' and "wifi/init.lua" or "wifi/init32.lua")
+elseif net then
+   dofile("net.up.lua")
 end
 
--- a slight delay in case startup/* script resets device, we can overwrite something (interrupt reboot loop)
-tmr.create():alarm(3000,tmr.ALARM_SINGLE,function()
-   if true then      -- experimental
-      for fn in pairs(file.list()) do
-         if string.match(fn,"^startup/") then
-            syslog.print(syslog.INFO,"startup: execute "..fn)
-            local f = dofile(fn)
-            if f and type(f)=='function' then
-               f(fn)
+if tmr then
+   -- a slight delay in case startup/* script resets device, we can overwrite something (interrupt reboot loop)
+   tmr.create():alarm(3000,tmr.ALARM_SINGLE,function()
+      if true then      -- experimental
+         for fn in pairs(file.list()) do
+            if string.match(fn,"^startup/") then
+               syslog.print(syslog.INFO,"startup: execute "..fn)
+               local f = dofile(fn)
+               if f and type(f)=='function' then
+                  f(fn)
+               end
             end
          end
       end
-   end
-end)
+   end)
+end

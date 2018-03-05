@@ -214,7 +214,7 @@ shell_srv:listen(conf.port,function(socket)
       end
 
       if(#a > 0 and fileExpFail) then
-         c:send(a[1]..": "..fileExpFail.."\n")
+         --c:send(a[1]..": "..fileExpFail.."\n")
          c:send(promptString)
          prompt = true
       elseif #a > 0 then
@@ -330,7 +330,8 @@ shell_srv:listen(conf.port,function(socket)
       ms = "\n== "
    end
    ms = ms .. "Welcome to NodeMCU Shell " .. VERSION .. "/" .. arch .. " on "
-   if wifi.sta and wifi.sta.gethostname then
+
+   if wifi and wifi.sta and wifi.sta.gethostname then
       ms = ms .. wifi.sta.gethostname().." ("..node.chipid()..string.format("/0x%x",node.chipid())..")"
    else 
       ms = ms .. "("..node.chipid()..string.format("/0x%x",node.chipid())..")"
