@@ -69,9 +69,13 @@ return function(...)
          local fl2 = { }
          for i,f in ipairs(fl) do
             local d = f:match("([^/]+)/.*")
-            if d and d ~= dl then
+            if d and d ~= dl then               -- pseudo dir
                table.insert(fl2,d.."/")
             elseif not d then
+               local st = file.stat(f)
+               if st and st.is_dir then
+                  f = f .. "/"
+               end
                table.insert(fl2,f)
             end
             dl = d
