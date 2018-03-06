@@ -1,8 +1,9 @@
 # NodeMCU Shell (UNIX-like)
 
 This provides a **UNIX-like Shell for the NodeMCU/Lua platform** for
-- **[ESP8266](https://en.wikipedia.org/wiki/ESP8266)**: 64KB/96KB RAM, 512KB-16MB Flash, 80/160MHz RISC Processor with WIFI, cost ~EUR 1.50-5.00 (2018/01)
-- **[ESP32](https://en.wikipedia.org/wiki/ESP32)**: 512KB RAM, 4MB-16MB Flash, 160/240MHz RISC Processor with WIFI, Bluetooth, cost ~EUR 4.00-7.00 (2018/01)
+- **[NodeMCU/ESP8266](https://en.wikipedia.org/wiki/ESP8266)**: 64KB/96KB RAM, 512KB-16MB Flash, 80/160MHz RISC Processor with WIFI, cost ~EUR 1.50-5.00 (2018/01)
+- **[NodeMCU/ESP32](https://en.wikipedia.org/wiki/ESP32)**: 512KB RAM, 4MB-16MB Flash, 160/240MHz RISC Processor with WIFI, Bluetooth, cost ~EUR 4.00-7.00 (2018/01)
+- **[NodeMCU/Linux](https://github.com/Spiritdude/nodemcu-linux)** (experimental): any device which runs Debian-based Linux with GPIO, I2C, SPI and alike interfaces, like Raspberry Pi, Orange Pi, NanoPi series, cost ~EUR 7-40 (2018/02)
 
 ## Main Features
 - **commands with space separated arguments** (including "string with spaces" or 'string with spaces' arguments)
