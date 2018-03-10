@@ -18,15 +18,15 @@ return function(...)
 
    kv('Architecture',arch)
    if node.chipid then
-      kv('Chip ID',node.chipid().." / "..string.format("0x%x",node.chipid()))
+      kv('Chip ID',node.chipid()..(type(node.chipid())=='number' and " / "..string.format("0x%x",node.chipid()) or ""))
    end
    if node.flashid then
-      kv('Flash ID',node.flashid().." / "..string.format("0x%x",node.flashid()))
+      kv('Flash ID',node.flashid()..(type(node.flashid())=='number' and " / "..string.format("0x%x",node.flashid()) or ""))
    end
    kv('Heap',node.heap(),'bytes')
    if node.info then
-      local maver, miver, devv, cid, fid, fsize, fmode, fspeed = node.info()
-      kv('Info',"V"..maver.."."..miver.."."..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed)
+      local maver, miver, devv, cid, fid, fsize, fmode, fspeed, arch = node.info()
+      kv('Info',"V"..maver.."."..miver.."."..devv..", FlashMode "..fmode..", FlashSpeed "..fspeed..", Arch "..arch)
    end
    local t = tmr.time();
    kv("Uptime",string.format("%dd %dh %dm %ds",int(t/24/3600),int(t/3600)%24,int(t/60)%60,t%60))
