@@ -327,7 +327,8 @@ Whenever you code with integers in mind, convert with `int()` so regardless whic
 the same way.
 
 ### Prebuilt ESP8266 Firmware
-- **[nodemcu-2018-01-05-integer.bin](fw/nodemcu-master-oled-2018-01-05-font_4x6,font_6x10,font_6x12,font_helvR08,font_chikita,font_04b_03-integer.bin)** with ssd1306 128x64 OLED controller support and couple of fonts
+- **[nodemcu-2018-01-05-integer.bin](fw/nodemcu-master-oled-2018-01-05-font_4x6,font_6x10,font_6x12,font_helvR08,font_chikita,font_04b_03-integer.bin)** 
+  - with ssd1306 128x64 OLED controller support and couple of fonts
 
 ### Prebuilt ESP32 Firmware
 - **[nodemcu-esp32-spiritdude-math-2018-03-08-clean.bin](fw/nodemcu-esp32-spiritdude-math-2018-03-08-clean.bin)**
