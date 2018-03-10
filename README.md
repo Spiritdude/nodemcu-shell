@@ -327,14 +327,16 @@ Whenever you code with integers in mind, convert with `int()` so regardless whic
 the same way.
 
 ### Prebuilt ESP8266 Firmware
-- **[nodemcu-2018-01-05-integer.bin](fw/nodemcu-master-oled-2018-01-05-font_4x6,font_6x10,font_6x12,font_helvR08,font_chikita,font_04b_03-integer.bin)** 
+- **[nodemcu-master-2018-01-05-integer.bin](fw/nodemcu-master-oled-2018-01-05-font_4x6,font_6x10,font_6x12,font_helvR08,font_chikita,font_04b_03-integer.bin)**  (4MB flash)
   - with ssd1306 128x64 OLED controller support and couple of fonts
+  - flash with `esptool.py write_flash -fm dout 0 nodemcu-...bin`
 
 ### Prebuilt ESP32 Firmware
-- **[nodemcu-esp32-spiritdude-math-2018-03-08-clean.bin](fw/nodemcu-esp32-spiritdude-math-2018-03-08-clean.bin)**
+- **[nodemcu-esp32-spiritdude-math-2018-03-08-clean.bin](fw/nodemcu-esp32-spiritdude-math-2018-03-08-clean.bin)** (4MB flash)
   - `dev-esp32` branch with my extensions: `node.info()` support added, and `tmr.now()`, `tmr.time()` and `tmr.uptime()` etc, with `math` library experimentally enabled, contains ssd1306 128x64 OLED controller support and a few fonts
   - **Note**: requires my patched [nodemcu-tool](https://github.com/Spiritdude/nodemcu-tool) to upload Lua code when you use this firmware
-
+  - flash with `esptool.py write_flash -fm dout 0 nodemcu-...bin`
+  
 ## Installation
 To install the shell with its own `init.lua` and `startup.lua` chain:
 ```
