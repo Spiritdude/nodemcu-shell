@@ -1,7 +1,7 @@
 return {
    port = 2323,         -- 2323 (experimental), later then 23
    width = 80,          -- default screen width
-   height = 24.         -- default screen height
+   height = 24,         -- default screen height
    banner = true,       -- display banner at login
    banner_type = 'bw',  -- display banner style: 'bw', 'co'
 }
