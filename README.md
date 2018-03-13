@@ -326,7 +326,7 @@ the same way.
 
 ### Prebuilt ESP8266 Firmware
 **Latest**
-- **[nodemcu-master-2018-03-13-integer.bin](fw/nodemcu-master-oled-2018-03-13-font_4x6,font_5x7,font_6x10,font_helvR08,font_chikita,font_04b_03-integer.bin)
+- **[nodemcu-master-2018-03-13-integer.bin](fw/nodemcu-master-oled-2018-03-13-font_4x6,font_5x7,font_6x10,font_helvR08,font_chikita,font_04b_03-integer.bin)** (4MB flash)
   - modules: `adc, bit, crypto, encoder, file, gpio, http, i2c, mqtt, net, node, ow, pcm, pwm, rtctime, sjson, spi, struct, tmr, u8g, uart, websocket, wifi, tls
   - with ssd1306 128x64 OLED controller support and couple of fonts (`font_4x6, font_5x7, font_6x10, font_helvR08, font_chikita, font_04b_03`)
   - flash with `esptool.py write_flash -fm dout 0 nodemcu-...bin`
