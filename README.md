@@ -331,14 +331,7 @@ the same way.
   - with ssd1306 128x64 OLED controller support and couple of fonts (`font_4x6, font_5x7, font_6x10, font_helvR08, font_chikita, font_04b_03`)
   - flash with `esptool.py write_flash -fm dout 0 nodemcu-...bin`
 
-**Archive**
-- **[nodemcu-master-2018-03-12-integer.bin](fw/nodemcu-master-oled-2018-03-12-font_6x10,font_helvR08,font_chikita,font_04b_03-integer.bin)** (4MB flash)
-  - modules: `adc, bit, encoder, file, gpio, http, i2c, net, node, ow, pcm, pwm, rtctime, sjson, struct, tmr, u8g, uart, websocket, wifi, tls`
-  - with ssd1306 128x64 OLED controller support and couple of fonts (`font_6x10, font_helvR08, font_chikita, font_04b_03`)
-  - special feature: `pwm` for making sound via `gpio`
-- **[nodemcu-master-2018-01-05-integer.bin](fw/nodemcu-master-oled-2018-01-05-font_4x6,font_6x10,font_6x12,font_helvR08,font_chikita,font_04b_03-integer.bin)**  (4MB flash)
-  - modules: `adc, bit, crypto, encoder, file, gpio, http, i2c, mdns, mqtt, net, node, rtctime, sjson, sntp, struct, tmr, u8g, uart, websocket, wifi, tls`
-  - with ssd1306 128x64 OLED controller support and couple of fonts (`font_4x6, font_6x10, font_6x12, font_helvR08, font_chikita, font_04b_03`)
+or check [older firmware](https://github.com/Spiritdude/nodemcu-shell/tree/master/fw).
 
 ### Prebuilt ESP32 Firmware
 - **[nodemcu-esp32-spiritdude-math-2018-03-08-clean.bin](fw/nodemcu-esp32-spiritdude-math-2018-03-08-clean.bin)** (4MB flash)
