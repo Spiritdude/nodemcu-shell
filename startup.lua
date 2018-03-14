@@ -13,6 +13,9 @@ dofile("lib/integer.lua")
 dofile("lib/console.lua")
 dofile("lib/syslog.lua")
 dofile("shell/cat.lua")('cat',"shell/bnr."..arch..".bw.txt")
+if pwm and file.exists("beep/boot.song") then
+   dofile("beep/main.lua")('beep',"beep/boot.song")
+end
 dofile("lib/tmr.lua")
 dofile("lib/gpio.lua")
 if not http then
