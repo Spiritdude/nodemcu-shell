@@ -577,7 +577,7 @@ USAGE: gpio [<pin>=<value>] [<pin>=]
 ```
 
 ## beep
-Beep on a pin (e.g. attched piezo speaker):
+Beep on a pin (e.g. attched piezo speaker) or play a song (.song = listed beeps or RTTTL format supported):
 ```
 % beep
 % beep 500
