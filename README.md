@@ -16,8 +16,8 @@ NodeMCU is a Lua runtime environment, so the shell is written in Lua.
 
 ## Updates
 - **0.1.1**: added 
-  - `gpio` command, e.g. `gpip 0=on 1,2,3=off`
-  - `beep` command, e.g. `beep 500` short beep (500ms), `beep 300 400` (300ms 400Hz), `beep 500 c` note
+  - `gpio` command, e.g. `gpip 0=on 1,2,3=off` (see [documentation](#gpio))
+  - `beep` command, e.g. `beep 500` short beep (500ms), `beep 300 400` (300ms 400Hz), `beep 500 c` note (see [documentation](#beep))
 - **0.1.0**: 
   - `exec`, `repeat` command added
   - `lib/exec.lua` to execute a program with arguments (additionally look in `apps/*` for executables)
