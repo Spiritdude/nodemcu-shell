@@ -19,7 +19,7 @@ if shell_srv then    -- are we called from net.up.lua *again*, if so ignore
    return
 end
 
-local VERSION = '0.1.0'
+local VERSION = '0.1.1'
 
 local conf = {}
 
