@@ -7,7 +7,7 @@ all::
 
 upload_all::
 	nodemcu-tool --port ${PORT} upload --keeppath *.lua */*.lua */*.txt */*.conf */*.dist display/*.mono www/imgs/* www/*.html www/favicon.ico.gz
-	nodemcu-tool --port ${PORT} upload --keeppath beep/*.song beep/rtttl/*.txt
+	nodemcu-tool --port ${PORT} upload --keeppath beep/*.song beep/rtttl/0071.txt
 	nodemcu-tool --port ${PORT} upload --keeppath --minify --compile shell/main.lua
 	touch .lastupload
 
