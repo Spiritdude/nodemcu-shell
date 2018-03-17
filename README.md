@@ -15,7 +15,9 @@ This provides a **UNIX-like Shell for the NodeMCU/Lua platform** for
 NodeMCU is a Lua runtime environment, so the shell is written in Lua.
 
 ## Updates
-- **0.1.1**: added `gpio` command, e.g. `gpip 0=on 1,2,3=off`
+- **0.1.1**: added 
+  - `gpio` command, e.g. `gpip 0=on 1,2,3=off`
+  - `beep` command, e.g. `beep 500` short beep (500ms), `beep 300 400` (300ms 400Hz), `beep 500 c` note
 - **0.1.0**: 
   - `exec`, `repeat` command added
   - `lib/exec.lua` to execute a program with arguments (additionally look in `apps/*` for executables)
@@ -572,8 +574,21 @@ USAGE: gpio [<pin>=<value>] [<pin>=]
       gpio 0=on
       gpio 0=off
       gpio 0,1,5=on 2,3=off
-
 ```
+
+## beep
+Beep on a pin (e.g. attched piezo speaker):
+```
+% beep
+% beep 500
+% beep 500 440
+% beep 500 a
+% beep beep/imperial.song
+% beep beep/rtttl/0071.txt
+```
+By default pin 1 is the output of the sound, requires `pwm` module to be included in the firmware.
+Copy `beep/beep.conf.dist` to `beep/beep.conf` and edit it, in case you need another pin.
+
 ## heap
 Display remaining heap (free RAM):
 ```

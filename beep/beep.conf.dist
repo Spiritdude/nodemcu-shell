@@ -1,0 +1,3 @@
+return {
+   pin = 1        -- define the pin the speaker is attached (piezo can be attached direct without amplifier)
+}
