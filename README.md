@@ -15,6 +15,7 @@ This provides a **UNIX-like Shell for the NodeMCU/Lua platform** for
 NodeMCU is a Lua runtime environment, so the shell is written in Lua.
 
 ## Updates
+- **0.1.1**: added `gpio` command, e.g. `gpip 0=on 1,2,3=off`
 - **0.1.0**: 
   - `exec`, `repeat` command added
   - `lib/exec.lua` to execute a program with arguments (additionally look in `apps/*` for executables)
@@ -548,6 +549,31 @@ Blink the on-board LED, with a particular frequency (default 500 = 500ms), 0 or 
 % blink off
 ```
 
+## gpio
+
+Set gpio pins individually:
+```
+% gpio
+USAGE: gpio [<pin>=<value>] [<pin>=]
+   pin:
+      <int>          single pin
+      <int>[,<int>]  multiple pins
+   value:
+      <value>        0, 1, on or off
+   read: 
+      <pin>=
+   write:
+      <pin>=<value>
+
+   examples:
+      gpio 0=           read gpio #0 as input
+      gpio 0=1          write gpio #0 to high
+      gpio 0=0
+      gpio 0=on
+      gpio 0=off
+      gpio 0,1,5=on 2,3=off
+
+```
 ## heap
 Display remaining heap (free RAM):
 ```
