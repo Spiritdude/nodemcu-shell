@@ -589,6 +589,8 @@ Beep on a pin (e.g. attched piezo speaker):
 By default pin 1 is the output of the sound, requires `pwm` module to be included in the firmware.
 Copy `beep/beep.conf.dist` to `beep/beep.conf` and edit it, in case you need another pin.
 
+If want a boot sound, then rename `beep/boot.song.dist` to `beep/boot.song` at it play at each startup.
+
 ## heap
 Display remaining heap (free RAM):
 ```
