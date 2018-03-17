@@ -580,9 +580,9 @@ USAGE: gpio [<pin>=<value>] [<pin>=]
 Beep on a pin (e.g. attched piezo speaker) or play a song (.song = listed beeps or RTTTL format supported):
 ```
 % beep
-% beep 500
-% beep 500 440
-% beep 500 a
+% beep 500                 (500ms)
+% beep 500 440             (500ms with 440Hz)
+% beep 500 a               (note 'a')
 % beep beep/imperial.song
 % beep beep/rtttl/0071.txt
 ```
