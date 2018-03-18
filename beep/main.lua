@@ -1,7 +1,8 @@
 -- == Beep ==
 -- Copyright (c) 2018 by Rene K. Mueller <spiritdude@gmail.com>
 -- License: MIT License (see LICENSE file)
--- Description: just playing some basic sounds via gpio ping
+-- Description: 
+--   just playing some basic sounds via gpio ping
 --
 -- History:
 -- 2018/03/13: 0.0.2: utilizing pwm module, functional including song.load() and song.play()

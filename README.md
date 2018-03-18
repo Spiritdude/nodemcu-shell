@@ -307,6 +307,7 @@ The recommended modules for your firmware from [nodemcu-build.com](https://nodem
 - **mqtt** (recommended)
 - **net**
 - **node**
+- **pwm** (recommended if you want `beep` to work)
 - **rtctime**
 - **sjson**
 - **sntp** (recommended)
