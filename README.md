@@ -341,7 +341,9 @@ or check [older firmware](https://github.com/Spiritdude/nodemcu-shell/tree/maste
   - `dev-esp32` branch with my extensions: `node.info()` support added, and `tmr.now()`, `tmr.time()` and `tmr.uptime()` etc, with `math` library experimentally enabled, contains ssd1306 128x64 OLED controller support and a few fonts
   - **Note**: requires my patched [nodemcu-tool](https://github.com/Spiritdude/nodemcu-tool) to upload Lua code when you use this firmware
   - flash with `esptool.py write_flash -fm dout 0 nodemcu-...bin`
-  
+
+**Important Note**: if you flashed a new firmware with `esptool.py`, after the 'Hard resetting' wait for 15-20secs as it will initialize and make the filesystem of the flash - then upload:
+
 ## Installation
 To install the shell with its own `init.lua` and `startup.lua` chain:
 ```
